@@ -654,11 +654,11 @@
                 <mxCell id="tsdLPZSW6yYGTnTAyJmC-421" value="&lt;div style=&quot;font-size: 1px&quot;&gt;&lt;font style=&quot;font-size:12.7px;font-family:Calibri;color:#000000;direction:ltr;letter-spacing:0px;line-height:120%;opacity:1&quot;&gt;Azure ML&lt;br/&gt;&lt;/font&gt;&lt;/div&gt;" style="text;vsdxID=526;fillColor=none;gradientColor=none;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[[0.5,0,0],[0.5,0.5,0],[1,0.5,0]];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;verticalAlign=middle;align=center;;html=1;" parent="tsdLPZSW6yYGTnTAyJmC-417" vertex="1">
                     <mxGeometry x="-23.17" y="73.52" width="101.6" height="15.25" as="geometry"/>
                 </mxCell>
-                <mxCell id="tsdLPZSW6yYGTnTAyJmC-450" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.529;entryY=0.98;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=16;" parent="1" source="tsdLPZSW6yYGTnTAyJmC-432" target="148" edge="1">
+                <mxCell id="ORODhOVhDRgmNtIDM92I-438" style="edgeStyle=none;html=1;" edge="1" parent="1" source="tsdLPZSW6yYGTnTAyJmC-432" target="148">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="tsdLPZSW6yYGTnTAyJmC-432" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
-                    <mxGeometry x="1420" y="680" width="300" height="320" as="geometry"/>
+                    <mxGeometry x="1422" y="679" width="300" height="320" as="geometry"/>
                 </mxCell>
                 <UserObject label="&lt;div style=&quot;font-size: 1px&quot;&gt;&lt;font style=&quot;font-size:16.93px;font-family:Calibri;color:#000000;direction:ltr;letter-spacing:0px;line-height:120%;opacity:1&quot;&gt; DS Business Metrics Pipeline&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" tags="Background" id="tsdLPZSW6yYGTnTAyJmC-433">
                     <mxCell style="verticalAlign=middle;align=center;vsdxID=492;fillColor=#ddd6e5;gradientColor=none;shape=stencil(nZBLDoAgDERP0z3SIyjew0SURgSD+Lu9kMZoXLhwN9O+tukAlrNpJg1SzDH4QW/URgNYgZTkjA4UkwJUgGXng+6DX1zLfmoymdXo17xh5zmRJ6Q42BWCfc2oJfdAr+Yv+AP9Cb7OJ3H/2JG1HNGz/84klThPVCc=);strokeColor=#000000;points=[];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
@@ -768,6 +768,12 @@
                 </mxCell>
                 <mxCell id="ORODhOVhDRgmNtIDM92I-431" value="&lt;div style=&quot;font-size: 1px&quot;&gt;&lt;font style=&quot;font-size:12.7px;font-family:Calibri;color:#000000;direction:ltr;letter-spacing:0px;line-height:120%;opacity:1&quot;&gt;Scheduled&lt;br/&gt;&lt;/font&gt;&lt;/div&gt;" style="text;vsdxID=704;fillColor=none;gradientColor=none;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[[0.5,0,0],[0.5,0.5,0],[1,0.5,0]];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;verticalAlign=middle;align=center;;html=1;" vertex="1" parent="ORODhOVhDRgmNtIDM92I-415">
                     <mxGeometry x="-32.96" y="35.52" width="101.6" height="15.25" as="geometry"/>
+                </mxCell>
+                <mxCell id="ORODhOVhDRgmNtIDM92I-436" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.sql_database_sql_azure;" vertex="1" parent="1">
+                    <mxGeometry x="1900" y="514" width="47.5" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ORODhOVhDRgmNtIDM92I-437" value="Azure SQL" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="1890" y="570" width="80" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
