@@ -3,12 +3,32 @@
 This is a sample chatbot for Contoso. It is built using Azure Open AI and Streamlit.
 This application is used to populate the data for user and chatbot interaction, that is used to demonstrate the LLM Based Evaluation.
 
+## Prerequisites
+
+The following are the prerequisites to run this app:
+
+- Azure Subscription: To run this app, you need an Azure subscription.
+- Azure OpenAI Resource: You need to have an Azure OpenAI resource to run this app.
+- GPT3.5 Model in Azure OpenAI: You need to have GPT3.5 model deployed in Azure OpenAI resource.
+- Azure Application Insights: You need to have an Azure Application Insights resource to store the data.
+
 ## Installation
 
-This app can be run from anywhere using `Python` and `streamlit` command. To run his app, execute the following command:
+This app can be run from anywhere using `Python` and `streamlit` command.
+
+Before running the `.env` file should be created in this directory by copying the `.env_template` file and updating the values in the `.env` file.
 
 ```bash
-# Install Python by following the instructions at https://www.python.org/downloads/
+API_KEY=<your azure openai api key>
+AZURE_ENDPOINT=<your azure openai api endpoint>
+API_VERSION=2024-02-01
+DEPLOYMENT_NAME=<your azure openai model deployment name>
+APPLICATIONINSIGHTS_CONNECTION_STRING="<your application insights connection string>"
+```
+
+To run his app, execute the following command:
+
+```bash
 # Install the required libraries
 pip install -r requirements.txt
 # Run the app
