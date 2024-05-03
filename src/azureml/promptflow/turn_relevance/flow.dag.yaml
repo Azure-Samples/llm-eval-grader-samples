@@ -3,7 +3,7 @@ name: QnA Relevance Evaluation
 environment:
   python_requirements_txt: requirements.txt
 inputs:
-  question:
+  query:
     type: string
     default: What feeds all the fixtures in low voltage tracks instead of each light
       having a line-to-low voltage transformer?
@@ -21,12 +21,12 @@ inputs:
       traditional spots and floods, as well as other small hanging fixtures. A
       modified version of this is cable lighting, where lights are hung from or
       clipped to bare metal cables under tension
-  answer:
+  response:
     type: string
     default: The main transformer is the object that feeds all the fixtures in low
       voltage tracks.
 outputs:
-  gpt_relevance:
+  turn_relevance:
     type: object
     reference: ${concat_scores.output.gpt_relevance}
 nodes:
@@ -36,9 +36,9 @@ nodes:
     type: code
     path: relevance_score.jinja2
   inputs:
-    question: ${inputs.question}
+    question: ${inputs.query}
     context: ${inputs.context}
-    answer: ${inputs.answer}
+    answer: ${inputs.response}
     max_tokens: 256
     deployment_name: gpt-35-turbo
     temperature: 0
