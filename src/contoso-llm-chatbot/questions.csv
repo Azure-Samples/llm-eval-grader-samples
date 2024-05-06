@@ -1,0 +1,825 @@
+question,conversation,turn_specific_sequence_id
+What's the best aisle to find organic produce?,conversation_1,1
+Can you recommend a reliable brand for washing machines?,conversation_2,1
+Do you have any discounts on winter jackets?,conversation_3,1
+Where can I find allergy medication?,conversation_4,1
+Which section has the latest smartphones?,conversation_5,1
+Could you suggest some skincare products for sensitive skin?,conversation_6,1
+What's the best brand for laundry detergent?,conversation_7,1
+Do you have any recommendations for formal attire?,conversation_8,1
+Is there a section for gluten-free products?,conversation_9,1
+Where can I find HDMI cables?,conversation_10,1
+What's the best aisle to find organic produce?,conversation_11,1
+Can you recommend a reliable brand for washing machines?,conversation_12,1
+Do you have any discounts on winter jackets?,conversation_13,1
+Where can I find allergy medication?,conversation_14,1
+Which section has the latest smartphones?,conversation_15,1
+Could you suggest some skincare products for sensitive skin?,conversation_16,1
+What's the best brand for laundry detergent?,conversation_17,1
+Do you have any recommendations for formal attire?,conversation_18,1
+Is there a section for gluten-free products?,conversation_19,1
+Where can I find HDMI cables?,conversation_20,1
+What's the best aisle to find organic produce?,conversation_21,1
+Can you recommend a reliable brand for washing machines?,conversation_22,1
+Do you have any discounts on winter jackets?,conversation_23,1
+Where can I find allergy medication?,conversation_24,1
+Which section has the latest smartphones?,conversation_25,1
+Could you suggest some skincare products for sensitive skin?,conversation_26,1
+What's the best brand for laundry detergent?,conversation_27,1
+Do you have any recommendations for formal attire?,conversation_28,1
+Is there a section for gluten-free products?,conversation_29,1
+Where can I find HDMI cables?,conversation_30,1
+What's the best aisle to find organic produce?,conversation_31,1
+Can you recommend a reliable brand for washing machines?,conversation_32,1
+Do you have any discounts on winter jackets?,conversation_33,1
+Where can I find allergy medication?,conversation_34,1
+Which section has the latest smartphones?,conversation_35,1
+Could you suggest some skincare products for sensitive skin?,conversation_36,1
+What's the best brand for laundry detergent?,conversation_37,1
+Do you have any recommendations for formal attire?,conversation_38,1
+Is there a section for gluten-free products?,conversation_39,1
+Where can I find HDMI cables?,conversation_40,1
+What's the best aisle to find organic produce?,conversation_41,1
+Can you recommend a reliable brand for washing machines?,conversation_42,1
+Do you have any discounts on winter jackets?,conversation_43,1
+Where can I find allergy medication?,conversation_44,1
+Which section has the latest smartphones?,conversation_45,1
+Could you suggest some skincare products for sensitive skin?,conversation_46,1
+What's the best brand for laundry detergent?,conversation_47,1
+Do you have any recommendations for formal attire?,conversation_48,1
+Is there a section for gluten-free products?,conversation_49,1
+Where can I find HDMI cables?,conversation_50,1
+What's the best aisle to find organic produce?,conversation_51,1
+Can you recommend a reliable brand for washing machines?,conversation_52,1
+Do you have any discounts on winter jackets?,conversation_53,1
+Where can I find allergy medication?,conversation_54,1
+Which section has the latest smartphones?,conversation_55,1
+Could you suggest some skincare products for sensitive skin?,conversation_56,1
+What's the best brand for laundry detergent?,conversation_57,1
+Do you have any recommendations for formal attire?,conversation_58,1
+Is there a section for gluten-free products?,conversation_59,1
+Where can I find HDMI cables?,conversation_60,1
+What's the best aisle to find organic produce?,conversation_61,1
+Can you recommend a reliable brand for washing machines?,conversation_62,1
+Do you have any discounts on winter jackets?,conversation_63,1
+Where can I find allergy medication?,conversation_64,1
+Which section has the latest smartphones?,conversation_65,1
+Could you suggest some skincare products for sensitive skin?,conversation_66,1
+What's the best brand for laundry detergent?,conversation_67,1
+Do you have any recommendations for formal attire?,conversation_68,1
+Is there a section for gluten-free products?,conversation_69,1
+Where can I find HDMI cables?,conversation_70,1
+What's the best aisle to find organic produce?,conversation_71,1
+Can you recommend a reliable brand for washing machines?,conversation_72,1
+Do you have any discounts on winter jackets?,conversation_73,1
+Where can I find allergy medication?,conversation_74,1
+Which section has the latest smartphones?,conversation_75,1
+Could you suggest some skincare products for sensitive skin?,conversation_76,1
+What's the best brand for laundry detergent?,conversation_77,1
+Do you have any recommendations for formal attire?,conversation_78,1
+Is there a section for gluten-free products?,conversation_79,1
+Where can I find HDMI cables?,conversation_80,1
+What's the best aisle to find organic produce?,conversation_81,1
+Can you recommend a reliable brand for washing machines?,conversation_82,1
+Do you have any discounts on winter jackets?,conversation_83,1
+Where can I find allergy medication?,conversation_84,1
+Which section has the latest smartphones?,conversation_85,1
+Could you suggest some skincare products for sensitive skin?,conversation_86,1
+What's the best brand for laundry detergent?,conversation_87,1
+Do you have any recommendations for formal attire?,conversation_88,1
+Is there a section for gluten-free products?,conversation_89,1
+Where can I find HDMI cables?,conversation_90,1
+What's the best aisle to find organic produce?,conversation_91,1
+Can you recommend a reliable brand for washing machines?,conversation_92,1
+Do you have any discounts on winter jackets?,conversation_93,1
+Where can I find allergy medication?,conversation_94,1
+Which section has the latest smartphones?,conversation_95,1
+Could you suggest some skincare products for sensitive skin?,conversation_96,1
+What's the best brand for laundry detergent?,conversation_97,1
+Do you have any recommendations for formal attire?,conversation_98,1
+Is there a section for gluten-free products?,conversation_99,1
+Where can I find HDMI cables?,conversation_100,1
+What's the best detergent for tough stains?,conversation_101,1
+How many loads does it cover?,conversation_101,2
+Can I use this detergent for handwashing?,conversation_102,1
+Do you offer any eco-friendly options?,conversation_102,2
+Where can I find your detergent aisle?,conversation_103,1
+Any discounts for buying in bulk?,conversation_103,2
+Could you recommend a good brand for a smart thermostat?,conversation_104,1
+Energy efficiency rating?,conversation_104,2
+Can I control it from my phone?,conversation_105,1
+Installation included?,conversation_105,2
+What's the return policy for electronics?,conversation_106,1
+Extended warranties available?,conversation_106,2
+Any upcoming laptop sales?,conversation_107,1
+Trade-in for credit?,conversation_107,2
+Noise-canceling headphones recommendation?,conversation_108,1
+Where can I find pain relief medication?,conversation_108,2
+Generic or name-brand pain relievers?,conversation_109,1
+Recommended ibuprofen dosage?,conversation_109,2
+Side effects of this medication?,conversation_110,1
+Natural remedies for headaches?,conversation_110,2
+Affordable home decor suggestions?,conversation_111,1
+Space-saving furniture options?,conversation_111,2
+Popular living room paint colors?,conversation_112,1
+Interior design consultations available?,conversation_112,2
+Any sales on bedding sets this week?,conversation_113,1
+Installation services for major appliances?,conversation_113,2
+Return policy for clothing purchases?,conversation_114,1
+Sustainable fashion options?,conversation_114,2
+Order status tracking available?,conversation_115,1
+Where can I find the latest smartphones?,conversation_115,2
+Financing options for electronics purchases?,conversation_116,1
+Difference between OLED and LED TVs?,conversation_116,2
+Gaming console compatibility?,conversation_117,1
+Recommended allergy medication dosage?,conversation_117,2
+Natural remedies for seasonal allergies?,conversation_118,1
+Where can I find first aid supplies?,conversation_118,2
+Expiration date on this medication?,conversation_119,1
+Do you carry prescription medications?,conversation_119,2
+Affordable home decor suggestions?,conversation_120,1
+Assembly services available for furniture purchases?,conversation_120,2
+What's the best detergent for tough stains?,conversation_121,1
+How many loads does it cover?,conversation_121,2
+Can I use this detergent for handwashing?,conversation_122,1
+Do you offer any eco-friendly options?,conversation_122,2
+Where can I find your detergent aisle?,conversation_123,1
+Any discounts for buying in bulk?,conversation_123,2
+Could you recommend a good brand for a smart thermostat?,conversation_124,1
+Energy efficiency rating?,conversation_124,2
+Can I control it from my phone?,conversation_125,1
+Installation included?,conversation_125,2
+What's the return policy for electronics?,conversation_126,1
+Extended warranties available?,conversation_126,2
+Any upcoming laptop sales?,conversation_127,1
+Trade-in for credit?,conversation_127,2
+Noise-canceling headphones recommendation?,conversation_128,1
+Where can I find pain relief medication?,conversation_128,2
+Generic or name-brand pain relievers?,conversation_129,1
+Recommended ibuprofen dosage?,conversation_129,2
+Side effects of this medication?,conversation_130,1
+Natural remedies for headaches?,conversation_130,2
+Affordable home decor suggestions?,conversation_131,1
+Space-saving furniture options?,conversation_131,2
+Popular living room paint colors?,conversation_132,1
+Interior design consultations available?,conversation_132,2
+Any sales on bedding sets this week?,conversation_133,1
+Installation services for major appliances?,conversation_133,2
+Return policy for clothing purchases?,conversation_134,1
+Sustainable fashion options?,conversation_134,2
+Order status tracking available?,conversation_135,1
+Where can I find the latest smartphones?,conversation_135,2
+Financing options for electronics purchases?,conversation_136,1
+Difference between OLED and LED TVs?,conversation_136,2
+Gaming console compatibility?,conversation_137,1
+Recommended allergy medication dosage?,conversation_137,2
+Natural remedies for seasonal allergies?,conversation_138,1
+Where can I find first aid supplies?,conversation_138,2
+Expiration date on this medication?,conversation_139,1
+Do you carry prescription medications?,conversation_139,2
+Affordable home decor suggestions?,conversation_140,1
+Assembly services available for furniture purchases?,conversation_140,2
+What's the best detergent for tough stains?,conversation_141,1
+How many loads does it cover?,conversation_141,2
+Can I use this detergent for handwashing?,conversation_142,1
+Do you offer any eco-friendly options?,conversation_142,2
+Where can I find your detergent aisle?,conversation_143,1
+Any discounts for buying in bulk?,conversation_143,2
+Could you recommend a good brand for a smart thermostat?,conversation_144,1
+Energy efficiency rating?,conversation_144,2
+Can I control it from my phone?,conversation_145,1
+Installation included?,conversation_145,2
+What's the return policy for electronics?,conversation_146,1
+Extended warranties available?,conversation_146,2
+Any upcoming laptop sales?,conversation_147,1
+Trade-in for credit?,conversation_147,2
+Noise-canceling headphones recommendation?,conversation_148,1
+Where can I find pain relief medication?,conversation_148,2
+Generic or name-brand pain relievers?,conversation_149,1
+Recommended ibuprofen dosage?,conversation_149,2
+Side effects of this medication?,conversation_150,1
+Natural remedies for headaches?,conversation_150,2
+Affordable home decor suggestions?,conversation_151,1
+Space-saving furniture options?,conversation_151,2
+Popular living room paint colors?,conversation_152,1
+Interior design consultations available?,conversation_152,2
+Any sales on bedding sets this week?,conversation_153,1
+Installation services for major appliances?,conversation_153,2
+Return policy for clothing purchases?,conversation_154,1
+Sustainable fashion options?,conversation_154,2
+Order status tracking available?,conversation_155,1
+Where can I find the latest smartphones?,conversation_155,2
+Financing options for electronics purchases?,conversation_156,1
+Difference between OLED and LED TVs?,conversation_156,2
+Gaming console compatibility?,conversation_157,1
+Recommended allergy medication dosage?,conversation_157,2
+Natural remedies for seasonal allergies?,conversation_158,1
+Where can I find first aid supplies?,conversation_158,2
+Expiration date on this medication?,conversation_159,1
+Do you carry prescription medications?,conversation_159,2
+Affordable home decor suggestions?,conversation_160,1
+Assembly services available for furniture purchases?,conversation_160,2
+What's the best detergent for tough stains?,conversation_161,1
+How many loads does it cover?,conversation_161,2
+Can I use this detergent for handwashing?,conversation_162,1
+Do you offer any eco-friendly options?,conversation_162,2
+Where can I find your detergent aisle?,conversation_163,1
+Any discounts for buying in bulk?,conversation_163,2
+Could you recommend a good brand for a smart thermostat?,conversation_164,1
+Energy efficiency rating?,conversation_164,2
+Can I control it from my phone?,conversation_165,1
+Installation included?,conversation_165,2
+What's the return policy for electronics?,conversation_166,1
+Extended warranties available?,conversation_166,2
+Any upcoming laptop sales?,conversation_167,1
+Trade-in for credit?,conversation_167,2
+Noise-canceling headphones recommendation?,conversation_168,1
+Where can I find pain relief medication?,conversation_168,2
+Generic or name-brand pain relievers?,conversation_169,1
+Recommended ibuprofen dosage?,conversation_169,2
+Side effects of this medication?,conversation_170,1
+Natural remedies for headaches?,conversation_170,2
+Affordable home decor suggestions?,conversation_171,1
+Space-saving furniture options?,conversation_171,2
+Popular living room paint colors?,conversation_172,1
+Interior design consultations available?,conversation_172,2
+Any sales on bedding sets this week?,conversation_173,1
+Installation services for major appliances?,conversation_173,2
+Return policy for clothing purchases?,conversation_174,1
+Sustainable fashion options?,conversation_174,2
+Order status tracking available?,conversation_175,1
+Where can I find the latest smartphones?,conversation_175,2
+Financing options for electronics purchases?,conversation_176,1
+Difference between OLED and LED TVs?,conversation_176,2
+Gaming console compatibility?,conversation_177,1
+Recommended allergy medication dosage?,conversation_177,2
+Natural remedies for seasonal allergies?,conversation_178,1
+Where can I find first aid supplies?,conversation_178,2
+Expiration date on this medication?,conversation_179,1
+Do you carry prescription medications?,conversation_179,2
+Affordable home decor suggestions?,conversation_180,1
+Assembly services available for furniture purchases?,conversation_180,2
+What's the best detergent for tough stains?,conversation_181,1
+How many loads does it cover?,conversation_181,2
+Can I use this detergent for handwashing?,conversation_182,1
+Do you offer any eco-friendly options?,conversation_182,2
+Where can I find your detergent aisle?,conversation_183,1
+Any discounts for buying in bulk?,conversation_183,2
+Could you recommend a good brand for a smart thermostat?,conversation_184,1
+Energy efficiency rating?,conversation_184,2
+Can I control it from my phone?,conversation_185,1
+Installation included?,conversation_185,2
+What's the return policy for electronics?,conversation_186,1
+Extended warranties available?,conversation_186,2
+Any upcoming laptop sales?,conversation_187,1
+Trade-in for credit?,conversation_187,2
+Noise-canceling headphones recommendation?,conversation_188,1
+Where can I find pain relief medication?,conversation_188,2
+Generic or name-brand pain relievers?,conversation_189,1
+Recommended ibuprofen dosage?,conversation_189,2
+Side effects of this medication?,conversation_190,1
+Natural remedies for headaches?,conversation_190,2
+Affordable home decor suggestions?,conversation_191,1
+Space-saving furniture options?,conversation_191,2
+Popular living room paint colors?,conversation_192,1
+Interior design consultations available?,conversation_192,2
+Any sales on bedding sets this week?,conversation_193,1
+Installation services for major appliances?,conversation_193,2
+Return policy for clothing purchases?,conversation_194,1
+Sustainable fashion options?,conversation_194,2
+Order status tracking available?,conversation_195,1
+Where can I find the latest smartphones?,conversation_195,2
+Financing options for electronics purchases?,conversation_196,1
+Difference between OLED and LED TVs?,conversation_196,2
+Gaming console compatibility?,conversation_197,1
+Recommended allergy medication dosage?,conversation_197,2
+Natural remedies for seasonal allergies?,conversation_198,1
+Where can I find first aid supplies?,conversation_198,2
+Expiration date on this medication?,conversation_199,1
+Do you carry prescription medications?,conversation_199,2
+Affordable home decor suggestions?,conversation_200,1
+Assembly services available for furniture purchases?,conversation_200,2
+What's the best detergent for tough stains?,conversation_201,1
+Loads it covers?,conversation_201,2
+Handwashing?,conversation_201,3
+Do you offer any eco-friendly options?,conversation_202,1
+Detergent aisle?,conversation_202,2
+Bulk discounts?,conversation_202,3
+Recommend a good brand for a smart thermostat?,conversation_203,1
+Energy efficiency rating?,conversation_203,2
+Control from phone?,conversation_203,3
+Installation included?,conversation_204,1
+Return policy for electronics?,conversation_204,2
+Extended warranties available?,conversation_204,3
+Any upcoming laptop sales?,conversation_205,1
+Trade-in for credit?,conversation_205,2
+Noise-canceling headphones recommendation?,conversation_205,3
+Where can I find pain relief medication?,conversation_206,1
+Generic or name-brand pain relievers?,conversation_206,2
+Recommended ibuprofen dosage?,conversation_206,3
+Side effects of this medication?,conversation_207,1
+Natural remedies for headaches?,conversation_207,2
+Affordable home decor suggestions?,conversation_207,3
+Space-saving furniture options?,conversation_208,1
+Popular living room paint colors?,conversation_208,2
+Interior design consultations available?,conversation_208,3
+Any sales on bedding sets this week?,conversation_209,1
+Installation services for major appliances?,conversation_209,2
+Return policy for clothing purchases?,conversation_209,3
+Sustainable fashion options?,conversation_210,1
+Order status tracking available?,conversation_210,2
+Where can I find the latest smartphones?,conversation_210,3
+Financing options for electronics purchases?,conversation_211,1
+Difference between OLED and LED TVs?,conversation_211,2
+Gaming console compatibility?,conversation_211,3
+Recommended allergy medication dosage?,conversation_212,1
+Natural remedies for seasonal allergies?,conversation_212,2
+Where can I find first aid supplies?,conversation_212,3
+Expiration date on this medication?,conversation_213,1
+Do you carry prescription medications?,conversation_213,2
+Affordable home decor suggestions?,conversation_213,3
+Assembly services available for furniture purchases?,conversation_214,1
+What's the best detergent for tough stains?,conversation_214,2
+Loads it covers?,conversation_214,3
+Handwashing?,conversation_215,1
+Do you offer any eco-friendly options?,conversation_215,2
+Detergent aisle?,conversation_215,3
+Bulk discounts?,conversation_216,1
+Recommend a good brand for a smart thermostat?,conversation_216,2
+Energy efficiency rating?,conversation_216,3
+Installation included?,conversation_217,1
+Return policy for electronics?,conversation_217,2
+Extended warranties available?,conversation_217,3
+Any upcoming laptop sales?,conversation_218,1
+Trade-in for credit?,conversation_218,2
+Noise-canceling headphones recommendation?,conversation_218,3
+Where can I find pain relief medication?,conversation_219,1
+Generic or name-brand pain relievers?,conversation_219,2
+Recommended ibuprofen dosage?,conversation_219,3
+Side effects of this medication?,conversation_220,1
+Natural remedies for headaches?,conversation_220,2
+Affordable home decor suggestions?,conversation_220,3
+Space-saving furniture options?,conversation_221,1
+Popular living room paint colors?,conversation_221,2
+Interior design consultations available?,conversation_221,3
+Any sales on bedding sets this week?,conversation_222,1
+Installation services for major appliances?,conversation_222,2
+Return policy for clothing purchases?,conversation_222,3
+Sustainable fashion options?,conversation_223,1
+Order status tracking available?,conversation_223,2
+Where can I find the latest smartphones?,conversation_223,3
+Financing options for electronics purchases?,conversation_224,1
+Difference between OLED and LED TVs?,conversation_224,2
+Gaming console compatibility?,conversation_224,3
+Recommended allergy medication dosage?,conversation_225,1
+Natural remedies for seasonal allergies?,conversation_225,2
+Where can I find first aid supplies?,conversation_225,3
+Expiration date on this medication?,conversation_226,1
+Do you carry prescription medications?,conversation_226,2
+Affordable home decor suggestions?,conversation_226,3
+Assembly services available for furniture purchases?,conversation_227
+What's the best detergent for tough stains?,conversation_228,1
+Loads it covers?,conversation_228,2
+Handwashing?,conversation_228,3
+Do you offer any eco-friendly options?,conversation_229,1
+Detergent aisle?,conversation_229,2
+Bulk discounts?,conversation_229,3
+Recommend a good brand for a smart thermostat?,conversation_230,1
+Energy efficiency rating?,conversation_230,2
+Control from phone?,conversation_230,3
+Installation included?,conversation_231,1
+Return policy for electronics?,conversation_231,2
+Extended warranties available?,conversation_231,3
+Any upcoming laptop sales?,conversation_232,1
+Trade-in for credit?,conversation_232,2
+Noise-canceling headphones recommendation?,conversation_232,3
+Where can I find pain relief medication?,conversation_233,1
+Generic or name-brand pain relievers?,conversation_233,2
+Recommended ibuprofen dosage?,conversation_233,3
+Side effects of this medication?,conversation_234,1
+Natural remedies for headaches?,conversation_234,2
+Affordable home decor suggestions?,conversation_234,3
+Space-saving furniture options?,conversation_235,1
+Popular living room paint colors?,conversation_235,2
+Interior design consultations available?,conversation_235,3
+Any sales on bedding sets this week?,conversation_236,1
+Installation services for major appliances?,conversation_236,2
+Return policy for clothing purchases?,conversation_236,3
+Sustainable fashion options?,conversation_237,1
+Order status tracking available?,conversation_237,2
+Where can I find the latest smartphones?,conversation_237,3
+Financing options for electronics purchases?,conversation_238,1
+Difference between OLED and LED TVs?,conversation_238,2
+Gaming console compatibility?,conversation_238,3
+Recommended allergy medication dosage?,conversation_239,1
+Natural remedies for seasonal allergies?,conversation_239,2
+Where can I find first aid supplies?,conversation_239,3
+Expiration date on this medication?,conversation_240,1
+Do you carry prescription medications?,conversation_240,2
+Affordable home decor suggestions?,conversation_240,3
+Assembly services available for furniture purchases?,conversation_241,1
+What's the best detergent for tough stains?,conversation_241,2
+Loads it covers?,conversation_241,3
+Handwashing?,conversation_242,1
+Do you offer any eco-friendly options?,conversation_242,2
+Detergent aisle?,conversation_242,3
+Bulk discounts?,conversation_243,1
+Recommend a good brand for a smart thermostat?,conversation_243,2
+Energy efficiency rating?,conversation_243,3
+Installation included?,conversation_244,1
+Return policy for electronics?,conversation_244,2
+Extended warranties available?,conversation_244,3
+Any upcoming laptop sales?,conversation_245,1
+Trade-in for credit?,conversation_245,2
+Noise-canceling headphones recommendation?,conversation_245,3
+Where can I find pain relief medication?,conversation_246,1
+Generic or name-brand pain relievers?,conversation_246,2
+Recommended ibuprofen dosage?,conversation_246,3
+Side effects of this medication?,conversation_247,1
+Natural remedies for headaches?,conversation_247,2
+Affordable home decor suggestions?,conversation_247,3
+Space-saving furniture options?,conversation_248,1
+Popular living room paint colors?,conversation_248,2
+Interior design consultations available?,conversation_248,3
+Any sales on bedding sets this week?,conversation_249,1
+Installation services for major appliances?,conversation_249,2
+Return policy for clothing purchases?,conversation_249,3
+Sustainable fashion options?,conversation_250,1
+Order status tracking available?,conversation_250,2
+Where can I find the latest smartphones?,conversation_250,3
+What's the best detergent for tough stains?,conversation_251,1
+Loads it covers?,conversation_251,2
+Handwashing?,conversation_251,3
+Eco-friendly options available?,conversation_251,4
+Do you offer any eco-friendly options?,conversation_252,1
+Detergent aisle?,conversation_252,2
+Bulk discounts?,conversation_252,3
+How about liquid detergents?,conversation_252,4
+Recommend a good brand for a smart thermostat?,conversation_253,1
+Energy efficiency rating?,conversation_253,2
+Control from phone?,conversation_253,3
+Installation included?,conversation_253,4
+Installation included?,conversation_254,1
+Return policy for electronics?,conversation_254,2
+Extended warranties available?,conversation_254,3
+Can I get same-day installation?,conversation_254,4
+Any upcoming laptop sales?,conversation_255,1
+Trade-in for credit?,conversation_255,2
+Noise-canceling headphones recommendation?,conversation_255,3
+What's the warranty on laptops?,conversation_255,4
+Where can I find pain relief medication?,conversation_256,1
+Generic or name-brand pain relievers?,conversation_256,2
+Recommended ibuprofen dosage?,conversation_256,3
+Do you have natural pain relief options?,conversation_256,4
+Side effects of this medication?,conversation_257,1
+Natural remedies for headaches?,conversation_257,2
+Affordable home decor suggestions?,conversation_257,3
+Do you have any discounts for senior citizens?,conversation_257,4
+Space-saving furniture options?,conversation_258,1
+Popular living room paint colors?,conversation_258,2
+Interior design consultations available?,conversation_258,3
+Can I schedule a home visit for interior design consultation?,conversation_258,4
+Any sales on bedding sets this week?,conversation_259,1
+Installation services for major appliances?,conversation_259,2
+Return policy for clothing purchases?,conversation_259,3
+Do you offer alteration services for clothing purchases?,conversation_259,4
+Sustainable fashion options?,conversation_260,1
+Order status tracking available?,conversation_260,2
+Where can I find the latest smartphones?,conversation_260,3
+Can I trade in my old smartphone for a discount?,conversation_260,4
+Financing options for electronics purchases?,conversation_261,1
+Difference between OLED and LED TVs?,conversation_261,2
+Gaming console compatibility?,conversation_261,3
+Do you offer financing for gaming consoles?,conversation_261,4
+Recommended allergy medication dosage?,conversation_262,1
+Natural remedies for seasonal allergies?,conversation_262,2
+Where can I find first aid supplies?,conversation_262,3
+Do you offer first aid training courses?,conversation_262,4
+Expiration date on this medication?,conversation_263,1
+Do you carry prescription medications?,conversation_263,2
+Affordable home decor suggestions?,conversation_263,3
+Do you have any upcoming home decor workshops?,conversation_263,4
+Assembly services available for furniture purchases?,conversation_264,1
+What's the best detergent for tough stains?,conversation_264,2
+Loads it covers?,conversation_264,3
+Handwashing?,conversation_264,4
+Do you offer any eco-friendly options?,conversation_265,1
+Detergent aisle?,conversation_265,2
+Bulk discounts?,conversation_265,3
+How about liquid detergents?,conversation_265,4
+Recommend a good brand for a smart thermostat?,conversation_266,1
+Energy efficiency rating?,conversation_266,2
+Control from phone?,conversation_266,3
+Installation included?,conversation_266,4
+Installation included?,conversation_267,1
+Return policy for electronics?,conversation_267,2
+Extended warranties available?,conversation_267,3
+Can I get same-day installation?,conversation_267,4
+Any upcoming laptop sales?,conversation_268,1
+Trade-in for credit?,conversation_268,2
+Noise-canceling headphones recommendation?,conversation_268,3
+What's the warranty on laptops?,conversation_268,4
+Where can I find pain relief medication?,conversation_269,1
+Generic or name-brand pain relievers?,conversation_269,2
+Recommended ibuprofen dosage?,conversation_269,3
+Do you have natural pain relief options?,conversation_269,4
+Side effects of this medication?,conversation_270,1
+Natural remedies for headaches?,conversation_270,2
+Affordable home decor suggestions?,conversation_270,3
+Do you have any discounts for senior citizens?,conversation_270,4
+Space-saving furniture options?,conversation_271,1
+Popular living room paint colors?,conversation_271,2
+Interior design consultations available?,conversation_271,3
+Can I schedule a home visit for interior design consultation?,conversation_271,4
+Any sales on bedding sets this week?,conversation_272,1
+Installation services for major appliances?,conversation_272,2
+Return policy for clothing purchases?,conversation_272,3
+What's the best detergent for tough stains?,conversation_273,1
+Loads it covers?,conversation_273,2
+Handwashing?,conversation_273,3
+Eco-friendly options available?,conversation_273,4
+How about liquid detergents?,conversation_273,5
+Do you offer any eco-friendly options?,conversation_274,1
+Detergent aisle?,conversation_274,2
+Bulk discounts?,conversation_274,3
+How about liquid detergents?,conversation_274,4
+Any special offers on eco-friendly detergents?,conversation_274,5
+Recommend a good brand for a smart thermostat?,conversation_275,1
+Energy efficiency rating?,conversation_275,2
+Control from phone?,conversation_275,3
+Installation included?,conversation_275,4
+How does it compare to other brands in terms of energy savings?,conversation_275,5
+Installation included?,conversation_276,1
+Return policy for electronics?,conversation_276,2
+Extended warranties available?,conversation_276,3
+Can I get same-day installation?,conversation_276,4
+Do you offer installation for all types of electronics?,conversation_276,5
+Any upcoming laptop sales?,conversation_277,1
+Trade-in for credit?,conversation_277,2
+Noise-canceling headphones recommendation?,conversation_277,3
+What's the warranty on laptops?,conversation_277,4
+Do you offer financing options for laptops?,conversation_277,5
+Where can I find pain relief medication?,conversation_278,1
+Generic or name-brand pain relievers?,conversation_278,2
+Recommended ibuprofen dosage?,conversation_278,3
+Do you have natural pain relief options?,conversation_278,4
+Are there any side effects I should be aware of?,conversation_278,5
+Side effects of this medication?,conversation_279,1
+Natural remedies for headaches?,conversation_279,2
+Affordable home decor suggestions?,conversation_279,3
+Do you have any discounts for senior citizens?,conversation_279,4
+Can I purchase pain relief medication online?,conversation_279,5
+Space-saving furniture options?,conversation_280,1
+Popular living room paint colors?,conversation_280,2
+Interior design consultations available?,conversation_280,3
+Can I schedule a home visit for interior design consultation?,conversation_280,4
+Do you offer assembly services for furniture?,conversation_280,5
+Any sales on bedding sets this week?,conversation_281,1
+Installation services for major appliances?,conversation_281,2
+Return policy for clothing purchases?,conversation_281,3
+Do you offer alteration services for clothing purchases?,conversation_281,4
+Are there any ongoing promotions for bedding sets?,conversation_281,5
+Sustainable fashion options?,conversation_282,1
+Order status tracking available?,conversation_282,2
+Where can I find the latest smartphones?,conversation_282,3
+Can I trade in my old smartphone for a discount?,conversation_282,4
+Do you offer financing options for smartphones?,conversation_282,5
+Financing options for electronics purchases?,conversation_283,1
+Difference between OLED and LED TVs?,conversation_283,2
+Gaming console compatibility?,conversation_283,3
+Do you offer financing options for gaming consoles?,conversation_283,4
+Can I purchase electronics online and finance them?,conversation_283,5
+Recommended allergy medication dosage?,conversation_284,1
+Natural remedies for seasonal allergies?,conversation_284,2
+Where can I find first aid supplies?,conversation_284,3
+Do you offer first aid training courses?,conversation_284,4
+Are there any allergen-free alternatives to medication?,conversation_284,5
+Expiration date on this medication?,conversation_285,1
+Do you carry prescription medications?,conversation_285,2
+Affordable home decor suggestions?,conversation_285,3
+Do you have any upcoming home decor workshops?,conversation_285,4
+Can I order prescription medications online?,conversation_285,5
+Assembly services available for furniture purchases?,conversation_286,1
+What's the best detergent for tough stains?,conversation_286,2
+Loads it covers?,conversation_286,3
+Handwashing?,conversation_286,4
+Eco-friendly options available?,conversation_286,5
+Do you offer any eco-friendly options?,conversation_287,1
+Detergent aisle?,conversation_287,2
+Bulk discounts?,conversation_287,3
+How about liquid detergents?,conversation_287,4
+Any special offers on eco-friendly detergents?,conversation_287,5
+Recommend a good brand for a smart thermostat?,conversation_288,1
+Energy efficiency rating?,conversation_288,2
+Control from phone?,conversation_288,3
+Installation included?,conversation_288,4
+How does it compare to other brands in terms of energy savings?,conversation_288,5
+Installation included?,conversation_289,1
+Return policy for electronics?,conversation_289,2
+Extended warranties available?,conversation_289,3
+Can I get same-day installation?,conversation_289,4
+Do you offer installation for all types of electronics?,conversation_289,5
+Any upcoming laptop sales?,conversation_290,1
+Trade-in for credit?,conversation_290,2
+Noise-canceling headphones recommendation?,conversation_290,3
+What's the warranty on laptops?,conversation_290,4
+Do you offer financing options for laptops?,conversation_290,5
+Where can I find pain relief medication?,conversation_291,1
+Generic or name-brand pain relievers?,conversation_291,2
+Recommended ibuprofen dosage?,conversation_291,3
+Do you have natural pain relief options?,conversation_291,4
+Are there any side effects I should be aware of?,conversation_291,5
+Side effects of this medication?,conversation_292,1
+Natural remedies for headaches?,conversation_292,2
+Affordable home decor suggestions?,conversation_292,3
+Do you have any discounts for senior citizens?,conversation_292,4
+Can I purchase pain relief medication online?,conversation_292,5
+Space-saving furniture options?,conversation_293,1
+Popular living room paint colors?,conversation_293,2
+Interior design consultations available?,conversation_293,3
+Can I schedule a home visit for interior design consultation?,conversation_293,4
+Do you offer assembly services for furniture?,conversation_293,5
+Any sales on bedding sets this week?,conversation_294,1
+Installation services for major appliances?,conversation_294,2
+Return policy for clothing purchases?,conversation_294,3
+Do you offer alteration services for clothing purchases?,conversation_294,4
+Are there any ongoing promotions for bedding sets?,conversation_294,5
+Sustainable fashion options?,conversation_295,1
+Order status tracking available?,conversation_295,2
+Where can I find the latest smartphones?,conversation_295,3
+Can I trade in my old smartphone for a discount?,conversation_295,4
+Do you offer financing options for smartphones?,conversation_295,5
+Financing options for electronics purchases?,conversation_296,1
+Difference between OLED and LED TVs?,conversation_296,2
+Gaming console compatibility?,conversation_296,3
+Do you offer financing options for gaming consoles?,conversation_296,4
+Can I purchase electronics online and finance them?,conversation_296,5
+Recommended allergy medication dosage?,conversation_297,1
+Natural remedies for seasonal allergies?,conversation_297,2
+Where can I find first aid supplies?,conversation_297,3
+Do you offer first aid training courses?,conversation_297,4
+Are there any allergen-free alternatives to medication?,conversation_297,5
+Expiration date on this medication?,conversation_298,1
+Do you carry prescription medications?,conversation_298,2
+Affordable home decor suggestions?,conversation_298,3
+Do you have any upcoming home decor workshops?,conversation_298,4
+Can I order prescription medications online?,conversation_298,5
+Assembly services available for furniture purchases?,conversation_299,1
+What's the best detergent for tough stains?,conversation_299,2
+Loads it covers?,conversation_299,3
+Handwashing?,conversation_299,4
+Eco-friendly options available?,conversation_299,5
+Do you offer any eco-friendly options?,conversation_300,1
+Detergent aisle?,conversation_300,2
+Bulk discounts?,conversation_300,3
+How about liquid detergents?,conversation_300,4
+Any special offers on eco-friendly detergents?,conversation_300,5
+Recommend a good brand for a smart thermostat?,conversation_301,1
+Energy efficiency rating?,conversation_301,2
+Control from phone?,conversation_301,3
+Installation included?,conversation_301,4
+How does it compare to other brands in terms of energy savings?,conversation_301,5
+Installation included?,conversation_302,1
+Return policy for electronics?,conversation_302,2
+Extended warranties available?,conversation_302,3
+Can I get same-day installation?,conversation_302,4
+Do you offer installation for all types of electronics?,conversation_302,5
+Any upcoming laptop sales?,conversation_303,1
+Trade-in for credit?,conversation_303,2
+Noise-canceling headphones recommendation?,conversation_303,3
+What's the warranty on laptops?,conversation_303,4
+Do you offer financing options for laptops?,conversation_303,5
+Where can I find pain relief medication?,conversation_304,1
+Generic or name-brand pain relievers?,conversation_304,2
+Recommended ibuprofen dosage?,conversation_304,3
+Do you have natural pain relief options?,conversation_304,4
+Are there any side effects I should be aware of?,conversation_304,5
+Side effects of this medication?,conversation_305,1
+Natural remedies for headaches?,conversation_305,2
+Affordable home decor suggestions?,conversation_305,3
+Do you have any discounts for senior citizens?,conversation_305,4
+Can I purchase pain relief medication online?,conversation_305,5
+Space-saving furniture options?,conversation_306,1
+Popular living room paint colors?,conversation_306,2
+Interior design consultations available?,conversation_306,3
+Can I schedule a home visit for interior design consultation?,conversation_306,4
+Do you offer assembly services for furniture?,conversation_306,5
+Any sales on bedding sets this week?,conversation_307,1
+Installation services for major appliances?,conversation_307,2
+Return policy for clothing purchases?,conversation_307,3
+Do you offer alteration services for clothing purchases?,conversation_307,4
+Are there any ongoing promotions for bedding sets?,conversation_307,5
+Sustainable fashion options?,conversation_308,1
+Order status tracking available?,conversation_308,2
+Where can I find the latest smartphones?,conversation_308,3
+Can I trade in my old smartphone for a discount?,conversation_308,4
+Do you offer financing options for smartphones?,conversation_308,5
+Financing options for electronics purchases?,conversation_309,1
+Difference between OLED and LED TVs?,conversation_309,2
+Gaming console compatibility?,conversation_309,3
+Do you offer financing options for gaming consoles?,conversation_309,4
+Can I purchase electronics online and finance them?,conversation_309,5
+Recommended allergy medication dosage?,conversation_310,1
+Natural remedies for seasonal allergies?,conversation_310,2
+Where can I find first aid supplies?,conversation_310,3
+Do you offer first aid training courses?,conversation_310,4
+Are there any allergen-free alternatives to medication?,conversation_310,5
+Expiration date on this medication?,conversation_311,1
+Do you carry prescription medications?,conversation_311,2
+Affordable home decor suggestions?,conversation_311,3
+Do you have any upcoming home decor workshops?,conversation_311,4
+Can I order prescription medications online?,conversation_311,5
+Assembly services available for furniture purchases?,conversation_312,1
+What's the best detergent for tough stains?,conversation_312,2
+Loads it covers?,conversation_312,3
+Handwashing?,conversation_312,4
+Eco-friendly options available?,conversation_312,5
+Do you offer any eco-friendly options?,conversation_313,1
+Detergent aisle?,conversation_313,2
+Bulk discounts?,conversation_313,3
+How about liquid detergents?,conversation_313,4
+Any special offers on eco-friendly detergents?,conversation_313,5
+Recommend a good brand for a smart thermostat?,conversation_314,1
+Energy efficiency rating?,conversation_314,2
+Control from phone?,conversation_314,3
+Installation included?,conversation_314,4
+How does it compare to other brands in terms of energy savings?,conversation_314,5
+Installation included?,conversation_315,1
+Return policy for electronics?,conversation_315,2
+Extended warranties available?,conversation_315,3
+Can I get same-day installation?,conversation_315,4
+Do you offer installation for all types of electronics?,conversation_315,5
+Any upcoming laptop sales?,conversation_316,1
+Trade-in for credit?,conversation_316,2
+Noise-canceling headphones recommendation?,conversation_316,3
+What's the warranty on laptops?,conversation_316,4
+Do you offer financing options for laptops?,conversation_316,5
+Where can I find pain relief medication?,conversation_317,1
+Generic or name-brand pain relievers?,conversation_317,2
+Recommended ibuprofen dosage?,conversation_317,3
+Do you have natural pain relief options?,conversation_317,4
+Are there any side effects I should be aware of?,conversation_317,5
+Side effects of this medication?,conversation_318,1
+Natural remedies for headaches?,conversation_318,2
+Affordable home decor suggestions?,conversation_318,3
+Do you have any discounts for senior citizens?,conversation_318,4
+Can I purchase pain relief medication online?,conversation_318,5
+Space-saving furniture options?,conversation_319,1
+Popular living room paint colors?,conversation_319,2
+Interior design consultations available?,conversation_319,3
+Can I schedule a home visit for interior design consultation?,conversation_319,4
+Do you offer assembly services for furniture?,conversation_319,5
+Any sales on bedding sets this week?,conversation_320,1
+Installation services for major appliances?,conversation_320,2
+Return policy for clothing purchases?,conversation_320,3
+Do you offer alteration services for clothing purchases?,conversation_320,4
+Are there any ongoing promotions for bedding sets?,conversation_320,5
+Sustainable fashion options?,conversation_321,1
+Order status tracking available?,conversation_321,2
+Where can I find the latest smartphones?,conversation_321,3
+Can I trade in my old smartphone for a discount?,conversation_321,4
+Do you offer financing options for smartphones?,conversation_321,5
+Financing options for electronics purchases?,conversation_322,1
+Difference between OLED and LED TVs?,conversation_322,2
+Gaming console compatibility?,conversation_322,3
+Do you offer financing options for gaming consoles?,conversation_322,4
+Can I purchase electronics online and finance them?,conversation_322,5
+Recommended allergy medication dosage?,conversation_323,1
+Natural remedies for seasonal allergies?,conversation_323,2
+Where can I find first aid supplies?,conversation_323,3
+Do you offer first aid training courses?,conversation_323,4
+Are there any allergen-free alternatives to medication?,conversation_323,5
+Expiration date on this medication?,conversation_324,1
+Do you carry prescription medications?,conversation_324,2
+Affordable home decor suggestions?Items starting from $5,conversation_324,3
+Do you have any upcoming home decor workshops?,conversation_324,4
+Can I order prescription medications online?,conversation_324,5
+Assembly services available for furniture purchases?,conversation_325,1
+What's the best detergent for tough stains?,conversation_325,2
+Loads it covers?,conversation_325,3
+Handwashing?,conversation_325,4
+Eco-friendly options available?,conversation_325,5
+Do you offer any eco-friendly options?,conversation_326,1
+Detergent aisle?,conversation_326,2
+Bulk discounts?,conversation_326,3
+How about liquid detergents?,conversation_326,4
+Any special offers on eco-friendly detergents?,conversation_326,5
+Recommend a good brand for a smart thermostat?,conversation_327,1
+Energy efficiency rating?,conversation_327,2
+Control from phone?,conversation_327,3
+Installation included?,conversation_327,4
+How does it compare to other brands in terms of energy savings?,conversation_327,5
+Installation included?,conversation_328,1
+Return policy for electronics?,conversation_328,2
+Extended warranties available?,conversation_328,3
+Can I get same-day installation?,conversation_328,4
+Do you offer installation for all types of electronics?,conversation_328,5
+Any upcoming laptop sales?,conversation_329,1
+Trade-in for credit?,conversation_329,2
+Noise-canceling headphones recommendation?,conversation_329,3
+What's the warranty on laptops?,conversation_329,4
+Do you offer financing options for laptops?,conversation_329,5
+Where can I find pain relief medication?,conversation_330,1
+Generic or name-brand pain relievers?,conversation_330,2
+Recommended ibuprofen dosage?,conversation_330,3
+Do you have natural pain relief options?,conversation_330,4
