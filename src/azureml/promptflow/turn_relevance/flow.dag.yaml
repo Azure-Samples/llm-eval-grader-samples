@@ -1,5 +1,4 @@
-id: QnA_Relevance_llm_based_dev_test
-name: QnA Relevance Evaluation
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
 environment:
   python_requirements_txt: requirements.txt
 inputs:
