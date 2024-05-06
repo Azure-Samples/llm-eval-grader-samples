@@ -16,7 +16,7 @@ The following are the prerequisites to run this app:
 
 This app can be run from anywhere using `Python` and `streamlit` command.
 
-Before running the `.env` file should be created in this directory by copying the `.env_template` file and updating the values in the `.env` file.
+Before running the `.env` file should be created in this directory by copying the `.env.template` file and updating the values in the `.env` file.
 
 ```bash
 API_KEY=<your azure openai api key>
