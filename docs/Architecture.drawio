@@ -548,7 +548,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="wqt1-dp9pM5B39aJQcM-" name="Low Level Data model">
-        <mxGraphModel dx="1839" dy="1861" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="2087" dy="579" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -974,16 +974,16 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="XtR2BsyFWRbOH7-gKXCU-5" value="" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
-                    <mxGeometry x="-540" y="-10" width="660" height="480" as="geometry"/>
+                    <mxGeometry x="-540" width="660" height="480" as="geometry"/>
                 </mxCell>
                 <mxCell id="XtR2BsyFWRbOH7-gKXCU-6" value="" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
-                    <mxGeometry x="159" y="-10" width="441" height="470" as="geometry"/>
+                    <mxGeometry x="159" width="441" height="480" as="geometry"/>
                 </mxCell>
                 <mxCell id="XtR2BsyFWRbOH7-gKXCU-7" value="ADLS Gen 2" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
-                    <mxGeometry x="-500" y="-10" width="130" height="50" as="geometry"/>
+                    <mxGeometry x="-500" y="5" width="130" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="XtR2BsyFWRbOH7-gKXCU-8" value="Azure SQL" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
-                    <mxGeometry x="190" y="15" width="100" height="40" as="geometry"/>
+                    <mxGeometry x="200" y="10" width="100" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
