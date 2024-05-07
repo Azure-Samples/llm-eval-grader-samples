@@ -2,42 +2,30 @@ $schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
 environment:
   python_requirements_txt: requirements.txt
 inputs:
-  query:
-    type: string
-    default: What feeds all the fixtures in low voltage tracks instead of each light
-      having a line-to-low voltage transformer?
-  context:
-    type: string
-    default: Track lighting, invented by Lightolier, was popular at one period of
-      time because it was much easier to install than recessed lighting, and
-      individual fixtures are decorative and can be easily aimed at a wall. It
-      has regained some popularity recently in low-voltage tracks, which often
-      look nothing like their predecessors because they do not have the safety
-      issues that line-voltage systems have, and are therefore less bulky and
-      more ornamental in themselves. A master transformer feeds all of the
-      fixtures on the track or rod with 12 or 24 volts, instead of each light
-      fixture having its own line-to-low voltage transformer. There are
-      traditional spots and floods, as well as other small hanging fixtures. A
-      modified version of this is cable lighting, where lights are hung from or
-      clipped to bare metal cables under tension
-  response:
-    type: string
-    default: The main transformer is the object that feeds all the fixtures in low
-      voltage tracks.
+  evaluation_dataset:
+    type: list
+    default: []
 outputs:
-  turn_relevance:
+  evaluation_results:
     type: object
-    reference: ${concat_scores.output.gpt_relevance}
+    reference: ${parse_score.output}
 nodes:
+- name: parse_input
+  type: python
+  source:
+    type: code
+    path: parse_input.py
+  inputs:
+    evaluation_dataset: ${inputs.evaluation_dataset}
 - name: relevance_score
   type: llm
   source:
     type: code
     path: relevance_score.jinja2
   inputs:
-    question: ${inputs.query}
-    context: ${inputs.context}
-    answer: ${inputs.response}
+    question: ${parse_input.output.query}
+    context: ${parse_input.output.context}
+    answer: ${parse_input.output.response}
     max_tokens: 256
     deployment_name: gpt-35-turbo
     temperature: 0
@@ -45,18 +33,11 @@ nodes:
   connection: azure_open_ai_connection
   api: chat
   module: promptflow.tools.aoai
-- name: concat_scores
+- name: parse_score
   type: python
   source:
     type: code
-    path: concat_scores.py
+    path: parse_score.py
   inputs:
+    evaluation_dataset: ${parse_input.output}
     relevance_score: ${relevance_score.output}
-- name: aggregate_variants_results
-  type: python
-  source:
-    type: code
-    path: aggregate_variants_results.py
-  inputs:
-    results: ${concat_scores.output}
-  aggregation: true
