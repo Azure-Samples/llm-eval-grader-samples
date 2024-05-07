@@ -11,14 +11,17 @@ from azure.identity import DefaultAzureCredential
 from azure.monitor.query import LogsQueryClient, LogsQueryStatus
 
 class AzureMonitorHandler:
-    
-    def _get_logs(start_date: datetime, end_date: datetime, query: str) -> pd.DataFrame:
+    def __init__(self, workspace_id: str, logger: Logger = get_logger("azure_monitor_handler")):
+        self.workspace_id = workspace_id
+        self.logger = logger
+
+    def get_logs_by_time_range(self, start_date: datetime, end_date: datetime, query: str) -> pd.DataFrame:
         credential = DefaultAzureCredential()
         client = LogsQueryClient(credential)
         load_dotenv()
         try:
             response = client.query_workspace(
-                workspace_id="24bbb4b3-a8e3-4a98-9c0d-2a48494c5e35",
+                workspace_id=self.workspace_id,
                 query=query,
                 timespan=(start_date, end_date),
             )

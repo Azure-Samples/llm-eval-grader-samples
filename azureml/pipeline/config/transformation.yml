@@ -1,0 +1,50 @@
+transformation_config:
+  - chatbot_name: sample-chatbot
+    transformations:
+      - name: data_transformation
+        source:
+          type: azure_monitor
+          table: AppTraces
+          workspace_id_secret_key: "sample-chatbot-az-monitor-workspace-id"
+        mappings:
+          conversation_data:
+            - source: conversation_id
+              target: conversation_id
+              data_type: string
+            - source: turn_id
+              target: turn_id
+              data_type: string
+            - source: query
+              target: query
+              data_type: string
+            - source: response
+              target: response
+              data_type: string
+            - source: TimeGenerated
+              target: timestamp
+              data_type: datetime
+          llm_data:
+            - source: conversation_id
+              target: conversation_id
+              data_type: string
+            - source: turn_id
+              target: turn_id
+              data_type: string
+            - source: query
+              target: query
+              data_type: string
+            - source: response
+              target: response
+              data_type: string
+            - source: context
+              target: context
+              data_type: string
+            - source: model
+              target: model
+              data_type: string
+            - source: TimeGenerated
+              target: timestamp
+              data_type: datetime
+        endpoint_name: "dev-sample-chatbot-transform1" # max 32 characters of letters, numbers and dash
+        schedule: "0 18 * * 0" # (Cron expression) <MINUTES> <HOURS> <DAY_OF_MONTH> <MONTH> <DAY_OF_WEEK> where 0 is Sunday
+        schedule_start_time: "" # If left blank, schedule is enabled from the next day or specify a date in this format YYYY-MM-DD hh:mm:ss in UTC timezone

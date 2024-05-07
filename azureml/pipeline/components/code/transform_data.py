@@ -11,132 +11,33 @@ from azure.identity import DefaultAzureCredential
 from azure.monitor.query import LogsQueryClient, LogsQueryStatus
 
 
-class DataTransformer:
+
+def transform(self):
     """
-    Class representing data transformer for transferring data from silver to gold zone.
+    Core logic of data transformation flow.
     """
 
-    def __init__(self, start_date: datetime, end_date: datetime):
-        self.start_date = start_date
-        self.end_date = end_date
+    query_conversation_data = """ AppTraces | project TimeGenerated, Message, Properties | where Message == "conversation_data" """
 
-    @staticmethod
-    def _get_logs(start_date: datetime, end_date: datetime, query: str) -> pd.DataFrame:
-        credential = DefaultAzureCredential()
-        client = LogsQueryClient(credential)
-        load_dotenv()
-        try:
-            response = client.query_workspace(
-                workspace_id="24bbb4b3-a8e3-4a98-9c0d-2a48494c5e35",
-                query=query,
-                timespan=(start_date, end_date),
-            )
-            if response.status == LogsQueryStatus.PARTIAL:
-                error = response.partial_error
-                data = response.partial_data
-                print(error)
-            elif response.status == LogsQueryStatus.SUCCESS:
-                data = response.tables
-            for table in data:
-                df_logs = pd.DataFrame(data=table.rows, columns=table.columns)
-                print(df_logs)
-        except HttpResponseError as err:
-            print("something fatal happened")
-            print(err)
-        return df_logs
+    query_llm_data = """  AppTraces | project TimeGenerated, Message, Properties | where Message == "llm_data" """
 
-    @staticmethod
-    def transform_conversation_data(source_facts_conversation_df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Transforms the conversation data.
-        """
-        df_conversation_mapped = pd.DataFrame(
-            columns=["conversation_id", "turn_id", "query", "response", "timestamp"]
-        )
-        for i in range(source_facts_conversation_df.shape[0]):
-            df_conversation_mapped.loc[i] = [
-                ast.literal_eval(source_facts_conversation_df["Properties"].iloc[i])[
-                    "conversation_id"
-                ],
-                ast.literal_eval(source_facts_conversation_df["Properties"].iloc[i])["turn_id"],
-                ast.literal_eval(source_facts_conversation_df["Properties"].iloc[i])["query"],
-                ast.literal_eval(source_facts_conversation_df["Properties"].iloc[i])["response"],
-                source_facts_conversation_df["TimeGenerated"].iloc[i],
-            ]
-        return df_conversation_mapped
+    print("Data transformation started...")
+    print("Reading data from different sources...")
+    source_facts_conversation_df = self._get_logs(
+        self.start_date, self.end_date, query_conversation_data
+    )
+    source_facts_llm_df = self._get_logs(self.start_date, self.end_date, query_llm_data)
 
-    @staticmethod
-    def transform_llm_data(source_facts_llm_df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Transforms the llm data.
-        """
-        df_llm_mapped = pd.DataFrame(
-            columns=[
-                "context",
-                "response",
-                "conversation_id",
-                "turn_id",
-                "query",
-                "intent",
-                "model",
-                "timestamp",
-        ])
-        for i in range(source_facts_llm_df.shape[0]):
-            if "llm_response" not in ast.literal_eval(source_facts_llm_df["Properties"].iloc[i]):
-                continue
-            if "context" in ast.literal_eval(source_facts_llm_df["Properties"].iloc[i]):
-                df_llm_mapped.loc[i] = [
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["context"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["llm_response"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["conversation_id"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["turn_id"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["query"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["intent"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["model"],
-                    source_facts_llm_df["TimeGenerated"].iloc[i],
-                ]
-            else:
-                df_llm_mapped.loc[i] = [
-                    "",
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["llm_response"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["conversation_id"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["turn_id"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["query"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["intent"],
-                    ast.literal_eval(source_facts_llm_df["Properties"].iloc[i])["model"],
-                    source_facts_llm_df["TimeGenerated"].iloc[i],
-                ]
-        df_llm_mapped["response"] = df_llm_mapped["response"].apply(
-            lambda x: json.loads(x)["choices"][0]["message"]["content"] if x != "" else x
-        )
-        return df_llm_mapped
+    print(f"Read {len(source_facts_llm_df)} rows from azure monitor for llm data")
+    print(f"Read {len(source_facts_conversation_df)} rows from azure monitor for llm data")
 
-    def transform(self):
-        """
-        Core logic of data transformation flow.
-        """
+    print("Data transformation started for conversation level")
+    df_conversation_mapped = self.transform_conversation_data(source_facts_conversation_df)
+    print("Data transformation completed for conversation level")
 
-        query_conversation_data = """ AppTraces | project TimeGenerated, Message, Properties | where Message == "conversation_data" """
-
-        query_llm_data = """  AppTraces | project TimeGenerated, Message, Properties | where Message == "llm_data" """
-
-        print("Data transformation started...")
-        print("Reading data from different sources...")
-        source_facts_conversation_df = self._get_logs(
-            self.start_date, self.end_date, query_conversation_data
-        )
-        source_facts_llm_df = self._get_logs(self.start_date, self.end_date, query_llm_data)
-
-        print(f"Read {len(source_facts_llm_df)} rows from azure monitor for llm data")
-        print(f"Read {len(source_facts_conversation_df)} rows from azure monitor for llm data")
-
-        print("Data transformation started for conversation level")
-        df_conversation_mapped = self.transform_conversation_data(source_facts_conversation_df)
-        print("Data transformation completed for conversation level")
-
-        print("Data transformation started for llm level")
-        df_llm_mapped = self.transform_llm_data(source_facts_llm_df)
-        print("Data transformation completed llm level")
+    print("Data transformation started for llm level")
+    df_llm_mapped = self.transform_llm_data(source_facts_llm_df)
+    print("Data transformation completed llm level")
 
 
 def parse_args():
