@@ -22,6 +22,7 @@ def _get_conversation(sampled_data: pd.DataFrame, existing_conversation: pd.Data
     """
     """
     df_conversation = sampled_data[['conversation_id', 'timestamp']]
+    df_conversation = df_conversation.copy()
     df_conversation["timestamp1"] = df_conversation["timestamp"]
     df_conversation = df_conversation.groupby(['conversation_id'], group_keys=True, as_index=False).agg({'timestamp': 'min', 'timestamp1': 'max'})
     df_conversation.columns = ['conversation_id', 'conv_start_time', 'conv_end_time']
@@ -47,7 +48,7 @@ def _get_fact_data(sampled_data: pd.DataFrame, existing_fact_data: pd.DataFrame,
     sampled_data['evaluation_dataset_id'] = [str(uuid4()) for _ in range(len(sampled_data.index))]
 
     sampled_data.drop(columns=['model', 'intent'], inplace=True)
-    logger.info(f"Gold zone data columns: {sampled_data.columns}")
+    logger.info(f"Gold zone data columns: {sampled_data.columns.to_list()}")
 
     if len(existing_fact_data) == 0:
         return sampled_data

@@ -2,9 +2,13 @@
 
 from setuptools import setup, find_packages
 
+package_name = "llminspect"
+version = "0.1.0"
+
 setup(
-    name='llminspect',
-    version='0.1',
-    packages=find_packages(where='llminspect'),
-    package_dir={"": "llminspect"},
+    name=package_name,
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    version=version,
+    description="A short description of the project.",
 )

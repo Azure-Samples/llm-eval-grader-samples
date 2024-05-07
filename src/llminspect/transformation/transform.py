@@ -144,7 +144,7 @@ class DataTransformer:
         self.logger.info("Concatenating the data.")
         concat_df = pd.concat([transformation_dto.data for transformation_dto in transformation_dtos])
         self.logger.info(f"Shape of the concatenated data: {concat_df.shape}")
-        self.logger.info(f"Final data columns: {concat_df.columns}")
+        self.logger.info(f"Columns of the concatenated data: {concat_df.columns.to_list()}")
         return concat_df
     
     def fill_missing_values(self, concat_data: pd.DataFrame) -> pd.DataFrame:
