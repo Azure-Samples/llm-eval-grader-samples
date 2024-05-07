@@ -160,5 +160,12 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Ignore promtpflow related file
+*.promptflow
+*.DS_Store
+.vscode
+.amlignore
+.*.amlignore
+
 # Ignore .env file
 **/*.env

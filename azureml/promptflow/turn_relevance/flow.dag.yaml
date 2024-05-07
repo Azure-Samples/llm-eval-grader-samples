@@ -1,0 +1,43 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  evaluation_dataset:
+    type: list
+    default: []
+outputs:
+  evaluation_results:
+    type: object
+    reference: ${parse_score.output}
+nodes:
+- name: parse_input
+  type: python
+  source:
+    type: code
+    path: parse_input.py
+  inputs:
+    evaluation_dataset: ${inputs.evaluation_dataset}
+- name: relevance_score
+  type: llm
+  source:
+    type: code
+    path: relevance_score.jinja2
+  inputs:
+    question: ${parse_input.output.query}
+    context: ${parse_input.output.context}
+    answer: ${parse_input.output.response}
+    max_tokens: 256
+    deployment_name: gpt-35-turbo
+    temperature: 0
+  provider: AzureOpenAI
+  connection: azure_open_ai_connection
+  api: chat
+  module: promptflow.tools.aoai
+- name: parse_score
+  type: python
+  source:
+    type: code
+    path: parse_score.py
+  inputs:
+    evaluation_dataset: ${parse_input.output}
+    relevance_score: ${relevance_score.output}
