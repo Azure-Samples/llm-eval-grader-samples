@@ -15,4 +15,4 @@ dependencies:
     - pyodbc==5.0.1
     - azureml-mlflow==1.54.0
     - tenacity==8.2.3
-    - taskmonk-sdk==0.29
+    - -e ../../../
