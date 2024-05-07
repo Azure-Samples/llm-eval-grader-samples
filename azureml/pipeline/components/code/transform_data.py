@@ -9,7 +9,7 @@ import pandas as pd
 from azure.core.exceptions import HttpResponseError
 from azure.identity import DefaultAzureCredential
 from azure.monitor.query import LogsQueryClient, LogsQueryStatus
-from src.transformation.transform  import DataTransformer
+from llminspect.transformation.transform  import DataTransformer
 
 
 
@@ -54,8 +54,6 @@ def parse_args():
     )
     parser.add_argument("--bot_name", type=str, help="Bot name", required=True)
     parser.add_argument("--app_types", type=str, help="Apps type", required=True)
-    parser.add_argument("--fact_table_name", type=str, help="Fact table name", required=True)
-    parser.add_argument("--fact_schema_name", type=str, help="Fact schema name", required=True)
     parser.add_argument("--columns", type=str, help="Columns", required=True)
     parser.add_argument("--evaluation_types", type=str, help="Evaluation types", required=True)
     parser.add_argument("--start_date", type=str, help="Start date", required=True)
@@ -78,9 +76,7 @@ def main():
     end_date = datetime.strptime(args.end_date, "%Y/%m/%d").replace(tzinfo=timezone.utc)
     
     transformation_processor = DataTransformer(key_vault_url=args.key_vault_url, start_date=start_date,
-                                            end_date=end_date, columns=columns, evaluation_types=evaluation_types, app_types=app_types, bot_name=args.bot_name,
-                                            source_fact_schema_name=args.fact_schema_name,
-                                            source_fact_table_name=args.fact_table_name,
+                                            end_date=end_date, columns=columns, evaluation_types=evaluation_types, app_types=app_types, bot_name=args.bot_name, 
                                             dim_metadata_output_path=args.dim_metadata_output,
                                             dim_conversation_output_path=args.dim_conversation_output,
                                             fact_evaluation_output_path=args.fact_evaluation_output)
