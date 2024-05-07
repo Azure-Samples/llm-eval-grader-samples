@@ -27,7 +27,7 @@ def create_dynamic_evaluation_pipeline(
         evaluation_types,
         fact_evaluation_output_path,
         dim_metadata_output_path,
-        dim_session_output_path,
+        dim_conversation_output_path,
         key_vault_url,
         pipeline_name
     ):
@@ -42,7 +42,7 @@ def create_dynamic_evaluation_pipeline(
             columns (str): Columns to be selected from the fact table.
             fact_evaluation_output_path (str): Path to the output of the fact_evaluation component.
             dim_metadata_output_path (str): Path to the output of the dim_metadata component.
-            dim_session_output_path (str): Path to the output of the dim_session component.
+            dim_conversation_output_path (str): Path to the output of the dim_conversation component.
             key_vault_url (str): URL of the Azure Key Vault.
             pipeline_name (str): Name of the pipeline.
     """
@@ -75,11 +75,11 @@ def create_dynamic_evaluation_pipeline(
 
         fact_evaluation_output = Output(path=fact_evaluation_output_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
         dim_metadata_output = Output(path=dim_metadata_output_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
-        dim_session_output = Output(path=dim_session_output_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
+        dim_conversation_output = Output(path=dim_conversation_output_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
 
         transformation_component.outputs.fact_evaluation_output = fact_evaluation_output
         transformation_component.outputs.dim_metadata_output = dim_metadata_output
-        transformation_component.outputs.dim_session_output = dim_session_output
+        transformation_component.outputs.dim_conversation_output = dim_conversation_output
     
     return transformation_pipeline
 
@@ -117,7 +117,7 @@ def build_pipeline(
     fact_evaluation_dataset_folder = "fact_evaluation_dataset/test_fact_evaluation_dataset/"
     fact_evaluation_output_path = aml_datastore_gold_zone_path + fact_evaluation_dataset_folder
     dim_metadata_output_path = aml_datastore_gold_zone_path + "dim_metadata/"
-    dim_session_output_path = aml_datastore_gold_zone_path + "dim_session/"
+    dim_conversation_output_path = aml_datastore_gold_zone_path + "dim_conversation/"
 
     transformation_component = load_component("transformation/components/transformation.yml")
 
@@ -132,7 +132,7 @@ def build_pipeline(
         evaluation_types=str(evaluation_types),
         fact_evaluation_output_path=fact_evaluation_output_path,
         dim_metadata_output_path=dim_metadata_output_path,
-        dim_session_output_path=dim_session_output_path,
+        dim_conversation_output_path=dim_conversation_output_path,
         key_vault_url=aml_key_vault_url,
         pipeline_name=pipeline_name
     )

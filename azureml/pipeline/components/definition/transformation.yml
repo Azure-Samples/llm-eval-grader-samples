@@ -30,7 +30,7 @@ outputs:
     type: uri_folder
   dim_metadata_output:
     type: uri_folder
-  dim_session_output:
+  dim_conversation_output:
     type: uri_folder
 code: ../../src
 environment:
@@ -49,5 +49,5 @@ command: >-
   --key_vault_url "${{inputs.key_vault_url}}"
   --fact_evaluation_output "${{outputs.fact_evaluation_output}}"
   --dim_metadata_output "${{outputs.dim_metadata_output}}"
-  --dim_session_output "${{outputs.dim_session_output}}"
+  --dim_conversation_output "${{outputs.dim_conversation_output}}"
 # </component>

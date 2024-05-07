@@ -63,7 +63,7 @@ def parse_args():
     parser.add_argument("--key_vault_url", type=str, help="Key vault url", required=True)
     parser.add_argument("--fact_evaluation_output", type=str, help="Fact evaluation output path", required=True)
     parser.add_argument("--dim_metadata_output", type=str, help="Dim metadata output path", required=True)
-    parser.add_argument("--dim_session_output", type=str, help="Dim sessions output path", required=True)
+    parser.add_argument("--dim_conversation_output", type=str, help="Dim sessions output path", required=True)
     args, _ = parser.parse_known_args()
     return args
 
@@ -82,7 +82,7 @@ def main():
                                             source_fact_schema_name=args.fact_schema_name,
                                             source_fact_table_name=args.fact_table_name,
                                             dim_metadata_output_path=args.dim_metadata_output,
-                                            dim_session_output_path=args.dim_session_output,
+                                            dim_conversation_output_path=args.dim_conversation_output,
                                             fact_evaluation_output_path=args.fact_evaluation_output)
     transformation_processor.transform()
 
