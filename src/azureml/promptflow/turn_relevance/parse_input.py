@@ -1,7 +1,8 @@
 from promptflow import tool
 
+
 @tool
-def parse_evaluation_data(evaluation_dataset: list[dict]):
+def parse_evaluation_data(evaluation_dataset: list):
     """
     Parse the prompt flow input and return a dictionary of the evaluation data.
 

@@ -1,28 +1,39 @@
 import json
-from promptflow import tool
-import numpy as np
 import re
+
+import numpy as np
+
+from promptflow import tool
 
 
 @tool
 def concat_results(evaluation_dataset: dict, relevance_score: str):
+    """Parse the results of the evaluation score for Turn Relevance.
 
-    load_list = [{'name': 'gpt_relevance', 'score': relevance_score}]
+    Args:
+        evaluation_dataset (dict): The evaluation dataset.
+        relevance_score (str): The evaluation result LLM provides, possibly
+                               contains values from 1 to 5.
+
+    Returns:
+        evaluation_output (list): The parsed results of the evaluation score appended to the original evaluation dataset.
+    """
+
+    load_list = [{"name": "gpt_relevance", "score": relevance_score}]
     score_list = []
     errors = []
     for item in load_list:
         try:
             score = item["score"]
-            match = re.search(r'\d', score)
+            match = re.search(r"\d", score)
             if match:
                 score = match.group()
             score = float(score)
         except Exception as e:
             score = np.nan
-            errors.append({"name": item["name"], "msg":   str(e), "data": item["score"]})
+            errors.append({"name": item["name"], "msg": str(e), "data": item["score"]})
         score_list.append({"name": item["name"], "score": score})
 
-    
     metrics = json.loads(evaluation_dataset["metric_names"])
 
     # Remove metric names dictionary, since it is flattened out in final evaluation output
@@ -37,4 +48,3 @@ def concat_results(evaluation_dataset: dict, relevance_score: str):
     # This is the standard format for all evaluation outputs
     evaluation_output = [evaluation_dataset]
     return evaluation_output
-
