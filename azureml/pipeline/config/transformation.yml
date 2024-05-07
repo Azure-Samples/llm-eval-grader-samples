@@ -44,6 +44,9 @@ transformation_config:
               - source_name: model
                 target_name: model
                 data_type: string
+              - source_name: intent
+                target_name: intent
+                data_type: string
               - source_name: TimeGenerated
                 target_name: timestamp
                 data_type: datetime

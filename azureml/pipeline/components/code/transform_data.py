@@ -1,17 +1,13 @@
 import argparse
 import ast
 import datetime
-import json
-import os
 from datetime import datetime, timezone
-from dotenv import load_dotenv
 import pandas as pd
-from azure.core.exceptions import HttpResponseError
-from azure.identity import DefaultAzureCredential
-from azure.monitor.query import LogsQueryClient, LogsQueryStatus
 
-from llminspect.common.entities import AzureMonitorDataSource, MappingList, TransformationDTO
+from llminspect.common.entities import AzureMonitorDataSource, MappingList
 from llminspect.transformation.transform import DataTransformer
+from llminspect.transformation.goldzone_prep import create_goldzone_tables
+from llminspect.transformation.sampling import simple_sample
 
 
 def parse_args():
@@ -63,6 +59,21 @@ def main():
     transformation_dtos = transformation_processor.add_optional_extra_columns(transformation_dtos,
                                                                               "chatbot_name", args.chatbot_name)
     concat_data = transformation_processor.concat_data(transformation_dtos)
+    concat_data = transformation_processor.fill_missing_values(concat_data)
+
+    # TODO: Read existing data
+    existing_fact_data = pd.DataFrame()
+    existing_metadata = pd.DataFrame()
+    existing_conversation = pd.DataFrame()
+
+    # Sampling the data
+    concat_data = simple_sample(concat_data)
+
+    # Prepare the data model
+    fact_data, metadata, conversation = create_goldzone_tables(concat_data, existing_fact_data, existing_metadata, existing_conversation)
+
+    # TODO: Write the data to the output paths
+
 
 if __name__ == "__main__":
     main()

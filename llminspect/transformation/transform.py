@@ -146,3 +146,12 @@ class DataTransformer:
         self.logger.info(f"Shape of the concatenated data: {concat_df.shape}")
         self.logger.info(f"Final data columns: {concat_df.columns}")
         return concat_df
+    
+    def fill_missing_values(self, concat_data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Fills the missing values.
+        """
+        self.logger.info("Filling missing values.")
+        concat_data = concat_data.fillna("NA")
+        self.logger.info(f"Shape of the data after filling missing values: {concat_data.shape}")
+        return concat_data
