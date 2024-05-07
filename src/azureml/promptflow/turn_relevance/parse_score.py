@@ -1,9 +1,10 @@
 import json
+import logging
 import re
 
 import numpy as np
 
-from promptflow import tool
+from promptflow.core import tool
 
 
 @tool
@@ -30,7 +31,8 @@ def concat_results(evaluation_dataset: dict, relevance_score: str):
                 score = match.group()
             score = float(score)
         except Exception as e:
-            score = np.nan
+            logging.error("Parsing error: %s", e)
+            score = 0
             errors.append({"name": item["name"], "msg": str(e), "data": item["score"]})
         score_list.append({"name": item["name"], "score": score})
 
@@ -41,10 +43,11 @@ def concat_results(evaluation_dataset: dict, relevance_score: str):
 
     evaluation_dataset["metric_name"] = metrics[0]["metric_name"]
     evaluation_dataset["metric_version"] = metrics[0]["metric_version"]
-    evaluation_dataset["metric_value"] = score_list[0].get("score", np.nan)
+    evaluation_dataset["metric_value"] = score_list[0].get("score", 0)
     evaluation_dataset["metric_raw_value"] = relevance_score
 
     # Format the evaluation output as a list of dictionaries
     # This is the standard format for all evaluation outputs
     evaluation_output = [evaluation_dataset]
+    logging.info("Evaluation output: %s", evaluation_output)
     return evaluation_output
