@@ -1,21 +1,15 @@
-import argparse
 import ast
 import datetime
 import json
 from logging import Logger
-import os
-from datetime import datetime, timezone
-from dotenv import load_dotenv
+from datetime import datetime
 import numpy as np
 import pandas as pd
-from azure.core.exceptions import HttpResponseError
-from azure.identity import DefaultAzureCredential
-from azure.monitor.query import LogsQueryClient, LogsQueryStatus
 
 from llminspect.common.logger import get_logger
 from llminspect.common.azure_monitor_handler import AzureMonitorHandler
 from llminspect.common.get_secret import get_key_vault_secret
-from llminspect.common.entities import AzureMonitorDataSource, MappingList, TransformationDTO, MappingColumn
+from llminspect.common.entities import AzureMonitorDataSource, MappingList, TransformationDTO
 
 
 class DataTransformer:
