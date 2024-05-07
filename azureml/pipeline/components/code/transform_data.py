@@ -9,6 +9,10 @@ import pandas as pd
 from azure.core.exceptions import HttpResponseError
 from azure.identity import DefaultAzureCredential
 from azure.monitor.query import LogsQueryClient, LogsQueryStatus
+from src.transformation.transform  import DataTransformer
+
+
+
 
 
 
@@ -38,8 +42,6 @@ def transform(self):
     print("Data transformation started for llm level")
     df_llm_mapped = self.transform_llm_data(source_facts_llm_df)
     print("Data transformation completed llm level")
-
-
 def parse_args():
     """
     Parses the user arguments.
@@ -47,25 +49,41 @@ def parse_args():
     Returns:
         argparse.Namespace: The parsed user arguments.
     """
-    parser = argparse.ArgumentParser(allow_abbrev=False, description="parse user arguments")
+    parser = argparse.ArgumentParser(
+        allow_abbrev=False, description="parse user arguments"
+    )
+    parser.add_argument("--bot_name", type=str, help="Bot name", required=True)
+    parser.add_argument("--app_types", type=str, help="Apps type", required=True)
+    parser.add_argument("--fact_table_name", type=str, help="Fact table name", required=True)
+    parser.add_argument("--fact_schema_name", type=str, help="Fact schema name", required=True)
+    parser.add_argument("--columns", type=str, help="Columns", required=True)
+    parser.add_argument("--evaluation_types", type=str, help="Evaluation types", required=True)
     parser.add_argument("--start_date", type=str, help="Start date", required=True)
     parser.add_argument("--end_date", type=str, help="End date", required=True)
-
+    parser.add_argument("--key_vault_url", type=str, help="Key vault url", required=True)
+    parser.add_argument("--fact_evaluation_output", type=str, help="Fact evaluation output path", required=True)
+    parser.add_argument("--dim_metadata_output", type=str, help="Dim metadata output path", required=True)
+    parser.add_argument("--dim_session_output", type=str, help="Dim sessions output path", required=True)
     args, _ = parser.parse_known_args()
     return args
 
-
 def main():
     args = parse_args()
-
+    columns = ast.literal_eval(args.columns)    
+    evaluation_types = ast.literal_eval(args.evaluation_types)
+    app_types = ast.literal_eval(args.app_types)
+   
     # Converting the start_date and end_date to datetime with timezone
     start_date = datetime.strptime(args.start_date, "%Y/%m/%d").replace(tzinfo=timezone.utc)
     end_date = datetime.strptime(args.end_date, "%Y/%m/%d").replace(tzinfo=timezone.utc)
-
-    transformation_processor = DataTransformer(
-        start_date=start_date,
-        end_date=end_date,
-    )
+    
+    transformation_processor = DataTransformer(key_vault_url=args.key_vault_url, start_date=start_date,
+                                            end_date=end_date, columns=columns, evaluation_types=evaluation_types, app_types=app_types, bot_name=args.bot_name,
+                                            source_fact_schema_name=args.fact_schema_name,
+                                            source_fact_table_name=args.fact_table_name,
+                                            dim_metadata_output_path=args.dim_metadata_output,
+                                            dim_session_output_path=args.dim_session_output,
+                                            fact_evaluation_output_path=args.fact_evaluation_output)
     transformation_processor.transform()
 
 

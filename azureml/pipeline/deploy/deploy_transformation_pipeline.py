@@ -6,11 +6,13 @@ from dotenv import load_dotenv
 from azure.ai.ml import Output, Input, load_component
 from azure.ai.ml.constants import AssetTypes
 from azure.ai.ml.dsl import pipeline
-# from src.common.azure_ml_handler import AzureMLHandler
-# from src.common.config_handler import get_transformer_info
-from LLM-Inspect.src.llminspect.common.entities import Transformer
+from src.common.azure_ml_handler import AzureMLHandler
+from src.common.config_handler import get_transformer_info
+from src.common.entities import Transformer
+from src.transformation.transform  import DataTransformer
 
-from LLM-Inspect.src.llminspect.common.logger import get_logger
+
+from src.common.logger import get_logger
 logger = get_logger("deploy_transformation_pipeline")
 
 
@@ -23,11 +25,9 @@ def create_dynamic_evaluation_pipeline(
         fact_table_name,
         columns,
         evaluation_types,
-        dim_application_input,
         fact_evaluation_output_path,
         dim_metadata_output_path,
         dim_session_output_path,
-        dim_router_function_output_path,
         key_vault_url,
         pipeline_name
     ):
@@ -40,11 +40,9 @@ def create_dynamic_evaluation_pipeline(
             fact_table_name (str): Name of the fact table.
             fact_schema_name (str): Name of the fact schema.
             columns (str): Columns to be selected from the fact table.
-            dim_application_input (Input): Input for the dim_application component.
             fact_evaluation_output_path (str): Path to the output of the fact_evaluation component.
             dim_metadata_output_path (str): Path to the output of the dim_metadata component.
             dim_session_output_path (str): Path to the output of the dim_session component.
-            dim_router_function_output_path (str): Output path for the dim_router_function component.
             key_vault_url (str): URL of the Azure Key Vault.
             pipeline_name (str): Name of the pipeline.
     """
@@ -73,18 +71,15 @@ def create_dynamic_evaluation_pipeline(
             start_date=transformation_start_date,
             end_date=transformation_end_date,
             key_vault_url=key_vault_url,
-            dim_application_input=dim_application_input,
         )
 
         fact_evaluation_output = Output(path=fact_evaluation_output_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
         dim_metadata_output = Output(path=dim_metadata_output_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
         dim_session_output = Output(path=dim_session_output_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
-        dim_router_function_output = Output(path=dim_router_function_output_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
 
         transformation_component.outputs.fact_evaluation_output = fact_evaluation_output
         transformation_component.outputs.dim_metadata_output = dim_metadata_output
         transformation_component.outputs.dim_session_output = dim_session_output
-        transformation_component.outputs.dim_router_function_output = dim_router_function_output
     
     return transformation_pipeline
 
@@ -117,14 +112,12 @@ def build_pipeline(
     fact_schema_name = transformer_info.source_fact_schema
     columns = transformer_info.get_columns()
     evaluation_types = transformer_info.get_evaluation_types()
-    dim_application_input = Input(path= aml_datastore_gold_zone_path + "dim_application/", type=AssetTypes.URI_FOLDER)
 
     # Output of the pipeline
     fact_evaluation_dataset_folder = "fact_evaluation_dataset/test_fact_evaluation_dataset/"
     fact_evaluation_output_path = aml_datastore_gold_zone_path + fact_evaluation_dataset_folder
     dim_metadata_output_path = aml_datastore_gold_zone_path + "dim_metadata/"
     dim_session_output_path = aml_datastore_gold_zone_path + "dim_session/"
-    dim_router_function_output_path = aml_datastore_gold_zone_path + "dim_router_function/"
 
     transformation_component = load_component("transformation/components/transformation.yml")
 
@@ -137,11 +130,9 @@ def build_pipeline(
         fact_schema_name=fact_schema_name,
         columns=str(columns),
         evaluation_types=str(evaluation_types),
-        dim_application_input=dim_application_input,
         fact_evaluation_output_path=fact_evaluation_output_path,
         dim_metadata_output_path=dim_metadata_output_path,
         dim_session_output_path=dim_session_output_path,
-        dim_router_function_output_path=dim_router_function_output_path,
         key_vault_url=aml_key_vault_url,
         pipeline_name=pipeline_name
     )
@@ -156,9 +147,9 @@ def main():
     workspace_name = os.getenv("AML_WORKSPACE_NAME")
     key_vault_url = os.getenv("KEY_VAULT_URL")
 
-    aml_config_file_path = "../src/llm-inspect/config/aml_config.yml"
+    aml_config_file_path = "./config/aml_config.yml"
 
-    transformation_config_file_path = "../src/llm-inspect/config/transformation_config.yml"
+    transformation_config_file_path = "./config/transformation_config.yml"
 
     with open(aml_config_file_path, 'r') as file:
         aml_config = yaml.safe_load(file)
