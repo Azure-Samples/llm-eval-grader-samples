@@ -28,11 +28,12 @@ class MappingColumn:
             "data_type": self.data_type
         }
     
-    def from_dict(cls, data: dict):
+    @staticmethod
+    def from_dict(data: dict):
         """
         Creates a MappingColumn object from a dictionary.
         """
-        return cls(data["source_name"], data["target_name"], data["data_type"])
+        return MappingColumn(data["source_name"], data["target_name"], data["data_type"])
 
 class Mapping:
     """
@@ -55,12 +56,39 @@ class Mapping:
             "columns": [column.to_dict() for column in self.columns]
         }
 
-    def from_dict(cls, data: dict):
+    @staticmethod
+    def from_dict(data: dict):
         """
         Creates a Mapping object from a dictionary.
         """
-        return cls(data["name"], [MappingColumn.from_dict(column) for column in data["columns"]])
-    
+        return Mapping(data["name"], [MappingColumn.from_dict(column) for column in data["columns"]])
+
+class MappingList:
+    """
+    Represents a list of mapping files.
+
+    Attributes:
+        mappings (List[Mapping]): A list of Mapping objects.
+    """
+
+    def __init__(self, mappings: List[Mapping]):
+        self.mappings = mappings
+
+    def to_dict(self):
+        """
+        Returns a dictionary of the mapping list.
+        """
+        return {
+            "mappings": [mapping.to_dict() for mapping in self.mappings]
+        }
+
+    @staticmethod
+    def from_dict(data: dict):
+        """
+        Creates a MappingList object from a dictionary.
+        """
+        return MappingList([Mapping.from_dict(mapping) for mapping in data["mappings"]])
+
 class DataSource:
     def __init__(self, type: str):
         self.type = type
@@ -78,5 +106,12 @@ class AzureMonitorDataSource(DataSource):
             "workspace_id_secret_key": self.workspace_id_secret_key
         }
     
-    def from_dict(cls, data: dict):
-        return cls(data["table"], data["workspace_id_secret_key"])
+    @staticmethod
+    def from_dict(data: dict):
+        return AzureMonitorDataSource(data["table"], data["workspace_id_secret_key"])
+
+class TransformationDTO:
+    def __init__(self, name: str, mapping: Mapping, data: pd.DataFrame):
+        self.name = name
+        self.mapping = mapping
+        self.data = data
