@@ -19,33 +19,16 @@ logger = get_logger("deploy_transformation_pipeline")
 pipeline_components = []
 
 def create_dynamic_evaluation_pipeline(
-        bot_name,
-        app_types,
-        fact_schema_name,
-        fact_table_name,
-        columns,
-        evaluation_types,
+        chatbot_name,
+        data_source,
+        mapping_list,
         fact_evaluation_output_path,
         dim_metadata_output_path,
         dim_conversation_output_path,
         key_vault_url,
         pipeline_name
     ):
-    """
-        Construct transformation pipeline definition dynamically for a bot.
-
-        Args:
-            bot_name (str): Name of the bot.
-            app_types (list): List of application types.
-            fact_table_name (str): Name of the fact table.
-            fact_schema_name (str): Name of the fact schema.
-            columns (str): Columns to be selected from the fact table.
-            fact_evaluation_output_path (str): Path to the output of the fact_evaluation component.
-            dim_metadata_output_path (str): Path to the output of the dim_metadata component.
-            dim_conversation_output_path (str): Path to the output of the dim_conversation component.
-            key_vault_url (str): URL of the Azure Key Vault.
-            pipeline_name (str): Name of the pipeline.
-    """
+  
     @pipeline(
         name=pipeline_name,
         display_name=pipeline_name
@@ -62,12 +45,9 @@ def create_dynamic_evaluation_pipeline(
             transformation_end_date (str): End date of data against which data transformation is run.
         """
         transformation_component = pipeline_components[0](
-            bot_name=bot_name,
-            app_types=app_types,
-            fact_schema_name=fact_schema_name,
-            fact_table_name=fact_table_name,
-            columns=columns,
-            evaluation_types = evaluation_types,
+            chatbot_name=chatbot_name,
+            data_source=data_source,
+            mapping_list=mapping_list,
             start_date=transformation_start_date,
             end_date=transformation_end_date,
             key_vault_url=key_vault_url,
@@ -106,12 +86,9 @@ def build_pipeline(
         PipelineJob: Azure Machine Learning pipeline job.
     """
     # Input to the pipeline
-    bot_name = transformer_info.bot_name
-    app_types = transformer_info.app_types
-    fact_table_name = transformer_info.source_fact_table
-    fact_schema_name = transformer_info.source_fact_schema
-    columns = transformer_info.get_columns()
-    evaluation_types = transformer_info.get_evaluation_types()
+    chatbot_name = transformer_info.chatbot_name
+    data_source = transformer_info.data_source
+    mapping_list = transformer_info.get_columns()
 
     # Output of the pipeline
     fact_evaluation_dataset_folder = "fact_evaluation_dataset/test_fact_evaluation_dataset/"
@@ -124,12 +101,9 @@ def build_pipeline(
     pipeline_components.append(transformation_component)
 
     pipeline_definition = create_dynamic_evaluation_pipeline(
-        bot_name=bot_name,
-        app_types=str(app_types),
-        fact_table_name=fact_table_name,
-        fact_schema_name=fact_schema_name,
-        columns=str(columns),
-        evaluation_types=str(evaluation_types),
+        chatbot_name=chatbot_name,
+        data_source=str(data_source),
+        mapping_list=str(mapping_list),
         fact_evaluation_output_path=fact_evaluation_output_path,
         dim_metadata_output_path=dim_metadata_output_path,
         dim_conversation_output_path=dim_conversation_output_path,
@@ -167,8 +141,8 @@ def main():
     transformers = get_transformer_info(transformation_config_file_path)
     
     for transformer in transformers:
-        transformation_name = f"{transformer.bot_name.lower()}-transformation-{transformer.name}"
-        experiment_name = transformer.bot_name.lower()
+        transformation_name = f"{transformer.chatbot_name.lower()}-transformation-{transformer.name}"
+        experiment_name = transformer.chatbot_name.lower()
 
         # Build pipeline definition
         logger.info(f"Building pipeline for {transformation_name}...")

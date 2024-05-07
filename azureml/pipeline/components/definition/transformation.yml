@@ -6,17 +6,11 @@ version: 1
 is_deterministic: false # Whether to reuse the previous job's result if the component inputs didn't change.
 type: command
 inputs:
-  bot_name:
+  chatbot_name:
     type: string
-  app_types:
+  data_source:
     type: string
-  fact_schema_name:
-    type: string
-  fact_table_name:
-    type: string
-  columns:
-    type: string
-  evaluation_types:
+  mapping_list:
     type: string
   start_date:
     type: string
@@ -24,7 +18,6 @@ inputs:
     type: string
   key_vault_url:
     type: string
-
 outputs:
   fact_evaluation_output:
     type: uri_folder
@@ -38,12 +31,9 @@ environment:
   image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
 command: >-
   python transform_data.py
-  --bot_name "${{inputs.bot_name}}"
-  --app_types "${{inputs.app_types}}"
-  --fact_schema_name "${{inputs.fact_schema_name}}"
-  --fact_table_name "${{inputs.fact_table_name}}"
-  --columns "${{inputs.columns}}"
-  --evaluation_types "${{inputs.evaluation_types}}"
+  --chatbot_name "${{inputs.chatbot_name}}"
+  --data_source "${{inputs.data_source}}"
+  --mapping_list "${{inputs.mapping_list}}"
   --start_date "${{inputs.start_date}}"
   --end_date "${{inputs.end_date}}"
   --key_vault_url "${{inputs.key_vault_url}}"
