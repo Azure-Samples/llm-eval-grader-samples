@@ -36,6 +36,7 @@ environment:
 command: >-
   cp azureml/pipeline/components/code/prep_data.py src && cd src && python prep_data.py
   --app_name "${{inputs.app_name}}"
+  --app_type "${{inputs.app_type}}"
   --evaluator_name "${{inputs.evaluator_name}}"
   --metric_names "${{inputs.metric_names}}"
   --start_date "${{inputs.start_date}}"
