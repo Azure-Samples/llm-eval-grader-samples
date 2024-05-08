@@ -1,8 +1,9 @@
 import argparse
 import ast
 import datetime
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import pandas as pd
+
 
 from llminspect.common.entities import AzureMonitorDataSource, MappingList
 from llminspect.transformation.transform import DataTransformer
@@ -42,9 +43,16 @@ def main():
     mapping_list = MappingList.from_dict(ast.literal_eval(args.mapping_list))
     data_source = AzureMonitorDataSource.from_dict(ast.literal_eval(args.data_source))
    
-    # Converting the start_date and end_date to datetime with timezone
-    start_date = datetime.strptime(args.start_date, "%Y/%m/%d").replace(tzinfo=timezone.utc)
-    end_date = datetime.strptime(args.end_date, "%Y/%m/%d").replace(tzinfo=timezone.utc)
+    
+    
+    pipeline_run_day = datetime.today()
+    tomorrow = pipeline_run_day + timedelta(days=1)
+    start_date_default = tomorrow - timedelta(days=6)
+    start_date = datetime.combine(start_date_default, datetime.min.time()) if args.start_date.strip() == "NA" else datetime.strptime(args.start_date, "%Y/%m/%d") 
+    end_date =  datetime.combine(tomorrow, datetime.max.time()) if args.end_date.strip() == "NA" else datetime.strptime(args.end_date, "%Y/%m/%d")
+    logger.info(f"Start Date is {start_date.strftime('%m/%d/%Y')}")
+    logger.info(f"End Date is {end_date.strftime('%m/%d/%Y')}")
+
     
     # Initialize the transformation processor
     transformation_processor = DataTransformer(

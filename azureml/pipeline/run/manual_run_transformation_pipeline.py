@@ -1,11 +1,10 @@
 import argparse
 import os
 from datetime import datetime
-
 from azure.ai.ml import Input, MLClient
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
-
+from pathlib import Path
 
 def valid_date(datestring):
     """Validate the date format
@@ -20,7 +19,7 @@ def valid_date(datestring):
         datetime: The datetime object
     """
     try:
-        input_datetime = datetime.strptime(datestring, "%Y/%m/%d %H:%M")
+        input_datetime = datetime.strptime(datestring, "%Y/%m/%d")
         if input_datetime > datetime.now():
             raise ValueError(
                 "Date should be in the past, Input given is: '{0}'.".format(datestring)
@@ -65,7 +64,8 @@ def get_ml_client():
     Returns:
         MLClient: The ML client
     """
-    load_dotenv()
+    dotenv_path = Path("../deploy/.env")
+    load_dotenv(dotenv_path=dotenv_path)
     subscription_id = os.getenv("SUBSCRIPTION_ID")
     resource_group_name = os.getenv("RESOURCE_GROUP_NAME")
     workspace_name = os.getenv("AML_WORKSPACE_NAME")
@@ -92,7 +92,7 @@ def main():
         raise argparse.ArgumentTypeError("Start date should be less than end date")
 
     endpoint_name = (
-        "tm-e2e-assistant-dsbasel1fact"
+        "dev-sample-chatbot-transform1"
         if args.endpoint_name is None
         else args.endpoint_name
     )
