@@ -68,7 +68,7 @@ def main():
     transformation_dtos = transformation_processor.transform_data(transformation_dtos)
     transformation_dtos = transformation_processor.clean_data(transformation_dtos)
     transformation_dtos = transformation_processor.add_optional_extra_columns(transformation_dtos,
-                                                                              "chatbot_name", args.chatbot_name)
+                                                                              "app_name", args.chatbot_name)
     concat_data = transformation_processor.concat_data(transformation_dtos)
     concat_data = transformation_processor.fill_missing_values(concat_data)
 

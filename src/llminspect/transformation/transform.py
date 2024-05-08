@@ -56,6 +56,7 @@ class DataTransformer:
                 df_conversation_mapped[column.target_name] = pd.to_datetime(
                     transformation_dto.data[column.source_name], unit="ms"
                 )
+        df_conversation_mapped["app_type"] = "conversation"
         transformation_dto.data = df_conversation_mapped
         return transformation_dto
 
@@ -82,6 +83,7 @@ class DataTransformer:
                     df_llm_mapped[column.target_name] = pd.to_datetime(
                         transformation_dto.data[column.source_name], unit="ms"
                     )
+            df_llm_mapped["app_type"] = "llm"
             df_llm_mapped["response"] = transformation_dto.data["Properties"].apply(
                 lambda x: json.loads(json.loads(x)["llm_response"])["choices"][0]["message"]["content"] if x != np.nan and "llm_response" in json.loads(x) else None
             )
