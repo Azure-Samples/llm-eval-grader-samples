@@ -1,0 +1,54 @@
+transformation_config:
+  - name: transformation
+    chatbot_name: sample-chatbot
+    source:
+      type: azure_monitor
+      table: AppTraces
+      workspace_id_secret_key: "sample-chatbot-az-monitor-workspace-id"
+    mappings:
+      - name: conversation_data
+        columns:
+          - source_name: conversation_id
+            target_name: conversation_id
+            data_type: string
+          - source_name: turn_id
+            target_name: turn_id
+            data_type: string
+          - source_name: query
+            target_name: query
+            data_type: string
+          - source_name: response
+            target_name: response
+            data_type: string
+          - source_name: TimeGenerated
+            target_name: timestamp
+            data_type: datetime
+      - name: llm_data
+        columns:
+          - source_name: conversation_id
+            target_name: conversation_id
+            data_type: string
+          - source_name: turn_id
+            target_name: turn_id
+            data_type: string
+          - source_name: query
+            target_name: query
+            data_type: string
+          - source_name: response
+            target_name: response
+            data_type: string
+          - source_name: context
+            target_name: context
+            data_type: string
+          - source_name: model
+            target_name: model
+            data_type: string
+          - source_name: intent
+            target_name: intent
+            data_type: string
+          - source_name: TimeGenerated
+            target_name: timestamp
+            data_type: datetime
+    endpoint_name: "dev-sample-chatbot-transform1" # max 32 characters of letters, numbers and dash
+    schedule: "0 18 * * 0" # (Cron expression) <MINUTES> <HOURS> <DAY_OF_MONTH> <MONTH> <DAY_OF_WEEK> where 0 is Sunday
+    schedule_start_time: "" # If left blank, schedule is enabled from the next day or specify a date in this format YYYY-MM-DD hh:mm:ss in UTC timezone
