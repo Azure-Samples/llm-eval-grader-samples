@@ -82,14 +82,14 @@ def _get_fact_data(sampled_data: pd.DataFrame, existing_fact_data: pd.DataFrame,
 
     sampled_data["timestamp"] = pd.to_datetime(sampled_data["timestamp"])
     sampled_data['evaluation_dataset_id'] = [str(uuid4()) for _ in range(len(sampled_data.index))]
-
+    logger.info(f"Columns in the DataFrame sampled_Data :{sampled_data.columns}")
     sampled_data.drop(columns=['model', 'intent'], inplace=True)
     logger.info(f"Gold zone data columns: {sampled_data.columns.to_list()}")
 
     if len(existing_fact_data) == 0:
         return sampled_data
-    sampled_data_new = sampled_data[~sampled_data[['chatbot_name', 'conversation_id', 'metadata_id', 'turn_id']].apply(
-        tuple, 1).isin(existing_fact_data[['chatbot_name', 'conversation_id', 'metadata_id', 'turn_id']].apply(tuple, 1))]
+    sampled_data_new = sampled_data[~sampled_data[['app_name', 'conversation_id', 'metadata_id', 'turn_id']].apply(
+        tuple, 1).isin(existing_fact_data[['app_name', 'conversation_id', 'metadata_id', 'turn_id']].apply(tuple, 1))]
     return sampled_data_new
 
 
