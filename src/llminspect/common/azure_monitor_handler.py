@@ -55,7 +55,8 @@ class AzureMonitorHandler:
             for table in data:
                 df_logs = pd.DataFrame(data=table.rows, columns=table.columns)
                 self.logger.info(f"Gathered logs: {df_logs.shape[0]} rows")
+                return df_logs
         except HttpResponseError as err:
             self.logger.error("Something fatal happened")
             self.logger.error(err)
-        return df_logs
+            raise err
