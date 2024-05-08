@@ -1,9 +1,8 @@
 # This section contains the list of apps to be evaluated. An app can be a bot, a component or a function.
 # For each app, the evaluators to be run are specified.
 apps:
-  - name: contoso
-    parent_name: contoso
-    type: bot
+  - name: sample-chatbot
+    type: conversation
     evaluators:
       - name: turn_relevance
         active: "true"

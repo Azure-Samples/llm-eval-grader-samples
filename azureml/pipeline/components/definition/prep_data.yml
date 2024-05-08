@@ -31,7 +31,7 @@ outputs:
     type: uri_folder
 code: ../../src
 environment:
-  conda_file: ../../environments/conda.yml
+  conda_file: ../environments/conda.yml
   image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
 command: >-
   python prep_data.py

@@ -2,6 +2,92 @@ import datetime
 from typing import List, Union
 import pandas as pd
 
+class App:
+    """
+    Entity representing an application.
+
+    Attributes:
+        app_name (str): The name of the application. An application can be a bot, a component or a function.
+        parent_app_name (str): The name of the parent application, if applicable. Example: Parent application of a component is a bot.
+        app_type (str): The type of the application. Example: bot, component, function.
+        parent_app_bot_name (str): The name of the parent bot application, if applicable.
+        app_id (int): The ID of the application.
+        parent_app_id (int): The ID of the parent application.
+    """
+
+    def __init__(
+        self,
+        app_name: str,
+        app_type: str,
+    ):
+        self.app_name = app_name
+        self.app_type = app_type
+
+class Metric:
+    """
+    Represents a metric.
+
+    Attributes:
+        metric_name (str): The name of the metric.
+        metric_type (str): The type of the metric (e.g., numerical, categorical).
+        metric_allowed_values (list): A list of allowed values for the metric.
+    """
+
+    def __init__(self, metric_name: str, metric_type: str, metric_allowed_values: list, metric_id: int = None):
+        self.metric_name = metric_name
+        self.metric_type = metric_type
+        self.metric_allowed_values = metric_allowed_values
+        self.metric_id = metric_id
+
+    def to_dict(self):
+        """
+        Returns a dictionary of metric name, type and allowed values.
+        """
+        return {
+            "metric_name": self.metric_name,
+            "metric_type": self.metric_type,
+            "metric_allowed_values": self.metric_allowed_values
+        }
+
+
+class Evaluator:
+    """
+    Represents an evaluator.
+
+    Attributes:
+        evaluator_name (str): The name of the evaluator.
+        evaluator_type (str): The type of the evaluation being run (e.g., LLM, human).
+        evaluation_flow_path (str): The path to the evaluation promptflow.
+        evaluation_endpoint (str): Name of the endpoint to which evaluation pipeline must be deployed.
+        evaluation_schedule (str): The schedule for the evaluation pipeline to run in cron format.
+        evaluation_schedule_start_time (str): The start time for the evaluation pipeline to run as per schedule.
+        evaluation_metrics (list[Metric]): A list of Metric objects representing evaluation metrics.
+        evaluation_metrics_version (float): The version of the evaluation metrics.
+        app (App): An App object representing the associated application.
+    """
+
+    def __init__(
+        self,
+        evaluator_name: str,
+        evaluator_type: str,
+        evaluation_flow_path: str,
+        evaluation_endpoint: str,
+        evaluation_schedule: str,
+        evaluation_schedule_start_time: str,
+        evaluation_metrics: list[Metric],
+        evaluation_metrics_version: float,
+        app: App,
+    ):
+        self.evaluator_name = evaluator_name
+        self.evaluator_type = evaluator_type
+        self.evaluation_flow_path = evaluation_flow_path
+        self.evaluation_endpoint = evaluation_endpoint
+        self.evaluation_schedule = evaluation_schedule
+        self.evaluation_schedule_start_time = evaluation_schedule_start_time
+        self.evaluation_metrics = evaluation_metrics
+        self.evaluation_metrics_version = evaluation_metrics_version
+        self.app = app
+
 
 class MappingColumn:
     """
