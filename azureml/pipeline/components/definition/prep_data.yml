@@ -1,0 +1,48 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: prep_data
+display_name: Read parquet files from gold zone and transform to JSONL files
+version: 1
+type: command
+is_deterministic: false #Whether to reuse the previous job's result if the component inputs didn't change.
+inputs:
+  app_name:
+    type: string
+  # parent_app_name:
+  #   type: string
+  evaluator_name:
+    type: string
+  metric_names:
+    type: string
+  start_date:
+    type: string
+  end_date:
+    type: string
+  gold_zone_dim_app_path:
+    type: uri_folder
+  gold_zone_eval_fact_path:
+    type: uri_folder  
+  key_vault_url:
+    type: string
+  retry_pipeline:
+    type: string
+outputs:
+  prep_data_output_path:
+    type: uri_folder
+code: ../../src
+environment:
+  conda_file: ../../environments/conda.yml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
+command: >-
+  python prep_data.py
+  --app_name "${{inputs.app_name}}"
+  --evaluator_name "${{inputs.evaluator_name}}"
+  --metric_names "${{inputs.metric_names}}"
+  --start_date "${{inputs.start_date}}"
+  --end_date "${{inputs.end_date}}"
+  --gold_zone_dim_app_path "${{inputs.gold_zone_dim_app_path}}"
+  --gold_zone_fact_eval_path "${{inputs.gold_zone_eval_fact_path}}"  
+  --prep_data_output_path "${{outputs.prep_data_output_path}}"  
+  --key_vault_url "${{inputs.key_vault_url}}"
+  --retry_pipeline "${{inputs.retry_pipeline}}"
+# </component>

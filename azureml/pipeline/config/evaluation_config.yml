@@ -1,0 +1,23 @@
+# This section contains the list of apps to be evaluated. An app can be a bot, a component or a function.
+# For each app, the evaluators to be run are specified.
+apps:
+  - name: contoso
+    parent_name: contoso
+    type: bot
+    evaluators:
+      - name: turn_relevance
+        active: "true"
+        endpoint_name: "dev-contoso-turn-relevance" # max 32 characters of letters, numbers and dash
+        schedule: "0 19 * * 0" # (Cron expression) <MINUTES> <HOURS> <DAY_OF_MONTH> <MONTH> <DAY_OF_WEEK> where 0 is Sunday
+        schedule_start_time: "" # If left blank, schedule is enabled from the next day or specify a date in this format YYYY-MM-DD hh:mm:ss in UTC timezone
+evaluators:
+  - name: turn_relevance
+    version: 1.0
+    flow_path: ../../promptflow/turn_relevance/flow.dag.yaml
+    type: llm
+    scope: bot
+    metrics:
+      - name: turn_relevance
+        value_type: numerical
+        allowed_values: []
+

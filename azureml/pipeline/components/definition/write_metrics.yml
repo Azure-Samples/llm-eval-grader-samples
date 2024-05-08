@@ -1,0 +1,24 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: write_metrics
+display_name: Write metrics generated from evalutation flow to Azure SQL tables
+version: 1
+type: command
+is_deterministic: false #Whether to reuse the previous job's result if the component inputs didn't change.
+inputs:
+  eval_dataset_path:
+    type: uri_folder
+  eval_metrics_data_path: 
+    type: uri_folder
+  key_vault_url:
+    type: string  
+code: ../../src
+environment:
+  conda_file: ../../environments/conda.yml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
+command: >-
+  python write_metrics.py
+  --eval_dataset_path ${{inputs.eval_dataset_path}}
+  --eval_metrics_data_path ${{inputs.eval_metrics_data_path}}
+  --key_vault_url ${{inputs.key_vault_url}}
+# </component>
