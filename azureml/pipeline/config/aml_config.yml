@@ -8,6 +8,3 @@ environment:
 datastore:
   gold_zone: azureml://datastores/goldzone/paths/
   evaluation: azureml://datastores/evaluation/paths/
-  human_eval:
-    batch_status_table: human_eval_batch_status
-    tasks_tracker: azureml://datastores/humanevaluation/paths/

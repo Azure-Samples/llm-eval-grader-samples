@@ -1,0 +1,43 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: transformation
+display_name: Execute data transformation and sampling logic(if needed) for evaluation data.
+version: 1
+is_deterministic: false # Whether to reuse the previous job's result if the component inputs didn't change.
+type: command
+inputs:
+  chatbot_name:
+    type: string
+  data_source:
+    type: string
+  mapping_list:
+    type: string
+  start_date:
+    type: string
+  end_date:
+    type: string
+  key_vault_url:
+    type: string
+outputs:
+  fact_evaluation_output:
+    type: uri_folder
+  dim_metadata_output:
+    type: uri_folder
+  dim_conversation_output:
+    type: uri_folder
+code: ../../../../
+environment:
+  conda_file: ../../environments/conda.yml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
+command: >-
+  cp azureml/pipeline/components/code/transform_data.py src && cd src && python transform_data.py
+  --chatbot_name "${{inputs.chatbot_name}}"
+  --data_source "${{inputs.data_source}}"
+  --mapping_list "${{inputs.mapping_list}}"
+  --start_date "${{inputs.start_date}}"
+  --end_date "${{inputs.end_date}}"
+  --key_vault_url "${{inputs.key_vault_url}}"
+  --fact_evaluation_output "${{outputs.fact_evaluation_output}}"
+  --dim_metadata_output "${{outputs.dim_metadata_output}}"
+  --dim_conversation_output "${{outputs.dim_conversation_output}}"
+# </component>
