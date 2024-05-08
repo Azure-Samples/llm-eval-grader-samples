@@ -92,7 +92,7 @@ def build_pipeline(
     mapping_list = transformer_info.get_mapping_list()
 
     # Output of the pipeline
-    fact_evaluation_dataset_folder = "fact_evaluation_dataset/test_fact_evaluation_dataset/"
+    fact_evaluation_dataset_folder = "fact_evaluation_dataset/fact_evaluation_dataset/"
     fact_evaluation_output_path = aml_datastore_gold_zone_path + fact_evaluation_dataset_folder
     dim_metadata_output_path = aml_datastore_gold_zone_path + "dim_metadata/"
     dim_conversation_output_path = aml_datastore_gold_zone_path + "dim_conversation/"
