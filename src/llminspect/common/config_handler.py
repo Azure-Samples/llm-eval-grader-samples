@@ -9,6 +9,15 @@ logger = get_logger("config_handler")
 def get_transformer_info(transformation_config_file_path: str) -> list[Transformer]:
     """   
     Load the transformation configuration from the given file path.
+
+    Args:
+        transformation_config_file_path (str): The file path of the transformation configuration file.
+
+    Returns:
+        list[Transformer]: A list of Transformer objects representing the loaded configuration.
+
+    Raises:
+        yaml.YAMLError: If there is an error parsing the transformation configuration file.
     """
     logger.info("Reading transformation configuration file...")
     with open(transformation_config_file_path, 'r') as file:
@@ -20,7 +29,6 @@ def get_transformer_info(transformation_config_file_path: str) -> list[Transform
 
     transformers_list = []
 
- 
     for transformer_info in transformation_config.get('transformation_config', []):
         transformers_list.append(Transformer(
             name=transformer_info["name"],

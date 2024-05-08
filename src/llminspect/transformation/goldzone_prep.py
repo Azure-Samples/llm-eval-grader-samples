@@ -7,6 +7,23 @@ logger = get_logger("goldzone_prep")
 
 def _get_metadata(sampled_data: pd.DataFrame, existing_metadata: pd.DataFrame):
     """
+    Get metadata for sampled data.
+
+    This function takes in two dataframes: `sampled_data` and `existing_metadata`.
+    It creates a new dataframe `df_metadata` with columns ['metadata_id', 'model', 'intent'].
+    The function then populates the `df_metadata` dataframe with unique combinations of 'model' and 'intent' from `sampled_data`.
+    Each row in `df_metadata` is assigned a unique 'metadata_id' generated using the `uuid4()` function.
+    If `existing_metadata` is empty, the function returns `df_metadata`.
+    Otherwise, it filters out the rows from `df_metadata` that already exist in `existing_metadata` based on 'model' and 'intent'.
+    The filtered rows are then concatenated with `existing_metadata` to create `df_metadata_future`, which is returned by the function.
+
+    Parameters:
+    - sampled_data (pd.DataFrame): The dataframe containing the sampled data.
+    - existing_metadata (pd.DataFrame): The dataframe containing the existing metadata.
+
+    Returns:
+    - df_metadata_future (pd.DataFrame): The dataframe containing the future metadata.
+
     """
     df_metadata = pd.DataFrame(columns=['metadata_id', 'model', 'intent'])
     df_metadata = sampled_data[['model', 'intent']].drop_duplicates()
@@ -20,6 +37,15 @@ def _get_metadata(sampled_data: pd.DataFrame, existing_metadata: pd.DataFrame):
 
 def _get_conversation(sampled_data: pd.DataFrame, existing_conversation: pd.DataFrame):
     """
+    Get the conversation data by grouping the sampled data based on conversation ID.
+
+    Args:
+        sampled_data (pd.DataFrame): The sampled data containing conversation ID and timestamp.
+        existing_conversation (pd.DataFrame): The existing conversation data.
+
+    Returns:
+        pd.DataFrame: The updated conversation data.
+
     """
     df_conversation = sampled_data[['conversation_id', 'timestamp']]
     df_conversation = df_conversation.copy()
@@ -39,6 +65,16 @@ def _get_conversation(sampled_data: pd.DataFrame, existing_conversation: pd.Data
 
 def _get_fact_data(sampled_data: pd.DataFrame, existing_fact_data: pd.DataFrame, df_metadata_future: pd.DataFrame):
     """
+    Get the fact data by processing the sampled data, existing fact data, and future metadata.
+
+    Args:
+        sampled_data (pd.DataFrame): The sampled data containing model, intent, timestamp, and other columns.
+        existing_fact_data (pd.DataFrame): The existing fact data to compare with the sampled data.
+        df_metadata_future (pd.DataFrame): The future metadata dataframe.
+
+    Returns:
+        pd.DataFrame: The fact data after processing.
+
     """
     sampled_data['metadata_id'] = sampled_data[['model', 'intent']].apply(
         tuple, 1).map(df_metadata_future.set_index(['model', 'intent'])[
@@ -60,8 +96,18 @@ def _get_fact_data(sampled_data: pd.DataFrame, existing_fact_data: pd.DataFrame,
 def create_goldzone_tables(sampled_data: pd.DataFrame, existing_fact_data: pd.DataFrame,
                            existing_metadata: pd.DataFrame, existing_conversation: pd.DataFrame):
     """
-    """
+    Create goldzone tables based on the sampled data and existing data.
 
+    Args:
+        sampled_data (pd.DataFrame): The sampled data used to create the goldzone tables.
+        existing_fact_data (pd.DataFrame): The existing fact data to be combined with the sampled data.
+        existing_metadata (pd.DataFrame): The existing metadata to be combined with the sampled data.
+        existing_conversation (pd.DataFrame): The existing conversation data to be combined with the sampled data.
+
+    Returns:
+        tuple: A tuple containing the pandas dataframes for the fact data, metadata, and conversation data.
+
+    """
     # Get the metadata
     metadata = _get_metadata(sampled_data, existing_metadata)
     # Get the conversation

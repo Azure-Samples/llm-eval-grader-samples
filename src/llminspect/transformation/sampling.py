@@ -7,6 +7,15 @@ from llminspect.common.logger import get_logger
 
 def simple_sample(df: pd.DataFrame, sample_conversation_fraction: float = 0.8, logger: Logger = get_logger("simple_sample")):
     """
+    Sample a fraction of conversations from a DataFrame.
+
+    Parameters:
+    - df (pd.DataFrame): The input DataFrame containing conversations.
+    - sample_conversation_fraction (float): The fraction of conversations to sample. Default is 0.8.
+    - logger (Logger): The logger object to log information. Default is the logger named "simple_sample".
+
+    Returns:
+    - pd.DataFrame: The sampled DataFrame containing the selected conversations.
     """
     logger.info(f"Before sampling total rows: {len(df)}")
     all_conversations = df["conversation_id"].unique()

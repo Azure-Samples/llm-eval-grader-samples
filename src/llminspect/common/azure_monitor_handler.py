@@ -10,10 +10,32 @@ from llminspect.common.logger import get_logger
 
 class AzureMonitorHandler:
     def __init__(self, workspace_id: str, logger: Logger = get_logger("azure_monitor_handler")):
+        """
+        Initializes an instance of the AzureMonitorHandler class.
+
+        Args:
+            workspace_id (str): The ID of the Azure workspace.
+            logger (Logger, optional): The logger instance to use for logging. Defaults to get_logger("azure_monitor_handler").
+        """
         self.workspace_id = workspace_id
         self.logger = logger
 
     def get_logs_by_time_range(self, start_date: datetime, end_date: datetime, query: str) -> pd.DataFrame:
+        """
+        Retrieves logs from Azure Monitor within the specified time range and based on the given query.
+
+        Args:
+            start_date (datetime): The start date of the time range.
+            end_date (datetime): The end date of the time range.
+            query (str): The query to filter the logs.
+
+        Returns:
+            pd.DataFrame: A pandas DataFrame containing the retrieved logs.
+
+        Raises:
+            HttpResponseError: If an HTTP response error occurs during the query.
+
+        """
         credential = DefaultAzureCredential()
         client = LogsQueryClient(credential)
         try:
