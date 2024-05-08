@@ -3,7 +3,7 @@ from typing import List
 from glob import glob
 
 import pandas as pd
-from common.logger import get_logger
+from llminspect.common.logger import get_logger
 
 logger = get_logger("adls_handler")
 
@@ -155,9 +155,9 @@ class ADLSHandler:
             None
         """
         try:
-            df_fact_table["year"] = df_fact_table["response_time"].dt.year
-            df_fact_table["month"] = df_fact_table["response_time"].dt.month
-            df_fact_table["day"] = df_fact_table["response_time"].dt.day
+            df_fact_table["year"] = df_fact_table["timestamp"].dt.year
+            df_fact_table["month"] = df_fact_table["timestamp"].dt.month
+            df_fact_table["day"] = df_fact_table["timestamp"].dt.day
             df_fact_table.to_parquet(f"{fact_output_path}", partition_cols=["year", "month", "day"], index=False)
         except Exception as e:
             logger.error(f"Failed to write fact table to {fact_output_path}: {e}")
