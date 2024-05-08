@@ -25,12 +25,12 @@ outputs:
     type: uri_folder
   dim_conversation_output:
     type: uri_folder
-code: ../../src
+code: ../../../../
 environment:
   conda_file: ../../environments/conda.yml
   image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
 command: >-
-  python transform_data.py
+  cp azureml/pipeline/components/code/transform_data.py src && cd src && python transform_data.py
   --chatbot_name "${{inputs.chatbot_name}}"
   --data_source "${{inputs.data_source}}"
   --mapping_list "${{inputs.mapping_list}}"

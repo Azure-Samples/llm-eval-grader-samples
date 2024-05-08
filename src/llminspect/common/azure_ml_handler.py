@@ -11,7 +11,7 @@ from azure.ai.ml.entities import (
 )
 from azure.core.exceptions import ResourceNotFoundError
 
-from src.common.logger import get_logger
+from llminspect.common.logger import get_logger
 
 # get module name
 logger = get_logger("azure_ml_handler")

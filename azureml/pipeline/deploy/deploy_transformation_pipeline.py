@@ -6,13 +6,14 @@ from dotenv import load_dotenv
 from azure.ai.ml import Output, Input, load_component
 from azure.ai.ml.constants import AssetTypes
 from azure.ai.ml.dsl import pipeline
-from src.common.azure_ml_handler import AzureMLHandler
-from src.common.config_handler import get_transformer_info
-from src.common.entities import Transformer
-from src.transformation.transform  import DataTransformer
+
+from llminspect.common.azure_ml_handler import AzureMLHandler
+from llminspect.common.config_handler import get_transformer_info
+from llminspect.common.entities import Transformer
+from llminspect.transformation.transform  import DataTransformer
+from llminspect.common.logger import get_logger
 
 
-from src.common.logger import get_logger
 logger = get_logger("deploy_transformation_pipeline")
 
 
@@ -88,7 +89,7 @@ def build_pipeline(
     # Input to the pipeline
     chatbot_name = transformer_info.chatbot_name
     data_source = transformer_info.data_source
-    mapping_list = transformer_info.get_columns()
+    mapping_list = transformer_info.get_mapping_list()
 
     # Output of the pipeline
     fact_evaluation_dataset_folder = "fact_evaluation_dataset/test_fact_evaluation_dataset/"
@@ -96,14 +97,14 @@ def build_pipeline(
     dim_metadata_output_path = aml_datastore_gold_zone_path + "dim_metadata/"
     dim_conversation_output_path = aml_datastore_gold_zone_path + "dim_conversation/"
 
-    transformation_component = load_component("transformation/components/transformation.yml")
+    transformation_component = load_component("../components/definition/transformation.yml")
 
     pipeline_components.append(transformation_component)
 
     pipeline_definition = create_dynamic_evaluation_pipeline(
         chatbot_name=chatbot_name,
-        data_source=str(data_source),
-        mapping_list=str(mapping_list),
+        data_source=str(data_source.to_dict()),
+        mapping_list=str(mapping_list.to_dict()),
         fact_evaluation_output_path=fact_evaluation_output_path,
         dim_metadata_output_path=dim_metadata_output_path,
         dim_conversation_output_path=dim_conversation_output_path,
@@ -121,9 +122,9 @@ def main():
     workspace_name = os.getenv("AML_WORKSPACE_NAME")
     key_vault_url = os.getenv("KEY_VAULT_URL")
 
-    aml_config_file_path = "./config/aml_config.yml"
+    aml_config_file_path = "../config/aml_config.yml"
 
-    transformation_config_file_path = "./config/transformation.yml"
+    transformation_config_file_path = "../config/transformation.yml"
     
     with open(aml_config_file_path, 'r') as file:
         aml_config = yaml.safe_load(file)

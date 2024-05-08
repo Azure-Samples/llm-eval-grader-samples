@@ -115,3 +115,18 @@ class TransformationDTO:
         self.name = name
         self.mapping = mapping
         self.data = data
+
+class Transformer:
+    def __init__(self, name: str, chatbot_name: str,
+                 data_source: AzureMonitorDataSource, mapping_list: MappingList,
+                 endpoint: str, schedule: str, schedule_start_time: str):
+        self.name = name
+        self.chatbot_name = chatbot_name
+        self.data_source = data_source
+        self.mapping_list = mapping_list
+        self.endpoint = endpoint
+        self.schedule = schedule
+        self.schedule_start_time = schedule_start_time
+    
+    def get_mapping_list(self):
+        return self.mapping_list
