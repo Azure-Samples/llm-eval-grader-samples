@@ -6,7 +6,7 @@ apps:
     evaluators:
       - name: turn_relevance
         active: "true"
-        endpoint_name: "dev-contoso-turn-relevance" # max 32 characters of letters, numbers and dash
+        endpoint_name: "sample-chatbot-turn-relevance" # max 32 characters of letters, numbers and dash
         schedule: "0 19 * * 0" # (Cron expression) <MINUTES> <HOURS> <DAY_OF_MONTH> <MONTH> <DAY_OF_WEEK> where 0 is Sunday
         schedule_start_time: "" # If left blank, schedule is enabled from the next day or specify a date in this format YYYY-MM-DD hh:mm:ss in UTC timezone
 evaluators:

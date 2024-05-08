@@ -19,7 +19,6 @@ pipeline_components = []
 
 def create_dynamic_evaluation_pipeline(
         app_name,
-        parent_app_name,
         evaluator_name,
         metric_names,        
         dim_application_input,
@@ -34,7 +33,6 @@ def create_dynamic_evaluation_pipeline(
 
         Args:
             app_name (str): Name of the application.
-            parent_app_name (str): Name of the parent application.
             evaluator_name (str): Name of the evaluator.
             metric_names (list(dict)): List of dictionaries containing name, version and allowed values of the metrics generated from the evaluation.
             dim_application_input (Input): Input object representing dimension application data.
@@ -47,7 +45,7 @@ def create_dynamic_evaluation_pipeline(
     @pipeline(
         name=pipeline_name,
         display_name=pipeline_name,
-        experiment_name=parent_app_name
+        experiment_name=app_name
     )
     def evaluation_pipeline(
             evaluation_data_start_date: str,
@@ -58,7 +56,6 @@ def create_dynamic_evaluation_pipeline(
 
         prep_data = pipeline_components[0](
             app_name=app_name,
-            parent_app_name=parent_app_name,
             evaluator_name=evaluator_name,
             metric_names=metric_names,
             start_date=evaluation_data_start_date,
@@ -116,10 +113,7 @@ def build_pipeline(
     fact_evaluation_dataset_folder = "fact_evaluation_dataset/fact_evaluation_dataset/"
     fact_evaluation_input = Input(path=aml_datastore_gold_zone_path + fact_evaluation_dataset_folder, type=AssetTypes.URI_FOLDER)
 
-    if app_info.parent_app_bot_name == app_info.app_name:
-        app_path = app_info.parent_app_bot_name + "/" + evaluator_info.evaluator_name
-    else:
-        app_path = app_info.parent_app_bot_name + "/" + app_info.app_name + "-" + evaluator_info.evaluator_name
+    app_path = app_info.app_name + "/" + evaluator_info.evaluator_name
     prepped_evaluation_data_path = aml_datastore_evaluation_path + "in-prepped-data/" + app_path.replace("_", "-") + "/${{name}}/"
     pf_output_data_path = aml_datastore_evaluation_path + "out-evaluation-metrics/" + app_path.replace("_", "-") + "/${{name}}/"
 
@@ -140,7 +134,6 @@ def build_pipeline(
         app_name=app_info.app_name,
         evaluator_name=evaluator_info.evaluator_name,
         metric_names=json.dumps(metric_names).replace('"', '\\"'),
-        parent_app_name=app_info.parent_app_name,
         dim_application_input=dim_application_input,
         fact_evaluation_input=fact_evaluation_input,
         prepped_evaluation_data_path=prepped_evaluation_data_path,
@@ -198,7 +191,7 @@ def main():
 
 
         evaluation_name = f"{evaluator.evaluator_name}-evaluation-{evaluator.app.app_name}".replace("_", "-")
-        experiment_name = evaluator.app.parent_app_bot_name
+        experiment_name = evaluator.app.app_name
 
         # Build pipeline definition
         logger.info(f"Building pipeline for {evaluation_name}...")

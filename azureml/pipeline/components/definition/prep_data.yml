@@ -29,12 +29,12 @@ inputs:
 outputs:
   prep_data_output_path:
     type: uri_folder
-code: ../../src
+code: ../../../../
 environment:
-  conda_file: ../environments/conda.yml
+  conda_file: ../../environments/conda.yml
   image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
 command: >-
-  python prep_data.py
+  cp azureml/pipeline/components/code/prep_data.py src && cd src && python prep_data.py
   --app_name "${{inputs.app_name}}"
   --evaluator_name "${{inputs.evaluator_name}}"
   --metric_names "${{inputs.metric_names}}"

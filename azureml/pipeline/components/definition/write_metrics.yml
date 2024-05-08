@@ -12,12 +12,12 @@ inputs:
     type: uri_folder
   key_vault_url:
     type: string  
-code: ../../src
+code: ../../../../
 environment:
   conda_file: ../../environments/conda.yml
   image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
 command: >-
-  python write_metrics.py
+  cp azureml/pipeline/components/code/write_metrics.py src && cd src && python write_metrics.py
   --eval_dataset_path ${{inputs.eval_dataset_path}}
   --eval_metrics_data_path ${{inputs.eval_metrics_data_path}}
   --key_vault_url ${{inputs.key_vault_url}}
