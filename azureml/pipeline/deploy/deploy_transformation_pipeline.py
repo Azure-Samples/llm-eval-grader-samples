@@ -115,7 +115,16 @@ def build_pipeline(
     return pipeline_definition
 
 def main():
-    """Build and publish transformation pipelines"""
+    """
+    Build and publish transformation pipelines.
+
+    This function reads configuration files, builds and publishes transformation pipelines
+    based on the information provided in the configuration files. It also schedules the
+    pipelines to run at specified intervals.
+
+    Returns:
+        None
+    """
     load_dotenv()
     subscription_id = os.getenv("SUBSCRIPTION_ID")
     resource_group_name = os.getenv("RESOURCE_GROUP_NAME")
