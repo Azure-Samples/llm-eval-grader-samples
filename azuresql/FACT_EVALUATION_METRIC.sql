@@ -8,7 +8,7 @@ evaluator_metadata Varchar(255),
 metric_numeric_value FLOAT,
 metric_str_value Varchar(255),
 metric_raw_value Varchar(MAX),
-fact_creation_time DATETIME
+fact_creation_time DATETIME,
 created_date DATETIME NOT NULL DEFAULT GETDATE(),
 created_by VARCHAR(255) NOT NULL,
 updated_date DATETIME NOT NULL DEFAULT GETDATE(),
