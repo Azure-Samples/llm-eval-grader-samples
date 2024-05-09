@@ -9,9 +9,12 @@ Location agent talks to the user about the location of interest.
 Weather agent answers user's questions about the weather at the location.
 The orchestrator controls the flow of the conversation invoking an agent according to the conversation state.
 
-Each agent implements Extract Decide Reply pattern. The Extract step extracts the necessary information from the
-conversation state. The Decide step decides what to do next. The Reply step generates an answer for the user
-or generates a question if more information is required.
+Each agent implements Extract Decide Reply pattern.
+
+- Extract step extracts the necessary information from the
+conversation state.
+- Decide step decides what to do next.
+- Reply step generates an answer for the user or generates a question if more information is required.
 
 To run the demo of the chatbot, execute the following command in the terminal from `src` folder:
 
