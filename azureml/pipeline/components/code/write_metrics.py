@@ -71,7 +71,7 @@ class MetricsProcessor:
         fact_evaluation_metric_list = []
         logger.info("Processing raw evaluation metrics data")
         for eval_metrics_row in eval_metrics_raw_data:
-            dim_metric_dict = self.db_handler.select_row_by_columns("DIM_METRIC", ["metric_name", "metric_version"], [eval_metrics_row["metric_name"], eval_metrics_row["metric_version"]])
+            dim_metric_dict = self.db_handler.select_row_by_columns("DIM_METRIC", ["metric_name", "metric_version"], [eval_metrics_row["metric_name"], str(eval_metrics_row["metric_version"])])
 
             metric_id = dim_metric_dict["metric_id"]
             if metric_id is None:
@@ -83,7 +83,7 @@ class MetricsProcessor:
                     metric_version=eval_metrics_row["metric_version"],
                     metric_type=eval_metrics_row["metric_type"],
                     evaluator_name=eval_metrics_row["evaluator_name"],
-                    evaluator_type=eval_metrics_row["evaluator_type"],
+                    evaluator_type="llm", # TODO: Change to evaluator_type from promptflow output
                     created_by="system",
                     updated_date=datetime.datetime.now(),
                     updated_by="system",
