@@ -311,7 +311,8 @@ class FactEvaluationMetric:
         metric_raw_value: str,
         fact_creation_time: datetime.datetime,
         created_by: str,
-        updated_by: str
+        updated_by: str,
+        updated_date: datetime.datetime
     ):
         self.metric_id = metric_id
         self.evaluation_dataset_id = evaluation_dataset_id
@@ -324,3 +325,4 @@ class FactEvaluationMetric:
         self.fact_creation_time = fact_creation_time
         self.created_by = created_by
         self.updated_by = updated_by
+        self.updated_date = updated_date
