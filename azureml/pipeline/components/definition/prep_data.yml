@@ -8,8 +8,8 @@ is_deterministic: false #Whether to reuse the previous job's result if the compo
 inputs:
   app_name:
     type: string
-  # parent_app_name:
-  #   type: string
+  app_type:
+    type: string
   evaluator_name:
     type: string
   metric_names:
@@ -18,8 +18,6 @@ inputs:
     type: string
   end_date:
     type: string
-  gold_zone_dim_app_path:
-    type: uri_folder
   gold_zone_eval_fact_path:
     type: uri_folder  
   key_vault_url:
@@ -41,7 +39,6 @@ command: >-
   --metric_names "${{inputs.metric_names}}"
   --start_date "${{inputs.start_date}}"
   --end_date "${{inputs.end_date}}"
-  --gold_zone_dim_app_path "${{inputs.gold_zone_dim_app_path}}"
   --gold_zone_fact_eval_path "${{inputs.gold_zone_eval_fact_path}}"  
   --prep_data_output_path "${{outputs.prep_data_output_path}}"  
   --key_vault_url "${{inputs.key_vault_url}}"

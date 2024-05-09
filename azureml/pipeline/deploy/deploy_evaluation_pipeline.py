@@ -18,10 +18,9 @@ logger = get_logger("deploy_evaluation_pipeline")
 pipeline_components = []
 
 def create_dynamic_evaluation_pipeline(
-        app_name,
+        app_info,
         evaluator_name,
         metric_names,        
-        dim_application_input,
         fact_evaluation_input,
         prepped_evaluation_data_path,
         pf_output_data_path,
@@ -32,10 +31,9 @@ def create_dynamic_evaluation_pipeline(
         Construct evaluation pipeline definition dynamically for a specific app and evaluator.
 
         Args:
-            app_name (str): Name of the application.
+            app_info (str): Info of the application.
             evaluator_name (str): Name of the evaluator.
             metric_names (list(dict)): List of dictionaries containing name, version and allowed values of the metrics generated from the evaluation.
-            dim_application_input (Input): Input object representing dimension application data.
             fact_evaluation_input (Input): Input object representing fact evaluation data.
             prepped_evaluation_data_path (Output): Output object representing prepped evaluation data.
             pf_output_data_path (Output): Output object representing promptflow output data.
@@ -45,7 +43,7 @@ def create_dynamic_evaluation_pipeline(
     @pipeline(
         name=pipeline_name,
         display_name=pipeline_name,
-        experiment_name=app_name
+        experiment_name=app_info.app_name
     )
     def evaluation_pipeline(
             evaluation_data_start_date: str,
@@ -55,12 +53,12 @@ def create_dynamic_evaluation_pipeline(
         prepped_evaluation_data = Output(path=prepped_evaluation_data_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
 
         prep_data = pipeline_components[0](
-            app_name=app_name,
+            app_name=app_info.app_name,
+            app_type=app_info.app_type,
             evaluator_name=evaluator_name,
             metric_names=metric_names,
             start_date=evaluation_data_start_date,
             end_date=evaluation_data_end_date,
-            gold_zone_dim_app_path=dim_application_input,
             gold_zone_eval_fact_path=fact_evaluation_input,
             key_vault_url=key_vault_url,
             retry_pipeline=retry_pipeline
@@ -107,8 +105,6 @@ def build_pipeline(
     Returns:
         PipelineJob: Azure Machine Learning pipeline job.
     """
-
-    dim_application_input = Input(path=aml_datastore_gold_zone_path + "dim_application/", type=AssetTypes.URI_FOLDER)
     
     fact_evaluation_dataset_folder = "fact_evaluation_dataset/fact_evaluation_dataset/"
     fact_evaluation_input = Input(path=aml_datastore_gold_zone_path + fact_evaluation_dataset_folder, type=AssetTypes.URI_FOLDER)
@@ -131,10 +127,9 @@ def build_pipeline(
     ]
 
     pipeline_definition = create_dynamic_evaluation_pipeline(
-        app_name=app_info.app_name,
+        app_info=app_info,
         evaluator_name=evaluator_info.evaluator_name,
         metric_names=json.dumps(metric_names).replace('"', '\\"'),
-        dim_application_input=dim_application_input,
         fact_evaluation_input=fact_evaluation_input,
         prepped_evaluation_data_path=prepped_evaluation_data_path,
         pf_output_data_path=pf_output_data_path,
