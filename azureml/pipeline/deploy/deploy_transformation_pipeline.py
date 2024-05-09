@@ -133,7 +133,7 @@ def main():
 
     aml_config_file_path = "../config/aml_config.yml"
 
-    transformation_config_file_path = "../config/transformation.yml"
+    transformation_config_file_path = "../config/transformation_config.yml"
     
     with open(aml_config_file_path, 'r') as file:
         aml_config = yaml.safe_load(file)
