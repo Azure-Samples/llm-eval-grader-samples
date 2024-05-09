@@ -99,7 +99,7 @@ def main():
 
     ml_client = get_ml_client()
     job = ml_client.batch_endpoints.invoke(
-        experiment_name="e2e_assistant",
+        experiment_name="sample-chatbot",
         endpoint_name=endpoint_name,
         inputs={
             "transformation_start_date": Input(

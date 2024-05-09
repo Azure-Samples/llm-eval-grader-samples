@@ -95,7 +95,7 @@ def main():
         raise argparse.ArgumentTypeError("Start date should be less than end date")
 
     endpoint_name = (
-        "tm-e2e-assistant-answerability"
+        "sample-chatbot-turn-relevance"
         if args.endpoint_name is None
         else args.endpoint_name
     )
@@ -104,7 +104,7 @@ def main():
 
     ml_client = get_ml_client()
     job = ml_client.batch_endpoints.invoke(
-        experiment_name="e2e_assistant",
+        experiment_name = "sample-chatbot",
         endpoint_name=endpoint_name,
         inputs={
             "evaluation_data_start_date": Input(
