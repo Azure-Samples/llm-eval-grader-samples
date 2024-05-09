@@ -136,10 +136,10 @@ def filter_evaluation_fact_on_common_properties(
 
     # filter eval_fact_df for start and end hour input by user
     eval_fact_df = eval_fact_df[
-        (eval_fact_df["response_time"] >= start_date)
-        & (eval_fact_df["response_time"] <= end_date)
+        (eval_fact_df["timestamp"] >= start_date)
+        & (eval_fact_df["timestamp"] <= end_date)
     ]
-    logger.info(f"Filtered {len(eval_fact_df)} FACT_EVALUATION rows for response time between {start_date} to {end_date}")
+    logger.info(f"Filtered {len(eval_fact_df)} FACT_EVALUATION rows for time between {start_date} to {end_date}")
     return eval_fact_df
 
 
