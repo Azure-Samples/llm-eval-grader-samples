@@ -18,6 +18,6 @@ conversation state.
 
 To run the demo of the chatbot, execute the following command in the terminal from `src` folder:
 
-```python
+```bash
 python demo.py 
 ```
