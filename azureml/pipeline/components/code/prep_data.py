@@ -25,15 +25,12 @@ def parse_args():
     )
     parser.add_argument("--app_name", type=str)
     parser.add_argument("--app_type", type=str)
-    parser.add_argument("--parent_app_name", type=str)
     parser.add_argument("--evaluator_name", type=str)
     parser.add_argument("--metric_names", type=json.loads)
     parser.add_argument("--start_date", type=str)
     parser.add_argument("--end_date", type=str)
     parser.add_argument("--gold_zone_fact_eval_path", type=str)
-    parser.add_argument("--gold_zone_dim_app_path", type=str)
     parser.add_argument("--prep_data_output_path", type=str)
-    parser.add_argument("--retry_pipeline", type=str)
     parser.add_argument("--key_vault_url", type=str)    
 
     args, _ = parser.parse_known_args()
@@ -57,55 +54,6 @@ def write_filtered_parquet_to_evaluation_zone(eval_fact_df, output_path):
     )
 
     return
-
-
-def filter_dataset_for_retry(
-    key_vault_url, start_date, end_date, app_name, metric_names, eval_fact_df
-):
-    """
-    Filter the evaluation dataset based on the metrics that are already present in the database
-
-    Args:
-        key_vault_url (str): The key vault url
-        start_date (str): The start date in the format "YYYY/MM/DD HH:MM".
-        end_date (str): The end date in the format "YYYY/MM/DD HH:MM".
-        app_name (int): The app name
-        metric_names (str): The metric names
-        eval_fact_df (pandas.DataFrame): The evaluation fact DataFrame
-    Returns:
-        eval_fact_df (pandas.DataFrame): The filtered evaluation fact DataFrame
-    """
-    db_handler = DBHandler(key_vault_url)
-    db_handler.init_db_connection()
-
-    metric_ids = []
-    for metric in metric_names:
-        dim_metric_dict = db_handler.select_row_by_columns("DIM_METRIC", ["metric_name", "metric_version"], [metric["metric_name"], metric["metric_version"]])
-        metric_id = dim_metric_dict["metric_id"]
-        if metric_id is None:
-            error_msg = f"Metric name {metric['metric_name']} and metric version {metric['metric_version']} not found in DIM_METRIC table"
-            logger.exception(error_msg)
-            raise ValueError(error_msg)
-        metric_ids.append(metric_id)
-
-    fact_input_metric_dict = db_handler.select_by_date_range_for_app_metric(
-        "FACT_INPUT_DS_METRIC",
-        "response_time",
-        start_date,
-        end_date,
-        app_name,
-        metric_ids,
-    )
-    # Filter the evaluation dataset based on the metrics that are already present in the database
-    if fact_input_metric_dict is not None:
-        fact_input_metric_df = pd.DataFrame(fact_input_metric_dict)
-        eval_fact_df = eval_fact_df[
-            ~eval_fact_df["evaluation_dataset_id"].isin(
-                fact_input_metric_df["evaluation_dataset_id"]
-            )
-        ]
-    return eval_fact_df
-
 
 def filter_evaluation_fact_on_common_properties(
     eval_fact_df, app_name, app_type, start_date, end_date, metric_names
@@ -174,24 +122,20 @@ def main():
     try:
         args = parse_args()
         logger.debug(
-            "Input configuration: app_name: %s, parent_app_name: %s, evaluator_name: %s, metric_names: %s, start_date: %s, end_date: %s, gold_zone_fact_eval_path: %s, gold_zone_dim_app_path: %s, prep_data_output_path: %s, retry_pipeline: %s",
+            "Input configuration: app_name: %s, evaluator_name: %s, metric_names: %s, start_date: %s, end_date: %s, gold_zone_fact_eval_path: %s, prep_data_output_path: %s",
             args.app_name,
-            args.parent_app_name,
             args.evaluator_name,
             args.metric_names,
             args.start_date,
             args.end_date,
             args.gold_zone_fact_eval_path,
-            args.gold_zone_dim_app_path,
             args.prep_data_output_path,
-            args.retry_pipeline,
         )
             
         start_date = start_date_for_pipeline_run(args.start_date)
         logger.info(f"Start Date is {start_date.strftime('%m/%d/%Y, %H:%M:%S')}")
         end_date =  end_date_for_pipeline_run(args.end_date)
         logger.info(f"End Date is {end_date.strftime('%m/%d/%Y, %H:%M:%S')}")
-        retry_pipeline = "false" if args.retry_pipeline.strip() == "NA" else args.retry_pipeline
 
         try:
             eval_fact_df = adls_handler.read_fact_table(
@@ -207,16 +151,6 @@ def main():
         eval_fact_df = filter_evaluation_fact_on_common_properties(
             eval_fact_df, args.app_name, args.app_type, start_date, end_date, args.metric_names
         )
-        
-        if retry_pipeline.lower() == "true":
-            eval_fact_df = filter_dataset_for_retry(
-                args.key_vault_url,
-                start_date,
-                end_date,
-                args.app_name,
-                args.metric_names,
-                eval_fact_df,
-            )
 
         if eval_fact_df.empty:
             error_msg = "Prep data returned no records to run evaluation."

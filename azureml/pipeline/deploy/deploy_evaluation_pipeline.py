@@ -47,8 +47,7 @@ def create_dynamic_evaluation_pipeline(
     )
     def evaluation_pipeline(
             evaluation_data_start_date: str,
-            evaluation_data_end_date: str,
-            retry_pipeline: str
+            evaluation_data_end_date: str
         ):
         prepped_evaluation_data = Output(path=prepped_evaluation_data_path, type=AssetTypes.URI_FOLDER, mode="rw_mount")
 
@@ -60,8 +59,7 @@ def create_dynamic_evaluation_pipeline(
             start_date=evaluation_data_start_date,
             end_date=evaluation_data_end_date,
             gold_zone_eval_fact_path=fact_evaluation_input,
-            key_vault_url=key_vault_url,
-            retry_pipeline=retry_pipeline
+            key_vault_url=key_vault_url
             )
         prep_data.outputs.prep_data_output_path = prepped_evaluation_data
 
@@ -211,8 +209,7 @@ def main():
         # When a scheduled pipeline job, we calculate the input dates dynamically within the pipeline components
         pipeline_job = pipeline_definition(
             evaluation_data_start_date="NA",
-            evaluation_data_end_date="NA",
-            retry_pipeline="NA"
+            evaluation_data_end_date="NA"
         )
         pipeline_job.settings.default_compute = compute_name
         pipeline_job.experiment_name = experiment_name

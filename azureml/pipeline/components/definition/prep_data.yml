@@ -22,8 +22,6 @@ inputs:
     type: uri_folder  
   key_vault_url:
     type: string
-  retry_pipeline:
-    type: string
 outputs:
   prep_data_output_path:
     type: uri_folder
@@ -42,5 +40,4 @@ command: >-
   --gold_zone_fact_eval_path "${{inputs.gold_zone_eval_fact_path}}"  
   --prep_data_output_path "${{outputs.prep_data_output_path}}"  
   --key_vault_url "${{inputs.key_vault_url}}"
-  --retry_pipeline "${{inputs.retry_pipeline}}"
 # </component>

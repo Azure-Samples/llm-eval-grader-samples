@@ -57,7 +57,6 @@ def parse_args():
         help="Endpoint name to run the aggregation for",
         required=False,
     )
-    parser.add_argument("--retry_pipeline", help="Retry Pipeline flag", required=False)
     return parser.parse_args()
 
 
@@ -100,8 +99,6 @@ def main():
         else args.endpoint_name
     )
 
-    retry_pipeline = "false" if args.retry_pipeline is None else args.retry_pipeline
-
     ml_client = get_ml_client()
     job = ml_client.batch_endpoints.invoke(
         experiment_name = "sample-chatbot",
@@ -113,7 +110,6 @@ def main():
             "evaluation_data_end_date": Input(
                 type="string", default=evaluation_data_end_date
             ),
-            "retry_pipeline": Input(type="string", default=retry_pipeline),
         },
     )
 
