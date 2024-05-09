@@ -4,11 +4,10 @@ import pandas as pd
 from pathlib import Path
 import datetime
 
-from common.entities import FactInputDSMetric
-from common.db_handler import DBHandler
-from common.logger import get_logger
-from common.mlflow_logger import mlflow_log_metric
-from common.constants import METRIC_OUTPUT_DICT_COLUMN, NUMERICAL_METRIC_TYPE, CATEGORICAL_METRIC_TYPE, CREATED_OR_UPDATED_BY_SYSTEM
+from llminspect.common.entities import FactEvaluationMetric, DimMetrics
+from llminspect.common.db_handler import DBHandler
+from llminspect.common.logger import get_logger
+from llminspect.common.mlflow_logger import mlflow_log_metric
 
 logger = get_logger("write_metrics")
 
@@ -50,9 +49,9 @@ class MetricsProcessor:
                 pf_input_df = pd.read_json(file, lines=True)
                 pf_input_row_count = pf_input_df.shape[0]
 
-        mlflow_log_metric("Evaluation Input Rows", pf_input_row_count)
-        mlflow_log_metric("Evaluation Successful Rows", pf_output_row_count)
-        mlflow_log_metric("Evaluation Failed Rows", pf_input_row_count - pf_output_row_count)
+        mlflow_log_metric("evaluation_input_rows", pf_input_row_count)
+        mlflow_log_metric("evaluation_successful_rows", pf_output_row_count)
+        mlflow_log_metric("evaluation_failed_rows", pf_input_row_count - pf_output_row_count)
         logger.info(f"Read {pf_output_row_count} rows from prompt flow output files.")
         if pf_input_row_count != pf_output_row_count:
             logger.error(f"Prompt flow input and output row counts do not match. Input: {pf_input_row_count} row(s), Output: {pf_output_row_count} row(s)")
@@ -69,16 +68,39 @@ class MetricsProcessor:
         Returns:
             list: A list of FactInputDSMetric entities.
         """
-        fact_input_ds_metric_list = []
+        fact_evaluation_metric_list = []
         logger.info("Processing raw evaluation metrics data")
         for eval_metrics_row in eval_metrics_raw_data:
             dim_metric_dict = self.db_handler.select_row_by_columns("DIM_METRIC", ["metric_name", "metric_version"], [eval_metrics_row["metric_name"], eval_metrics_row["metric_version"]])
 
             metric_id = dim_metric_dict["metric_id"]
             if metric_id is None:
-                error_msg = f"Metric name {eval_metrics_row['metric_name']} not found in DIM_METRIC table"
-                logger.exception(error_msg)
-                raise ValueError(error_msg)
+                # TODO: Add metrics from definition file to DIM_METRIC table
+                logger.info(f"Metric name {eval_metrics_row['metric_name']} not found in DIM_METRIC table. Adding metric to DIM_METRIC table...")
+                unique_columns = {"metric_name", "metric_version"}
+                dim_metric = DimMetrics(
+                    metric_name=eval_metrics_row["metric_name"],
+                    metric_version=eval_metrics_row["metric_version"],
+                    metric_type=eval_metrics_row["metric_type"],
+                    evaluator_name=eval_metrics_row["evaluator_name"],
+                    evaluator_type=eval_metrics_row["evaluator_type"],
+                    created_by="system",
+                    updated_date=datetime.datetime.now(),
+                    updated_by="system",
+                )
+                self.db_handler.upsert_into_table(
+                    "DIM_METRIC",
+                    [dim_metric],
+                    unique_columns,
+                    True,
+                )
+                logger.info("Upsertion into DIM_METRICS table complete.")
+                dim_metric_dict = self.db_handler.select_row_by_columns("DIM_METRIC", ["metric_name", "metric_version"], [eval_metrics_row["metric_name"], eval_metrics_row["metric_version"]])
+                metric_id = dim_metric_dict["metric_id"]
+                if metric_id is None:
+                    error_msg = f"Metric name {eval_metrics_row['metric_name']} not found in DIM_METRIC table"
+                    logger.exception(error_msg)
+                    raise ValueError(error_msg)
             
             metric_type = dim_metric_dict["metric_type"]
             if metric_type is None:
@@ -86,49 +108,46 @@ class MetricsProcessor:
                 logger.exception(error_msg)
                 raise ValueError(error_msg)
 
-            if metric_type.lower() == NUMERICAL_METRIC_TYPE:
+            if str(metric_type).lower() == "numerical":
                 metric_numeric_value = float(eval_metrics_row["metric_value"])
                 metric_str_value = None
-            elif metric_type.lower() == CATEGORICAL_METRIC_TYPE:
+            elif str(metric_type).lower() == "categorical":
                 metric_numeric_value = None
                 metric_str_value = eval_metrics_row["metric_value"]
             else:
-                logger.exception(f"Invalid metric type {metric_type}. Allowed values are 'numerical' and 'categorical'")
-                raise
+                error_msg = f"Invalid metric type {metric_type}. Allowed values are 'numerical' and 'categorical'"
+                logger.exception(error_msg)
+                raise ValueError(error_msg)
             
-            fact_input_ds_metric = FactInputDSMetric(
+            fact_evaluation_metric = FactEvaluationMetric(
                 metric_id=metric_id,
                 evaluation_dataset_id=eval_metrics_row["evaluation_dataset_id"],
-                app_id=eval_metrics_row["app_id"],
-                session_id=eval_metrics_row["session_id"],
-                router_function_id=eval_metrics_row["router_function_id"],
+                conversation_id=eval_metrics_row["conversation_id"],
                 metadata_id=eval_metrics_row["metadata_id"],
-                transcript_id=eval_metrics_row["transcript_id"],
                 evaluator_metadata=None,
                 metric_numeric_value=metric_numeric_value,
                 metric_str_value=metric_str_value,
                 metric_raw_value=eval_metrics_row["metric_raw_value"],
-                transcript_turn_seq_id=eval_metrics_row["transcript_turn_seq_id"],
-                response_time=datetime.datetime.fromtimestamp(eval_metrics_row["response_time"]/1000).strftime("%Y-%m-%d %H:%M:%S"),
-                created_by=CREATED_OR_UPDATED_BY_SYSTEM,
+                fact_creation_time=datetime.datetime.fromtimestamp(eval_metrics_row["timestamp"]/1000).strftime("%Y-%m-%d %H:%M:%S"),
+                created_by="system",
                 updated_date=datetime.datetime.now(),
-                updated_by=CREATED_OR_UPDATED_BY_SYSTEM          
+                updated_by="system"          
             )
-            fact_input_ds_metric_list.append(fact_input_ds_metric)
-        logger.info(f"Transformed {len(fact_input_ds_metric_list)} prompt flow output rows into FACT_INPUT_DS_METRIC rows.")
-        return fact_input_ds_metric_list
+            fact_evaluation_metric_list.append(fact_evaluation_metric)
+        logger.info(f"Transformed {len(fact_evaluation_metric_list)} prompt flow output rows into FACT_EVALUATION_METRIC rows.")
+        return fact_evaluation_metric_list
     
-    def write_metrics(self, fact_input_ds_metric_list):
+    def write_metrics(self, fact_evaluation_metric_list):
         """
         Writes FactInputDSMetric entities to database table.
 
         Parameters:
-            fact_input_ds_metric_list (list): A list of FactInputDSMetric entities.
+            fact_evaluation_metric_list (list): A list of FactInputDSMetric entities.
         """
-        logger.info(f"Inserting {len(fact_input_ds_metric_list)} rows into FACT_INPUT_DS_METRIC table...")
+        logger.info(f"Inserting {len(fact_evaluation_metric_list)} rows into FACT_EVALUATION_METRIC table...")
         unique_columns = {"evaluation_dataset_id", "metric_id"}
-        self.db_handler.upsert_into_table("FACT_INPUT_DS_METRIC", fact_input_ds_metric_list, unique_columns, True)
-        logger.info("Insertion into FACT_INPUT_DS_METRIC table complete.")
+        self.db_handler.upsert_into_table("FACT_EVALUATION_METRIC", fact_evaluation_metric_list, unique_columns, True)
+        logger.info("Insertion into FACT_EVALUATION_METRIC table complete.")
     
     def close_connection(self):
         """
@@ -159,8 +178,8 @@ def main():
     metrics_processor = MetricsProcessor(args.key_vault_url)
 
     eval_metrics_raw_data = metrics_processor.read_metrics(args.eval_dataset_path, args.eval_metrics_data_path)
-    fact_input_ds_metric_list = metrics_processor.process_metrics(eval_metrics_raw_data)
-    metrics_processor.write_metrics(fact_input_ds_metric_list)
+    fact_evaluation_metric_list = metrics_processor.process_metrics(eval_metrics_raw_data)
+    metrics_processor.write_metrics(fact_evaluation_metric_list)
     metrics_processor.close_connection()
 
 if __name__ == "__main__":

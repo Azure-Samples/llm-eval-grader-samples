@@ -276,3 +276,51 @@ class Transformer:
             MappingList: The list of mappings used for data transformation.
         """
         return self.mapping_list
+
+class DimMetrics:
+    def __init__(
+        self,
+        metric_name: str,
+        metric_version: float,
+        metric_type: str,
+        evaluator_name: str,
+        evaluator_type: str,
+        created_by: str,
+        updated_date: datetime,
+        updated_by: str
+    ):
+        self.metric_name = metric_name
+        self.metric_version = metric_version
+        self.metric_type = metric_type
+        self.evaluator_name = evaluator_name
+        self.evaluator_type = evaluator_type
+        self.created_by = created_by
+        self.updated_date = updated_date
+        self.updated_by = updated_by
+
+class FactEvaluationMetric:
+    def __init__(
+        self,
+        metric_id: int,
+        evaluation_dataset_id: str,
+        conversation_id: str,
+        metadata_id: str,
+        evaluator_metadata: str,
+        metric_numeric_value: float,
+        metric_str_value: str,
+        metric_raw_value: str,
+        fact_creation_time: datetime.datetime,
+        created_by: str,
+        updated_by: str
+    ):
+        self.metric_id = metric_id
+        self.evaluation_dataset_id = evaluation_dataset_id
+        self.conversation_id = conversation_id
+        self.metadata_id = metadata_id
+        self.evaluator_metadata = evaluator_metadata
+        self.metric_numeric_value = metric_numeric_value
+        self.metric_str_value = metric_str_value
+        self.metric_raw_value = metric_raw_value
+        self.fact_creation_time = fact_creation_time
+        self.created_by = created_by
+        self.updated_by = updated_by
