@@ -6,6 +6,6 @@ metric_type Varchar(255) NOT NULL,
 evaluator_name Varchar(255) NOT NULL,
 evaluator_type Varchar(255) NOT NULL,
 created_date DATETIME NOT NULL DEFAULT GETDATE(),
-created_by VARCHAR(255) NOT NULL,
+created_by VARCHAR(255) NULL,
 updated_date DATETIME NOT NULL DEFAULT GETDATE(),
-updated_by VARCHAR(255) NOT NULL))
+updated_by VARCHAR(255) NULL))
