@@ -22,7 +22,6 @@ class ChatCompletion:
             azure_endpoint=os.environ["OPENAI_API_BASE"],
             api_version=os.environ["OPENAI_API_VERSION"]
         )
-        self.max_retry = os.getenv("MAX_RETRY_COUNT")
         self.deployment_name = os.getenv("OPENAI_DEPLOYMENT_NAME")
         
     def get_completion(self, messages, temperature, max_tokens: Optional[int] = None):
@@ -53,8 +52,6 @@ class ChatCompletion:
         except RateLimitError as e:
             last_exception = e
             print(f"RateLimitError")
-            if i != self.max_retry - 1:
-                sleep(6)
         except (Timeout, ReadTimeoutError, APIConnectionError) as e:
             last_exception = e
             e_name = e.__class__.__name__
