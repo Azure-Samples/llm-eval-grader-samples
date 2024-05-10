@@ -32,7 +32,6 @@ class ChatCompletion:
             temperature: maximum number of tokens to generate
             max_tokens (Optional[int], optional): temperature parameter for sampling. Defaults to None.
         """
-        last_exception = Exception("Invalid state")
         try:
     
             response = self.client.chat.completions.create(
@@ -46,15 +45,7 @@ class ChatCompletion:
             content = completion.message.content
             return content
     
-        except AttributeError as e:
-            last_exception = e
-            print(f"AttributeError")
-        except RateLimitError as e:
-            last_exception = e
-            print(f"RateLimitError")
-        except (Timeout, ReadTimeoutError, APIConnectionError) as e:
-            last_exception = e
+        except Exception as e:
             e_name = e.__class__.__name__
             print(f"{e_name}")
-
-        raise last_exception
+            raise e
