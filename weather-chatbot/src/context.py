@@ -5,7 +5,7 @@ class Context:
         self._location = None
 
     def add_message(self, role: str, message: str):
-        self._messages += [[{"role": role, "content": message}]]
+        self._messages += [{"role": role, "content": message}]
 
     def get_messages(self):
         return self._messages
