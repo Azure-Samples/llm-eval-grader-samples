@@ -94,5 +94,5 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-@description('Outputs server URI to add to keyvault')
+@description('Outputs server URI to be added to keyvault')
 output serverUrl string = resourceDBServer.properties.fullyQualifiedDomainName

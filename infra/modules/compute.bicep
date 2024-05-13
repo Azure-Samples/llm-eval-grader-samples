@@ -9,8 +9,6 @@ param name string
 param environment string
 @description('Specifies the location of the Azure Machine Learning workspace and dependent resources.')
 param location string
-@description('The VM size for compute instance')
-param vmSize string = 'Standard_DS3_v2'
 @description('The username for the SQL Server admin')
 param dbLoginUserName string
 @secure()
@@ -33,24 +31,36 @@ param clientId string
 param authorityUrl string
 @description('Specifies the resource URL for the ADLS Gen2 data store')
 param resourceUrl string
-@description('Specifies the name of the compute cluster')
-param clusterName string = 'llm-inspect-cluster'
 @description('Specifies the user principal id')
 param userPrincipalId string
 @description('Specifies the name of the storage account for ADLS Gen2')
 param blobStorageName string
 
+// Parameters with default values
+@description('The VM size for compute instance')
+param vmSize string = 'Standard_DS3_v2'
+@description('Specifies the name of the compute cluster')
+param clusterName string = 'llm-inspect-cluster'
+@description('Specifies the name of the log analytics workspace secret')
+param logAnalyticsWorkspaceSecretName string = 'sample-chatbot-az-monitor-workspace-id'
+@description('Specifies the name of the sql database secret')
+param sqlDatabaseSecretName string = 'azuresqlserver-database'
+@description('Specifies the name of the sql server password secret')
+param sqlDatabasePasswordSecretName string = 'azuresqlserver-password'
+@description('Specifies the name of the sql server user secret')
+param sqlServerUserSecretName string = 'azuresqlserver-user'
+@description('Specifies the name of the sql server url secret')
+param sqlServerUrlSecretName string =  'azuresqlserver'
+
 var storageAccountName = 'amlst${name}${environment}${randomSuffix}'
 var keyVaultName = 'kv-${name}-${environment}-${randomSuffix}'
 var applicationInsightsName = 'appl-${name}-${environment}-${randomSuffix}'
-var containerRegistryName = 'reg${name}${environment}${randomSuffix}'
 var amlWorkspaceName = 'aml${name}${environment}${randomSuffix}'
 var logAnalyticsWorkspaceName = 'log-analytics-${name}-${environment}-${randomSuffix}'
 var tenantId = subscription().tenantId
 var storageAccount = resourceStorageAccount.id
 var keyVault = resourceKeyVault.id
 var applicationInsights = resourceApplicationInsights.id
-var containerRegistry = resourceContainerRegistry.id 
 
 @description('Creates AML Blob Storage Account')
 resource resourceStorageAccount 'Microsoft.Storage/storageAccounts@2021-01-01' = {
@@ -76,18 +86,6 @@ resource resourceStorageAccount 'Microsoft.Storage/storageAccounts@2021-01-01' =
   }
 }
 
-@description('Creates Container Registry Resorce for AML')
-resource resourceContainerRegistry 'Microsoft.ContainerRegistry/registries@2019-12-01-preview' = {
-  sku: {
-    name: 'Standard'
-  }
-  name: containerRegistryName
-  location: location
-  properties: {
-    adminUserEnabled: true
-  }
-}
-
 @description('Creates log analytics workspace for AML Monitoring and chatbot logs')
 resource resourceLogAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: logAnalyticsWorkspaceName
@@ -99,10 +97,10 @@ resource resourceLogAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces
   }
 }
 
-@description('Creates Applocation Insights for AML')
+@description('Creates Application Insights for AML')
 resource resourceApplicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: applicationInsightsName
-  location: (((location == 'eastus2') || (location == 'westcentralus')) ? 'southcentralus' : location)
+  location: location
   kind: 'web'
   properties: {
     Application_Type: 'web'
@@ -151,7 +149,6 @@ resource resourceWorkspace 'Microsoft.MachineLearningServices/workspaces@2021-07
     storageAccount: storageAccount
     keyVault: keyVault
     applicationInsights: applicationInsights
-    containerRegistry: containerRegistry
   }
   tags: {
     createdBy: 'Bicep Script'
@@ -256,7 +253,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-06-
 }
 
 @description('Role Assignment for AML cluster to access log analytics for reading chatbot logs')
-resource analyticsLogsRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+resource analyticsLogsRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01'  = {
   name: guid(resourceGroup().id, 'aml-', clusterName, 'analyticsLogsRoleAssignment')
   scope: resourceLogAnalyticsWorkspace
   properties: {
@@ -279,7 +276,7 @@ resource amlDataScientisRoleAssignment 'Microsoft.Authorization/roleAssignments@
 @description('Adds sql server uri to keyvault')
 resource databaseServerNameSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-preview' = {
   parent: resourceKeyVault
-  name: 'azuresqlserver'
+  name: sqlServerUrlSecretName
   properties: {
     value: serverUrl
   }
@@ -288,7 +285,7 @@ resource databaseServerNameSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-
 @description('Adds database username to keyvault')
 resource databaseLoginSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-preview' = {
   parent: resourceKeyVault
-  name: 'azuresqlserver-user'
+  name: sqlServerUserSecretName
   properties: {
     value: dbLoginUserName
   }
@@ -297,7 +294,7 @@ resource databaseLoginSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-previ
 @description('Adds database password to keyvault')
 resource databasePasswordSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-preview' = {
   parent: resourceKeyVault
-  name: 'azuresqlserver-password'
+  name: sqlDatabasePasswordSecretName
   properties: {
     value: dbLoginPassword
   }
@@ -306,7 +303,7 @@ resource databasePasswordSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-pr
 @description('Adds database name to keyvault')
 resource databaseSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-preview' = {
   parent: resourceKeyVault
-  name: 'azuresqlserver-database'
+  name: sqlDatabaseSecretName
   properties: {
     value: databaseName
   }
@@ -315,7 +312,7 @@ resource databaseSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-preview' =
 @description('Adds log analytics workspace id to keyvault')
 resource logAnalyticsWorkspaceIdSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-preview' = {
   parent: resourceKeyVault
-  name: 'sample-chatbot-az-monitor-workspace-id'
+  name: logAnalyticsWorkspaceSecretName
   properties: {
     value: resourceLogAnalyticsWorkspace.properties.customerId
 

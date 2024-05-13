@@ -170,3 +170,6 @@ cython_debug/
 # Ignore .env file
 **/*.env
 /.vs
+
+# Ignore main.json file
+**/main.json

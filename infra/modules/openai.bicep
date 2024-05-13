@@ -10,6 +10,9 @@ param location string
 @description('Specifies the principal ID of the workspace cluster.')
 param workspaceClusterPrincipalId string
 
+@description('Specifies the name of the OpenAI deployment.')
+param openAIDeploymentName string = 'gpt-35-turbo'
+
 var openAIServiceName = '${name}-${environment}-openai-${randomSuffix}'
 
 
@@ -36,7 +39,7 @@ resource resourceOpenAIService 'Microsoft.CognitiveServices/accounts@2021-10-01'
 
 @description('Deploys mentioned open ai model')
 resource openaiModeilDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
-  name: 'gpt-35-turbo'
+  name: openAIDeploymentName
   sku: {
     capacity: 10
     name: 'Standard'
@@ -45,7 +48,7 @@ resource openaiModeilDeployment 'Microsoft.CognitiveServices/accounts/deployment
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-35-turbo'
+      name: openAIDeploymentName
       version: '0301'
     }
     raiPolicyName: 'Microsoft.Default'

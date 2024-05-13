@@ -53,7 +53,7 @@ module storage 'modules/storage.bicep' = {
   }
 }
 
-@description('Module for create AML and related resources along with the role assignments')
+@description('Module for creating AML and related resources along with the role assignments')
 module compute 'modules/compute.bicep' = {
   name: 'compute'
   params: {
@@ -76,7 +76,7 @@ module compute 'modules/compute.bicep' = {
   }
 }
 
-@description('Module for creating observability resources such as Application Insights and log analytics workspace')
+@description('Module for creating observability resources such as Application Insights and Log Analytics Workspace')
 module observability 'modules/observability.bicep' = {
   name: 'observability'
   params: {
@@ -87,7 +87,7 @@ module observability 'modules/observability.bicep' = {
   }
 }
 
-@description('Module for creating openai resources')
+@description('Module for creating OpenAI resources')
 module openai 'modules/openai.bicep' = {
   name: 'openai'
   params: {

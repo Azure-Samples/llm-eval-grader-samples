@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceGroupName": {
-            "value": "llm-inspect-dev" 
+            "value": "llm-inspect-demo" 
         },
-        "name": {
-            "value": "llminspect" 
+        "applicationName": {
+            "value": "llmops" 
         },
         "environment": {
             "value": "dev" 
