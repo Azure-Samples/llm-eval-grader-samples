@@ -16,8 +16,8 @@ def get_completion(self, messages, temperature, max_tokens: Optional[int] = None
     
     # Set the API key of azure openai
     client = AzureOpenAI(
-        api_key=os.environ["OPENAI_API_KEY"],
-        azure_endpoint=os.environ["OPENAI_API_BASE"],
+        api_key=os.environ["AZURE_OPENAI_API_KEY"],
+        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
         api_version=os.environ["OPENAI_API_VERSION"]
     )
     deployment_name = os.environ["OPENAI_DEPLOYMENT_NAME"]
