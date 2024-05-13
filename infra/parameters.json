@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceGroupName": {
+            "value": "llm-inspect-dev" 
+        },
+        "name": {
+            "value": "llminspect" 
+        },
+        "environment": {
+            "value": "dev" 
+        },
+        "location": {
+            "value": "eastus" 
+        },
+        "storageContainerOne": {
+            "value": "evaluation" 
+        },
+        "storageContainerTwo": {
+            "value": "gold-zone" 
+        },  
+        "authorityUrl":{
+            "value": "https://login.microsoftonline.com" 
+        },
+        "resourceUrl": {
+            "value": "https://storage.azure.com" 
+        },
+        "userPrincipalId":{
+            "value": "0eef20c5-350a-437f-8093-2705d09f992c"
+        },
+        "dbLoginUserName": {
+            "value": "llminspect" 
+        },
+        "dbLoginPassword": {
+            "value": "P@ssw0rd1234" 
+        },
+        "servicePrincipalId":{ 
+            "value": "2fe98032-4726-447f-b50a-4a4cc4721c45"
+        },
+        "clientId": {
+            "value": "789ca3de-6ed4-487b-bfdf-d51f676169fe" 
+        },
+        "clientSecret": {
+            "value": "0OM8Q~NHrC7ym3l_DBMtJG66Hg2h2kWCf.GKGaz4" 
+        }
+    }
+}
