@@ -22,7 +22,7 @@ class ChatCompletion:
             azure_endpoint=os.environ["OPENAI_API_BASE"],
             api_version=os.environ["OPENAI_API_VERSION"]
         )
-        self.deployment_name = os.getenv("OPENAI_DEPLOYMENT_NAME")
+        self.deployment_name = os.environ["OPENAI_DEPLOYMENT_NAME"]
         
     def get_completion(self, messages, temperature, max_tokens: Optional[int] = None):
         """This method generates a response from the Azure OpenAI API
