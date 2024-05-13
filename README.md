@@ -59,6 +59,7 @@ The architecture consists of the following components:
     - Python 3.11
     - Conda
     - Visual Studio Code
+    - Power BI Desktop (for visualization)
 
 ### Infrastructure Deployment
 
