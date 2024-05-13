@@ -27,10 +27,10 @@
             "value": "https://storage.azure.com" 
         },
         "userPrincipalId":{
-            "value": "0eef20c5-350a-437f-8093-2705d09f992c"
+            "value": "<user-principal-id>"
         },
         "servicePrincipalId":{ 
-            "value": "2fe98032-4726-447f-b50a-4a4cc4721c45"
+            "value": "<service-principal-id>"
         }
     }
 }
