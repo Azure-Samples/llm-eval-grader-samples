@@ -1,8 +1,11 @@
 from context import Context
 from orchestrator import Orchestrator
+from dotenv import load_dotenv
 
 
 def main():
+    load_dotenv()
+
     orchestrator = Orchestrator()
     context = Context()
 
