@@ -11,7 +11,7 @@ This document provides a guide for developers on how to build the following comp
 1. Install Visual Studio Code with the following extensions:
 
     - Prompt Flow
-2. Create `.env` file from [`.env_template`](../../src/azureml/pipelines/.env_template) and update the values as per your Azure environment.
+2. Create `.env` file from [`.env_template`](../azureml/pipeline/deploy/env.template)and update the values as per your Azure environment.
 3. Install the Azure CLI and login to your Azure account:
 
     ```bash
@@ -132,29 +132,27 @@ Data transformation pipelines are used to transform the raw data into a format t
 
 1. To develop a new transformation pipeline for a new app, define the following in the [transformation_config.yml](../azureml/pipeline/config/transformation_config.yml) file:
 
-    - Update the bot_name as per the name of your app.
-    - Update the evaluation_types which has 
-        - evaluation_type: name of type of evaluation you want to run(human, llm, both)
-        - distribution: percentage of that evaluation_type
-    - Update source table,  schema_name etc
-    - Update the app_types which could be a bot or a component or both
-    - Update the mapping between source and target table columns
+    - Update the chatbot_name as per the name of your chatbotname: transformation
+    chatbot_name: sample-chatbot
+    - Update the source which has 
+    source:
+        - type: type of data source, in our case, azure monitor
+        - table: table name in Azure monitor
+        - workspace_id_secret_key: the key in the keyvault storing the secret value of workspace_id of the log analytic workspace, this might be applicable when the type is azure monitor, but not otherwise.(eg, Azure SQL)
+    - Update the mapping between source and target table columns for conversation and llm separately
     - Define transformation specific AML pipeline configurations such as endpoint, schedule, schedule start time etc.
-2. The transformation pipeline source code is both common and app specific.
-    - The common source code is located in the [azureml/pipeline/components/code](../azureml/pipeline/components/code) folder.
-        - [bot_column_mapping.py](../../src/azureml/pipelines/src/transformation/common/bot_column_mapping.py)
-        This file reads the source facts from ADLS Gen 2, column mappings from the transformation_config yaml file and then transforms the dataframe as per the mappings. It also does some data preprocessing around cleaning and filling NA values, dropping columns, etc
-        - [goldzone_prep.py](../src/llminspect/pipelines/src/transformation/common/goldzone_prep.py)
-        This file reads the existing dim tables and fact tables from ADLS gen 2 and writes new unqiue facts and dimensions are per the source data read.
 
-    - The app specific code is located in the  [src/azureml/pipelines/src/transformation/app_specific](../../src/azureml/pipelines/src/transformation/app_specific) folder.
-        - [bot_component_e2e_assistant.py](../../src/azureml/pipelines/src/transformation/app_specific/bot_component_e2e_assistant.py)
-        This file does all the main transformations in the data at the bot and the component level. If there is a change in the data format, data schema or transformation logic, one needs to make the changes here in the corresponding functions. Currently this file is specific to e2e_assistant bot. The plan is to have one file per bot in the app_specific folder
-        - [data_utils.py](../../src/azureml/pipelines/src/transformation/app_specific/data_utils.py)
-        This file has some generic functions which we foresee can be used by other apps as well.
-
-    - The orchestrator code for transformation pipeline is there in [transform_data.py](../../src/azureml/pipelines/src/transform_data.py) -
-        - This script orchestrates the transformation process. It calls the respective code which reads the data from FDP fact table (SILVER ZONE), transforms the data, assigns distribution of data to different evaluation_types as read from the transfromation_config file and updates the dim and fact tables in the ADLS Gen2 (GOLD ZONE) in parquet format. It will create the dim_session, dim_metadata, dim_router_function, fact_evaluation output files if not present , or update them if already present. Finally clean data is stored in the GOLD ZONE, ready for evaluation pipeleines
+2. The transformation pipeline source code is at two places, one in the azureml folder, other in the src folder.
+    - [transform_data.py](../azureml/pipeline/code/transform_data.py) This acts like the onboarding script for transformation.It imports the code in the src/llminspect folder, calling the common and transformation folder. This script orchestrates the transformation process. It calls the respective code which reads the data from azure monitor, transforms the data, as per mappings specified in the transfromation_config file , samples it and updates the dim and fact tables in the ADLS Gen2 (GOLD ZONE) in parquet format. It will create the dim_conversation, dim_metadata, fact_evaluation output files if not present , or update them if already present. Finally clean data is stored in the GOLD ZONE, ready for evaluation pipeleines
+    - [transformation.yml](../azureml/pipeline/components/definition/transformation.yml) This file has the definition for the transformation component. It has the input and outputs defined and the conda environment to be created.
+    - [deploy_transformation_pipeline.py](../azureml/pipeline/deploy/deploy_transformation_pipeline.py)
+        This file is the actual deploy script which invokes the transform_data.py
+    - The common reusable code is located in the  [src/llminspect/common/](../src/llminspect/)  and [src/llminspect/transformation/](../src/llminspect/transformation/)which is packaged and imported in the [../src/azureml/pipeline/code/](../azureml/pipeline/code) python scripts
+        - [transform.py](../src/llminspect/transformation/transform.py)
+        This file does all the main transformations in the data at the bot and the component level. If there is a change in the data format, data schema or transformation logic, one needs to make the changes here in the corresponding functions. Currently this file is specific to sample chatbot application. This file takes care of reading the data from azure monitor and mapping the columns and do the preprocessing on the data.
+        - [goldzone_prep.py](../src/llminspect/transformation/goldzonne_prep.py)
+        This file reads and updates the goldzone table, namely the dim_metadata,dim_conversation and fact_evaluation_dataset
+        - [sampling.py](..src/llminspect/transformation/sampling.py)This python script takes care of checking unique sessions and taking a fraction of these to be sampled and used for transformation pipeline, which gets written to the gold zone and finally is used by the eval pipeline
 
 ### LLM Evaluation Pipelines
 
