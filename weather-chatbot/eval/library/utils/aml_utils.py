@@ -120,15 +120,6 @@ def create_dataset(ws, local_data_path: str, azure_data_path: str, pattern=None)
     print(f'Upload complete')
 
 
-def get_model_url(model_name, model_version) -> str:
-    return (
-        f'https://ml.azure.com/model/{model_name}:{model_version}/details?wsid=/subscriptions/'
-        'd3af46b0-ebe4-480d-adfa-a40c48b1fd4e/resourceGroups/corp-stage-029-itgm-cc-rg/'
-        'providers/Microsoft.MachineLearningServices/workspaces/'
-        'corpstage02901ccmlw&tid=bd6704ff-1437-477c-9ac9-c30d6f5133c5#overview'
-    )
-
-
 def associate_model_w_data(
     model_name: str,
     model_version: int,
@@ -175,10 +166,6 @@ def associate_model_w_data(
 
         # Link registered data asset to your model instance
         model.add_dataset_references([(dataset_name, reg_data)])
-
-        model_uri = get_model_url(model_name=model_name, model_version=model_version)
-
-        print(f'Your registered model can be found here: {model_uri}')
     except Exception as e:
         print(e)
         print(traceback.format_exc())
