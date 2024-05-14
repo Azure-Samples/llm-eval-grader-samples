@@ -20,6 +20,7 @@ The infrastructure deployment process involves executing Bicep scripts located i
 ## OpenAI Module
 - Deployment of OpenAI Cognitive Service and Models.
 - Assignment of RBAC roles
+- Note: Currently, `ms.default` is utilized for raiPolicy which could be enhanced for detailed RAI configs 
 
 ## Deployment Details
 
