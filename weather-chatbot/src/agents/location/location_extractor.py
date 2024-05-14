@@ -1,10 +1,32 @@
-first_call = True  # used only for the stub implementation
+import os
+from azure.core.credentials import AzureKeyCredential
+from azure.maps.search import MapsSearchClient
 
 
 class LocationExtractor:
     """Class for extracting location information from message history."""
+    def __init__(self):
+        """Initialize the search client for looking up the address of the latest message"""
+        credential = AzureKeyCredential(os.environ["AZURE_SUBSCRIPTION_KEY"])
+
+        self.search_client = MapsSearchClient(
+            credential=credential,
+        )
+
     def extract(self, message_history: list[dict]) -> str | None:
-        global first_call  # used only for the stub implementation
-        result = None if first_call else "98144"
-        first_call = False
-        return result
+        last_message = self.get_last_user_message(message_history)
+
+        if last_message is not None:
+            search_results = self.search_client.search_address(last_message['content'])
+
+            # If we got results back from address lookups in the API, use the first one
+            point_addresses = [result for result in search_results.results if result.type == 'Point Address']
+            if len(point_addresses) > 0:
+                return f'{point_addresses[0].position.lat} {point_addresses[0].position.lon}'
+
+        return None
+
+    def get_last_user_message(self, message_history: list[dict]):
+        user_messages = [msg for msg in message_history if msg['role'] == 'user']
+        return user_messages[-1] if len(user_messages) > 0 else None
+

@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument("--key_vault_url", type=str, help="Key vault url", required=True)
     parser.add_argument("--fact_evaluation_output", type=str, help="Fact evaluation output path", required=True)
     parser.add_argument("--dim_metadata_output", type=str, help="Dim metadata output path", required=True)
-    parser.add_argument("--dim_conversation_output", type=str, help="Dim sessions output path", required=True)
+    parser.add_argument("--dim_conversation_output", type=str, help="Dim conversation output path", required=True)
     args, _ = parser.parse_known_args()
     return args
 
