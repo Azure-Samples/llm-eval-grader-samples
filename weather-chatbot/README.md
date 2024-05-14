@@ -21,3 +21,11 @@ To run the demo of the chatbot, execute the following command in the terminal fr
 ```bash
 python demo.py 
 ```
+
+## Running Unit Tests
+
+Switch to the weather-chatbot folder
+
+```bash
+pytest
+```
