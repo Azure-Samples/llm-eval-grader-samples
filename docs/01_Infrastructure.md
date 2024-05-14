@@ -7,7 +7,7 @@ The infrastructure deployment process involves executing Bicep scripts located i
 - Creation of ADLS Gen2 with specified containers.
 - Assignment of RBAC roles.
 ## Compute Module
-- Setup of ADLS Gen2 Storage account .
+- Setup of ADLS Gen2 Storage account.
 - Creation of Log Analytics Workspace.
 - Creation and Configuration of Application Insights.
 - Deployment of Keyvault with secrets.
