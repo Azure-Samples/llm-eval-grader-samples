@@ -1,0 +1,5 @@
+{
+    "AML_SUBSCRIPTION_ID": "dummy_id",
+    "AML_RESOURCE_GROUP": "dummy-rg",
+    "AML_WORKSPACE_NAME": "dummy_name"
+}
