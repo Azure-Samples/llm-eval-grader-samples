@@ -216,7 +216,7 @@ The framework uses Azure Serverless SQL Server model for two purposes:
 
 Azure Serverless [may experience a delay](https://learn.microsoft.com/en-us/azure/azure-sql/database/serverless-tier-overview?view=azuresql&tabs=general-purpose) in resuming from a paused state, which is known as a cold start. The duration of the cold start depends on the size and state of the database, and the workload characteristics.
 
-We performed the following Test cases to verify the potential issues:
+Typical issues are listed below -
 
 - SQL Server is unavailable for a long time due to global infrastructure problems such as network failure or regional outage.
 - SQL Server password has expired
@@ -265,6 +265,5 @@ FROM [dbo].[FACT_EVALUATION_METRIC] F
 INNER JOIN
 [dbo].[DIM_METRIC] D
 ON F.METRIC_ID = D.METRIC_ID
-WHERE D.METRIC_NAME = 'turn_level_answerability' AND D.METRIC_VERSION = 1.0
--- AND F.SESSION_ID = '<Search data for a specific session'
+WHERE D.METRIC_NAME = 'turn_relevance' AND D.METRIC_VERSION = 1.0
 ```
