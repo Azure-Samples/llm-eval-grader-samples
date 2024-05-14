@@ -12,13 +12,9 @@ from eval.library.utils.aml_utils import (
     create_dataset,
     associate_model_w_data,
     download_model_and_data,
-    is_running_in_aml,
     get_run,
     view_last_n_runs,
-    print_experiment_details,
-    AML_ENV_VAR_SUBSCRIPTION,
-    AML_ENV_VAR_RESOURCE_GROUP,
-    AML_ENV_VAR_WORKSPACE_NAME,
+    print_experiment_details
 )
 
 class TestAmlUtilsObject(TestCase):
@@ -158,18 +154,6 @@ class TestAmlUtilsObject(TestCase):
             assert mock_Model.called_with(model_name, version_num)
             assert mock_datastore.called_once()
             assert mock_dataset.caled_once()
-
-    def test_is_running_in_aml(self):
-        assert is_running_in_aml() is False
-
-        os.environ[AML_ENV_VAR_SUBSCRIPTION] = 'foo'
-        assert is_running_in_aml() is False
-
-        os.environ[AML_ENV_VAR_RESOURCE_GROUP] = 'bar'
-        assert is_running_in_aml() is False
-
-        os.environ[AML_ENV_VAR_WORKSPACE_NAME] = 'baz'
-        assert is_running_in_aml() is True
 
     def test_get_run(self):
 
