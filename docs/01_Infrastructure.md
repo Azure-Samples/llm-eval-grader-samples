@@ -49,7 +49,7 @@ Monitor deployment progress in the Azure Portal under the `Deployments` pane in 
 2. Create an Open AI connection, filling in the necessary details from OpenAI.
 Ensure the connection name is `azure_open_ai_connection` as referenced in the source code.
 
-### Step 6 : Run DDL SQL Scripts
+### Step 6:Run DDL SQL Scripts
 1. Access the SQL Database and open Query Editor.
 2. Execute the content from SQL files located under the `azuresql` folder in the source code.
 3. Verify successful creation of `DIM_METRIC` and `FACT_EVALUATION_METRIC` tables.
