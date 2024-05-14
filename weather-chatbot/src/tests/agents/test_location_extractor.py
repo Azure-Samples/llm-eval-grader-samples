@@ -1,5 +1,6 @@
+import os
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock, patch, ANY
 
 from azure.maps.search.models import LatLon
 
@@ -7,6 +8,7 @@ from agents.location.location_extractor import LocationExtractor
 
 
 class TestLocationExtractor(unittest.TestCase):
+    @patch.dict(os.environ, {"OPENAI_DEPLOYMENT_NAME": "openai_deployment_name"})
     @patch('agents.location.location_extractor.AzureOpenAI')
     @patch('agents.location.location_extractor.MapsSearchClient.search_address')
     def test_extract(self, search_address_mock, openai_mock):
@@ -25,3 +27,10 @@ class TestLocationExtractor(unittest.TestCase):
         expected = '47.6062 122.3321'
         actual = extractor.extract(message_history)
         self.assertEqual(expected, actual)
+
+        openai_mock().chat.completions.create.assert_called_once_with(
+            model='openai_deployment_name',
+            messages=[
+                {'role': 'system', 'content': ANY},
+            ]
+        )

@@ -31,11 +31,7 @@ Analyze the conversation transcript carefully and extract the location informati
 name value pair format without any explanations.
 """
 
-        messages = [
-            {
-                "role": "system",
-                "content": system_prompt,
-            }] + message_history
+        messages = [{"role": "system", "content": system_prompt}]
 
         response = AzureOpenAI().chat.completions.create(
             model=os.environ["OPENAI_DEPLOYMENT_NAME"],
