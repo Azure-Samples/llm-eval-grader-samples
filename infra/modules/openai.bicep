@@ -9,6 +9,8 @@ param environment string
 param location string 
 @description('Specifies the principal ID of the workspace cluster.')
 param workspaceClusterPrincipalId string
+@description('Specifies the openai model version.')
+param modelVersion string = '0301'
 
 @description('Specifies the name of the OpenAI deployment.')
 param openAIDeploymentName string = 'gpt-35-turbo'
@@ -49,7 +51,7 @@ resource openaiModeilDeployment 'Microsoft.CognitiveServices/accounts/deployment
     model: {
       format: 'OpenAI'
       name: openAIDeploymentName
-      version: '0301'
+      version: modelVersion
     }
     raiPolicyName: 'Microsoft.Default'
     versionUpgradeOption: 'OnceCurrentVersionExpired'
