@@ -7,7 +7,7 @@ class LocationExtractor:
     """Class for extracting location information from message history."""
     def __init__(self):
         """Initialize the search client for looking up the address of the latest message"""
-        credential = AzureKeyCredential(os.environ["AZURE_SUBSCRIPTION_KEY"])
+        credential = AzureKeyCredential(os.environ["MAPS_API_KEY"])
 
         self.search_client = MapsSearchClient(
             credential=credential,
