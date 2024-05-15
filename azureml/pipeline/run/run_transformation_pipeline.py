@@ -20,11 +20,6 @@ def valid_date(datestring):
     """
     try:
         input_datetime = datetime.strptime(datestring, "%Y/%m/%d")
-        if input_datetime > datetime.now():
-            raise ValueError(
-                "Date should be in the past, Input given is: '{0}'.".format(datestring)
-            )
-
         return datestring
     except ValueError as err:
         raise argparse.ArgumentTypeError(err.args[0])
@@ -39,13 +34,13 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Process command line arguments")
     parser.add_argument(
         "--transformation_start_date",
-        help="Date to run the aggregation for in format YYYY/MM/DD HH:MM",
+        help="Date to run the aggregation for in format YYYY/MM/DD",
         required=True,
         type=valid_date,
     )
     parser.add_argument(
         "--transformation_end_date",
-        help="Date to run the aggregation for in format YYYY/MM/DD HH:MM",
+        help="Date to run the aggregation for in format YYYY/MM/DD",
         required=True,
         type=valid_date,
     )
@@ -92,7 +87,7 @@ def main():
         raise argparse.ArgumentTypeError("Start date should be less than end date")
 
     endpoint_name = (
-        "dev-sample-chatbot-transform1"
+        "dev-sample-chatbot-transform"
         if args.endpoint_name is None
         else args.endpoint_name
     )
