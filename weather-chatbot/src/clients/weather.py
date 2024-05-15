@@ -18,7 +18,7 @@ class WeatherType(Enum):
 
 class Weather():
     @staticmethod
-    def get_weather(lat: str, lon: str, weather_type: WeatherType) -> str:
+    def get_weather(lat: float, lon: float, weather_type: WeatherType) -> str:
 
         if not Weather._is_float(lat) or not Weather._is_float(lon):
             return f"Coordinates must be valid floats: received lat: {lat} lon: {lon}"
