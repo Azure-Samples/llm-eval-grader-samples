@@ -9,6 +9,7 @@ from agents.location.location_extractor import LocationExtractor
 
 class TestLocationExtractor(unittest.TestCase):
     @patch.dict(os.environ, {"OPENAI_DEPLOYMENT_NAME": "openai_deployment_name"})
+    @patch.dict(os.environ, {"MAPS_API_KEY": "maps_api_key"})
     @patch('agents.location.location_extractor.AzureOpenAI')
     @patch('agents.location.location_extractor.MapsSearchClient.search_address')
     def test_extract(self, search_address_mock, openai_mock):
