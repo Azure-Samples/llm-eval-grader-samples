@@ -4,7 +4,7 @@ var randomSuffix = substring(uniqueId, 0, 4)
 @description('Specifies the name of the resource group.')
 param resourceGroupName string
 @description('Specifies the name of the deployment.')
-param name string
+param applicationName string
 @description('Specifies the name of the deployment environment.')
 param environment string
 @description('Specifies the location of the Azure Machine Learning workspace and dependent resources.')
@@ -32,9 +32,9 @@ param resourceUrl string
 @description('Specifies the user principal ID')
 param userPrincipalId string
 
-var databaseName = 'db-${name}-${environment}-${randomSuffix}'
-var dbServerName = 'server-${name}-${environment}-${randomSuffix}'
-var blobStorageName = 'storage${name}${environment}${randomSuffix}'
+var databaseName = 'db-${applicationName}-${environment}-${randomSuffix}'
+var dbServerName = 'server-${applicationName}-${environment}-${randomSuffix}'
+var blobStorageName = 'storage${applicationName}${environment}${randomSuffix}'
 
 
 @description('Module for deploying storage resources such as ADLS Gen2 and SQL Server, Database')
@@ -58,7 +58,7 @@ module compute 'modules/compute.bicep' = {
   name: 'compute'
   params: {
     resourceGroupName: resourceGroupName
-    name: name
+    applicationName: applicationName
     environment: environment
     location: location
     dbLoginUserName: dbLoginUserName
@@ -80,7 +80,7 @@ module compute 'modules/compute.bicep' = {
 module observability 'modules/observability.bicep' = {
   name: 'observability'
   params: {
-    name: name
+    applicationName: applicationName
     environment: environment
     location: location
     logAnalyticsResourceId: compute.outputs.logAnalyticsResourceId
@@ -92,7 +92,7 @@ module openai 'modules/openai.bicep' = {
   name: 'openai'
   params: {
     location: location
-    name: name
+    applicationName: applicationName
     environment: environment
     workspaceClusterPrincipalId: compute.outputs.workspaceClusterPrincipalId
   }

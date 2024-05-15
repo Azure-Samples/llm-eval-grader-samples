@@ -4,7 +4,7 @@ var randomSuffix = substring(uniqueId, 0, 4)
 @description('Specifies the name of the resource group.')
 param resourceGroupName string
 @description('Specifies the name of the deployment.')
-param name string
+param applicationName string
 @description('Specifies the name of the infra deployment environment.')
 param environment string
 @description('Specifies the location of the Azure Machine Learning workspace and dependent resources.')
@@ -52,11 +52,11 @@ param sqlServerUserSecretName string = 'azuresqlserver-user'
 @description('Specifies the name of the sql server url secret')
 param sqlServerUrlSecretName string =  'azuresqlserver'
 
-var storageAccountName = 'amlst${name}${environment}${randomSuffix}'
-var keyVaultName = 'kv-${name}-${environment}-${randomSuffix}'
-var applicationInsightsName = 'appl-${name}-${environment}-${randomSuffix}'
-var amlWorkspaceName = 'aml${name}${environment}${randomSuffix}'
-var logAnalyticsWorkspaceName = 'log-analytics-${name}-${environment}-${randomSuffix}'
+var storageAccountName = 'amlst${applicationName}${environment}${randomSuffix}'
+var keyVaultName = 'kv-${applicationName}-${environment}-${randomSuffix}'
+var applicationInsightsName = 'appl-${applicationName}-${environment}-${randomSuffix}'
+var amlWorkspaceName = 'aml${applicationName}${environment}${randomSuffix}'
+var logAnalyticsWorkspaceName = 'log-analytics-${applicationName}-${environment}-${randomSuffix}'
 var tenantId = subscription().tenantId
 var storageAccount = resourceStorageAccount.id
 var keyVault = resourceKeyVault.id
