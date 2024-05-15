@@ -5,8 +5,7 @@ from unittest.mock import Mock, patch, MagicMock
 from requests.exceptions import HTTPError
 from requests import Response
 
-#importing logger so we can capture and mock that modules logger
-from clients.weather import Weather, WeatherType, logger
+from clients.weather import Weather, WeatherType
 
 
 class TestWeatherClient(unittest.TestCase):
