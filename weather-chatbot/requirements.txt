@@ -1,0 +1,7 @@
+openai
+python-dotenv
+azureml-core
+azureml-dataprep
+azureml-mlflow
+azure-maps-search
+pytest
