@@ -7,9 +7,6 @@ from requests.exceptions import HTTPError
 
 logger = logging.getLogger(__name__)
 
-load_dotenv()
-
-MAPS_API_KEY = os.getenv('MAPS_API_KEY')
 BASE_WEATHER_URI = "https://atlas.microsoft.com/weather/"
 FORMAT = "json"
 API_VERSION = "1.0"
@@ -21,19 +18,19 @@ class WeatherType(Enum):
 
 class Weather():
     @staticmethod
-    def get_weather(lat: str, lon: str, type: WeatherType) -> str:
+    def get_weather(lat: str, lon: str, weather_type: WeatherType) -> str:
 
         if not Weather._is_float(lat) or not Weather._is_float(lon):
-            return "Coordinates must be valid floats"
+            return f"Coordinates must be valid floats: received lat: {lat} lon: {lon}"
         
         if not -90 <= float(lat) <= 90 or not -180 <= float(lon) <=180:
-            return "Coordinates out of range"
+            return f"Coordinates out of range: received lat {lat} lon {lon}, range for lat -90 - 90, range for lon -180 - 180"
         
         try:
-            response = requests.get(BASE_WEATHER_URI + type.value + FORMAT,
+            response = requests.get(BASE_WEATHER_URI + weather_type.value + FORMAT,
                                     params={"api-version": API_VERSION,
                                         "query": f"{lat}, {lon}",
-                                        "subscription-key": MAPS_API_KEY})
+                                        "subscription-key": os.environ['MAPS_API_KEY']})
             response.raise_for_status()
         
         except HTTPError as ex:
