@@ -8,7 +8,8 @@ Deploying the application involves several stages:
 4. Executing the evaluation pipeline.
 
 ## Prerequisites  
-Ensure successful completion of infrastructure deployment.
+- Ensure successful completion of infrastructure deployment.
+- [Developer Guide](03_Developer_Guide.md) is followed to setup the conda environment
 
 ## Application Deployment Details
 
