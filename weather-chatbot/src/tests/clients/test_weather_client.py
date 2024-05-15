@@ -1,21 +1,19 @@
 import unittest
 import json
 import os
-from logging import Logger
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 from unittest import mock
 from requests.exceptions import HTTPError
 from requests import Response
 
 from clients.weather import Weather, WeatherType
 
+
 @mock.patch.dict(os.environ, {"MAPS_API_KEY": "FAKE_KEY"})
 class TestWeatherClient(unittest.TestCase):
-    @patch("clients.weather.logger")
     @patch("clients.weather.requests")
     @patch("requests.Response")
-    def test_get_weather_valid_coords_returns_valid_content(self, mock_response: Mock, mock_requests: Mock,
-                                                                    mock_logger: Mock):
+    def test_get_weather_valid_coords_returns_valid_content(self, mock_response: Mock, mock_requests: Mock):
 
         mock_response.status_code = 200
 
@@ -40,18 +38,21 @@ class TestWeatherClient(unittest.TestCase):
 
         current_weather = Weather.get_weather(lat="45.6579106", lon="189", weather_type=WeatherType.CURRENT)
 
-        self.assertEqual(current_weather, "Coordinates out of range: received lat 45.6579106 lon 189, range for lat -90 - 90, range for lon -180 - 180")
+        self.assertEqual(current_weather, "Coordinates out of range: received lat 45.6579106 lon 189, "
+                         "range for lat -90 - 90, range for lon -180 - 180")
 
     @patch("clients.weather.logger")
     @patch("clients.weather.requests")
     @patch("requests.Response")
-    def test_get_weather_error_response_throws_exception(self, mock_response: Mock, mock_requests: Mock, mock_logger: Mock):
+    def test_get_weather_error_response_throws_exception(self, mock_response: Mock,
+                                                         mock_requests: Mock, mock_logger: Mock):
         fake_response = Response()
         fake_response.status_code = 500
         fake_response.reason = 'Internal Server Error'
 
         mock_requests.get.return_value = fake_response
-        key = os.environ["MAPS_API_KEY"]
-        #make sure to throw exception before you check to see if logger.exception called
-        self.assertRaises(HTTPError, Weather.get_weather, lat="45.6579106", lon="-122.5834869", weather_type=WeatherType.CURRENT)
+
+        # make sure to throw exception before you check to see if logger.exception called
+        self.assertRaises(HTTPError, Weather.get_weather, lat="45.6579106", lon="-122.5834869",
+                          weather_type=WeatherType.CURRENT)
         mock_logger.exception.assert_called_once()
