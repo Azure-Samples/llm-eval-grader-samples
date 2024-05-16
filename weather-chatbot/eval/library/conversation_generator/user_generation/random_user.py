@@ -30,8 +30,8 @@ class RandomUserGenerator:
 
 
         profile = {
-            'prompt': customer_profile_template.format(place=place,
-                                                       personality=personality),
+            'prompt': customer_profile_template.replace("{place}", place).replace(
+                                                       "{personality}", personality),
             'attributes': {'location': location_attribute},
             'name': 'randomly generated user'
         }

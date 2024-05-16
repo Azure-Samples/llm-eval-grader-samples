@@ -46,10 +46,10 @@ class StandardUserGenerator:
                     profile_details[key] = ""
 
             # Build prompt
-            prompt = standard_user_template.format(
-                location=profile_details['location'],
-                personality=profile_details['personality'],
-                other=profile_details['other'],
+            prompt = standard_user_template.replace(
+                "{location}", profile_details['location']).replace(
+                "{personality}", profile_details['personality']).replace(
+                "{other}", profile_details['other'],
             )
 
             # Build profile in required format
