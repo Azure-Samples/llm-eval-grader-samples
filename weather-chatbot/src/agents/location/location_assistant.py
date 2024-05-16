@@ -27,6 +27,6 @@ You can use only what the user has provided in the chat.
             model=os.environ["OPENAI_DEPLOYMENT_NAME"],
             messages=messages)
 
-        result = response.choices[0].message.content or ""
+        result = response.choices[0].message.content
 
         return result

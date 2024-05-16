@@ -7,6 +7,7 @@ from context import Context
 
 
 geo_score_threshold = 0.7
+location_unknown = "LOCATION UNKNOWN"
 
 
 class LocationExtractor:
@@ -36,7 +37,7 @@ Analyze the conversation transcript carefully and extract country, city, state o
 street address, and zip code values without any explanations.
 If it is a well known city add its country to the result.
 Only list geographical attributes that are present in the conversation, skip missing geographical attributes.
-If there is no geographical information in the history, then print 'LOCATION UNKNOWN'.
+If there is no geographical information in the history, then print '{location_unknown}'.
 Print the answer on one single line as comma separated values.
 """
 
@@ -49,8 +50,8 @@ Print the answer on one single line as comma separated values.
 
         location_description = response.choices[0].message.content or ""
 
-        if "LOCATION UNKNOWN" in location_description.upper():
-            return None
+        if location_unknown in location_description.upper():
+            return
 
         search_results = self.search_client.search_address(location_description)
 
