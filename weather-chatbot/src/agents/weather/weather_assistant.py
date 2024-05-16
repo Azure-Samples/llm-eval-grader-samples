@@ -1,4 +1,8 @@
+from context import Context
+
+
 class WeatherAssistant:
     """Class for answering weather questions."""
-    def invoke(self, message_history: list[dict]) -> str:
-        return "stub for answering weather questions"
+    def invoke(self, context: Context) -> str:
+        message_history = context.get_messages()
+        return f"stub for answering weather questions for {context.location_description}"
