@@ -73,9 +73,7 @@ class MetricsProcessor:
         for eval_metrics_row in eval_metrics_raw_data:
             dim_metric_dict = self.db_handler.select_row_by_columns("DIM_METRIC", ["metric_name", "metric_version"], [eval_metrics_row["metric_name"], str(eval_metrics_row["metric_version"])])
 
-            metric_id = dim_metric_dict["metric_id"]
-            if metric_id is None:
-                # TODO: Add metrics from definition file to DIM_METRIC table
+            if dim_metric_dict is None or eval_metrics_row["metric_id"] is None:
                 logger.info(f"Metric name {eval_metrics_row['metric_name']} not found in DIM_METRIC table. Adding metric to DIM_METRIC table...")
                 unique_columns = {"metric_name", "metric_version"}
                 dim_metric = DimMetrics(
@@ -96,6 +94,12 @@ class MetricsProcessor:
                 )
                 logger.info("Upsertion into DIM_METRICS table complete.")
                 dim_metric_dict = self.db_handler.select_row_by_columns("DIM_METRIC", ["metric_name", "metric_version"], [eval_metrics_row["metric_name"], eval_metrics_row["metric_version"]])
+                metric_id = dim_metric_dict["metric_id"]
+                if metric_id is None:
+                    error_msg = f"Metric name {eval_metrics_row['metric_name']} not found in DIM_METRIC table after upsertion"
+                    logger.exception(error_msg)
+                    raise ValueError(error_msg)
+            else:
                 metric_id = dim_metric_dict["metric_id"]
                 if metric_id is None:
                     error_msg = f"Metric name {eval_metrics_row['metric_name']} not found in DIM_METRIC table"
