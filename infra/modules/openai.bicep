@@ -2,7 +2,7 @@ var uniqueId = uniqueString(resourceGroup().id)
 var randomSuffix = substring(uniqueId, 0, 4)
 
 @description('Specifies the name of the deployment.')
-param name string
+param applicationName string
 @description('Specifies the name of the environment.')
 param environment string
 @description('Location for all resources.')
@@ -15,7 +15,7 @@ param modelVersion string = '0301'
 @description('Specifies the name of the OpenAI deployment.')
 param openAIDeploymentName string = 'gpt-35-turbo'
 
-var openAIServiceName = '${name}-${environment}-openai-${randomSuffix}'
+var openAIServiceName = '${applicationName}-${environment}-openai-${randomSuffix}'
 
 
 @allowed([
