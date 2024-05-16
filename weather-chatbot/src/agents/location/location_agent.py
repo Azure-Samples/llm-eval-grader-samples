@@ -9,12 +9,11 @@ class LocationAgent:
     def invoke(self, context: Context) -> str | None:
         extractor = LocationExtractor()
 
-        location = extractor.extract(context.get_messages())
+        extractor.extract(context)
 
-        if location is not None:
-            context.location = location
+        if context.location is not None:
             return None
-        
+
         assistant = LocationAssistant()
         reply = assistant.invoke(context.get_messages())
 

@@ -6,7 +6,7 @@ from context import Context
 class WeatherAgent:
     """Answers weather questions."""
 
-    def invoke(self, context: Context) -> str | None:
+    def invoke(self, context: Context) -> str:
         extractor = WeatherQueryExtractor()
 
         query = extractor.extract(context.get_messages())
