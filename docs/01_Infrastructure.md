@@ -41,7 +41,7 @@ Build the Bicep script and ensure there are no syntax errors:
 ### Step 4:Run Bicep Script
 Execute the Bicep script using the following command:
 ``` 
-az deployment group create --name llmops-infra-deployment --resource-group llm-inspect-demo --template-file main.bicep --parameters parameters.json --parameters clientId=CLIENT_SECRET --parameters clientSecret=CLIENT_ID --parameters dbLoginUserName=DB_LOGIN_USERNAME --parameters dbLoginPassword=DB_LOGIN_PASSWORD 
+az deployment group create --name llmops-infra-deployment --resource-group llm-inspect-demo --template-file main.bicep --parameters parameters.json --parameters clientId=CLIENT_ID --parameters clientSecret=CLIENT_SECRET --parameters dbLoginUserName=DB_LOGIN_USERNAME --parameters dbLoginPassword=DB_LOGIN_PASSWORD 
 ```
 Monitor deployment progress in the Azure Portal under the `Deployments` pane in `Settings` of the `Resource groups` section.
 
