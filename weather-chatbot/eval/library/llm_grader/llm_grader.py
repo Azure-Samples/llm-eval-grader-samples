@@ -9,18 +9,13 @@ class LLMgrader:
         self.template = template
         self.seed_prompt = template
 
-    def evaluate_conversation(self, conversation, criteria):
+    def evaluate_conversation(self, conversation, criteria, completion=None):
         self.seed_prompt = self.template.replace("{criteria}", criteria)
-        prompt = self.seed_prompt.replace("{conversation}", conversation)
-        llm_input = [{"role": "system", "content": f"{prompt}"}]
-        llm_output = get_completion(llm_input, temperature=0)
-        return llm_output
-
-    def evaluate_completion(self, conversation, completion, criteria):
-        self.seed_prompt = self.template.replace("{criteria}", criteria)
-        prompt = self.seed_prompt.replace("{conversation}", conversation).replace(
-            "{completion}", completion
-        )
+        if completion:
+            prompt = self.seed_prompt.replace("{conversation}", conversation).replace(
+            "{completion}", completion)
+        else:
+            prompt = self.seed_prompt.replace("{conversation}", conversation)
         llm_input = [{"role": "system", "content": f"{prompt}"}]
         llm_output = get_completion(llm_input, temperature=0)
         return llm_output
