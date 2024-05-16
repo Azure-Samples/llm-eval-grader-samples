@@ -4,7 +4,7 @@ from typing import Optional
 import os
 
 
-def get_completion(self, messages, temperature, max_tokens: Optional[int] = None):
+def get_completion(messages, temperature, max_tokens: Optional[int] = None):
     """This method generates a response from the Azure OpenAI API
 
     Args:
