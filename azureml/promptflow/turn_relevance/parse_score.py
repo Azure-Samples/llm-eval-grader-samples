@@ -45,6 +45,7 @@ def concat_results(evaluation_dataset: dict, relevance_score: str):
     evaluation_dataset["metric_version"] = metrics[0]["metric_version"]
     evaluation_dataset["metric_value"] = score_list[0].get("score", 0)
     evaluation_dataset["metric_raw_value"] = relevance_score
+    evaluation_dataset["metric_type"] = "numerical"
 
     # Format the evaluation output as a list of dictionaries
     # This is the standard format for all evaluation outputs

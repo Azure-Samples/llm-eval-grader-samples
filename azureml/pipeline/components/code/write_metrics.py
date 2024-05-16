@@ -73,14 +73,14 @@ class MetricsProcessor:
         for eval_metrics_row in eval_metrics_raw_data:
             dim_metric_dict = self.db_handler.select_row_by_columns("DIM_METRIC", ["metric_name", "metric_version"], [eval_metrics_row["metric_name"], str(eval_metrics_row["metric_version"])])
 
-            if dim_metric_dict is None or eval_metrics_row["metric_id"] is None:
+            if dim_metric_dict is None or dim_metric_dict["metric_id"] is None:
                 logger.info(f"Metric name {eval_metrics_row['metric_name']} not found in DIM_METRIC table. Adding metric to DIM_METRIC table...")
                 unique_columns = {"metric_name", "metric_version"}
                 dim_metric = DimMetrics(
                     metric_name=eval_metrics_row["metric_name"],
                     metric_version=eval_metrics_row["metric_version"],
                     metric_type=eval_metrics_row["metric_type"],
-                    evaluator_name=eval_metrics_row["evaluator_name"],
+                    evaluator_name=eval_metrics_row["metric_name"],
                     evaluator_type="llm", # TODO: Change to evaluator_type from promptflow output
                     created_by="system",
                     updated_date=datetime.datetime.now(),
