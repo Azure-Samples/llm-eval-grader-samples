@@ -2,13 +2,18 @@ import os
 from azure.core.credentials import AzureKeyCredential
 from azure.maps.search import MapsSearchClient
 from openai import AzureOpenAI
+from location_prompt import location_extractor_prompt
 
+<<<<<<< HEAD
 from context import Context
 
 
 geo_score_threshold = 0.7
 location_unknown = "LOCATION UNKNOWN"
 
+=======
+HISTORY_REPLACE_STRING = "{message_history}"
+>>>>>>> ba29d8a (draft)
 
 class LocationExtractor:
     """Class for extracting location information from message history."""
@@ -23,6 +28,7 @@ class LocationExtractor:
         if len(message_history) == 0:
             return None
 
+<<<<<<< HEAD
         flattened_history = "\n".join([f"{m['role']}: {m['content']}" for m in message_history])
 
         system_prompt = f"""\
@@ -40,6 +46,10 @@ Only list geographical attributes that are present in the conversation, skip mis
 If there is no geographical information in the history, then print '{location_unknown}'.
 Print the answer on one single line as comma separated values.
 """
+=======
+        history = "\n".join([f"{m['role']}: {m['content']}" for m in message_history])
+        system_prompt = location_extractor_prompt.replace(HISTORY_REPLACE_STRING, history)
+>>>>>>> ba29d8a (draft)
 
         messages = [{"role": "system", "content": system_prompt}]
 
