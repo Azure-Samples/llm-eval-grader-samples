@@ -25,12 +25,12 @@ USER: I want to know weather information next Tuesday in Dallas, TX
 ASSISTANT: The temperatures next Tuesday in Dallas, TX are forecasted to be highs in 90F and lows in 70F.
 
 Criterion:
-Does the assistant correctly recommend products within the price range specified by the user?
+Does the assistant give weather information?
 
 Example Output:
 {
-  "criteria_prompt": "Does the assistant correctly recommend products within the price range specified by the user?",
-  "explanation": "The user asked for tires less than $200, but the assistant recommended Tire B, which costs $219, exceeding the specified price range. Therefore, the assistant did not meet the criterion, resulting in a grade of 'N'.",
+  "criteria_prompt": "Does the assistant give weather information?",
+  "explanation": "The assistant give weather information",
   "answer": "N"
 }
 

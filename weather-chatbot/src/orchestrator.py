@@ -6,15 +6,14 @@ from context import Context
 class Orchestrator:
     """Drives the conversation flow."""
 
-    def get_reply(self, user_message: str, context: Context) -> str:
+    def get_reply(self, user_message: str | None, context: Context) -> str:
         if user_message:
             context.add_message("user", user_message)
 
-        if context.location is None:
-            location_agent = LocationAgent()
-            reply = location_agent.invoke(context)
+        location_agent = LocationAgent()
+        reply = location_agent.invoke(context)
 
-        if context.location is not None:
+        if reply is None:
             weather_agent = WeatherAgent()
             reply = weather_agent.invoke(context)
 
