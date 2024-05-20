@@ -91,3 +91,32 @@ Getting the format incorrect will cause the system to crash and cost thousands o
 Provides meaningful feedback for each criterion based on the conversation's content. 
 
 """
+
+prompt_template_single_scenario_grading = """
+You are tasked with assessing whether or not a scenario took place as part of a conversation.   \
+The conversation is between a user and a virtual assistant tasked with providing weather information. \
+Please follow the instructions below and provide JSON-formatted feedback for the criterion. \
+
+Scenario:
+{criteria}
+
+DATA:
+---------
+Conversation History: {conversation}
+---------
+
+Instructions:
+1. Read the conversation history provided.
+2. For the scenario, Respond with "Y" if the scenario took place in the conversation history. Respond "N" otherwise.
+3. Provide your answer in a JSON dictionary. The dictionary must include the following fields:
+    "explanation": A brief explanation justifying the assigned grade.
+    "answer": The grade assigned (e.g., "Y").
+
+Example Output:
+{
+    "explanation": "The customer did not mention their location",\
+    "answer": "N"
+}
+
+Ensure that the output is well-formatted and provides meaningful feedback based on the conversation's content.
+"""
