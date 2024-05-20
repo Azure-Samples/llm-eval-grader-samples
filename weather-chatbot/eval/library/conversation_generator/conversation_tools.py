@@ -128,8 +128,8 @@ def write_conversation_to_condensed_logs(message_history: List,
     _write_df_to_excel(df_log, log_file_name)
 
 
-def generate_turn(pos, user, context: dict) -> bool:
-    success_bool = generate_turn_assistant_message(pos, context=context)
+def generate_turn(assistantHarness, user, context: dict) -> bool:
+    success_bool = generate_turn_assistant_message(assistantHarness, context=context)
     if not success_bool:
         return success_bool
 
@@ -145,29 +145,29 @@ def generate_turn_customer_message(user, context: dict):
     context['message_history'].append({'role': 'user', 'content': customer_message})
 
 
-def generate_turn_assistant_message(pos, context: dict) -> bool:
-    # Get a snapshot of the message history in the pos context before it can be modified
-    last_turn_pos_context_message_history = deepcopy(context['pos_context']['message_history'])
+def generate_turn_assistant_message(assistantHarness, context: dict) -> bool:
+    # Get a snapshot of the message history in the assistantHarness context before it can be modified
+    last_turn_assistantHarness_context_message_history = deepcopy(context['assistantHarness_context']['message_history'])
 
     # Generate turn
-    assistant_message = pos.get_reply(context)
+    assistant_message = assistantHarness.get_reply(context)
 
     print(f'\nASSISTANT: {assistant_message}\n')
 
-    # We must modify the message history to accurately log the message history used by the AICO
-    # This is because the AICO can truncate message_history at any time
-    # Start with the pos_context from last turn
-    new_pos_context = deepcopy(context['pos_context'])
-    new_pos_context['message_history'] = last_turn_pos_context_message_history
+    # We must modify the message history to accurately log the message history used by the assistant
+    # This is because the assistant can truncate message_history at any time
+    # Start with the assistantHarness_context from last turn
+    new_assistantHarness_context = deepcopy(context['assistantHarness_context'])
+    new_assistantHarness_context['message_history'] = last_turn_assistantHarness_context_message_history
 
     # Then add the latest user message and newly generated assistant message
     last_user_message = deepcopy(context['message_history'][-1])
-    new_pos_context['message_history'].append(last_user_message)
-    new_pos_context['message_history'].append({'role': 'assistant', 'content': assistant_message})
+    new_assistantHarness_context['message_history'].append(last_user_message)
+    new_assistantHarness_context['message_history'].append({'role': 'assistant', 'content': assistant_message})
 
-    # Log this reconstructed context as the pos_context for this turn
+    # Log this reconstructed context as the assistantHarness_context for this turn
     context['message_history'].append(
-        {'role': 'assistant', 'content': assistant_message, 'context': new_pos_context})
+        {'role': 'assistant', 'content': assistant_message, 'context': new_assistantHarness_context})
 
     if assistant_message is None:
         return False

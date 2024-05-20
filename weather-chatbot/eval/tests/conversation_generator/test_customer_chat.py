@@ -36,9 +36,9 @@ class TestCustomerChat(unittest.TestCase):
 
             # Set context and make a deepycopy
             context = {
-                'message_history': [{'role': "assistant", 'content': "Hi. I am AICO"},
+                'message_history': [{'role': "assistant", 'content': "Hi. I am assistant"},
                                     {'role': "user", 'content': "Hello. I am an emulated user"}],
-                'pos_context': {'message_history': []},
+                'assistantHarness_context': {'message_history': []},
                 'conversation_id': '123',
                 'customer_profile': {'prompt': 'customer prompt'}
             }
@@ -55,7 +55,7 @@ class TestCustomerChat(unittest.TestCase):
 
             # The emulated user flips the assistant/user order around
             # so that the emulated user messages are from the
-            # assistant and the user it's talking to is actually AICO
+            # assistant and the user it's talking to is actually assistant
             for message in context['message_history']:
                 if message['role'] == 'assistant':
                     message['role'] = 'user'

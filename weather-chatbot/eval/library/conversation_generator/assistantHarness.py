@@ -10,10 +10,10 @@ class OrchestratorHarness:
 
         # Get the latest user message
         message = context['message_history'][-1]['content']
-        pos_context = Context()
-        pos_context._messages = context['message_history']
+        assistantHarness_context = Context()
+        assistantHarness_context._messages = context['message_history']
 
         reply = None
-        reply = self.orchestrator.get_reply(user_message=message, context=pos_context)
+        reply = self.orchestrator.get_reply(user_message=message, context=assistantHarness_context)
 
         return reply

@@ -28,7 +28,7 @@ Enter "R" during a conversation to regenerate the most recent turn.
 Enter "M" during the conversation to manually overwrite dialogue for the user's turn.
 Enter "V" to view the whole conversation so far.
 Enter "U" to view the full emulated user prompt.
-Enter "C" to manually chat with AICO.  Turn generation will not be supported.
+Enter "C" to manually chat with assistant.  Turn generation will not be supported.
 Type "help" at any time to see these options again.
 Your command: """
 
@@ -44,7 +44,7 @@ class DummyUser():
 class ConversationGenerationTool():
     def __init__(self):
         self.customer_chat = CustomerChat()
-        self.pos = cfg['pos']
+        self.assistantHarness = cfg['assistantHarness']
         self.customer_generator = RandomUserGenerator()
         self.cg = ConversationGenerator()
 
@@ -85,7 +85,7 @@ class ConversationGenerationTool():
         elif command == "U":
             self.view_emulated_user_prompt()
         elif command == "C":
-            self.chat_with_aico()
+            self.chat_with_assistant()
         else:
             self.command = input(MAIN_MENU)
             return
@@ -149,7 +149,7 @@ class ConversationGenerationTool():
                         'scenario_prompt': scenario_prompt,
                         'conversation_id': uuid4().hex,
                         'customer_profile': customer_profile,
-                        'pos_context': {'message_history': []}}
+                        'assistantHarness_context': {'message_history': []}}
 
         # Get the first customer message
         customer_message = self.customer_chat.get_reply(self.context)
@@ -160,7 +160,7 @@ class ConversationGenerationTool():
     def next_turn(self):
         # Generate turn
         try:
-            succeeded = generate_turn(pos=self.pos, user=self.customer_chat, context=self.context)
+            succeeded = generate_turn(assistantHarness=self.assistantHarness, user=self.customer_chat, context=self.context)
         except Exception:
             # Exception may need to be handled and logged. Right now, it is only printing
             # within generate_turn
@@ -174,34 +174,34 @@ class ConversationGenerationTool():
 
         return succeeded
 
-    def chat_with_aico(self):
+    def chat_with_assistant(self):
         self.context = {'message_history': [{'role': "assistant",
                                              'content': cfg['initial_assistant_message']}],
-                        'customer_profile': {"name": "Created using manual chat with AICO",
+                        'customer_profile': {"name": "Created using manual chat with assistant",
                                              "attributes": {
                                                  "location": {}}},
                         'conversation_id': uuid4().hex,
                         'scenario_prompt': "N/A",
-                        'pos_context': {'message_history': []}}
+                        'assistantHarness_context': {'message_history': []}}
 
         print(f'\nASSISTANT: {cfg["initial_assistant_message"]}\n')
-        self.route_chat_with_aico_command()
+        self.route_chat_with_assistant_command()
 
-    def route_chat_with_aico_command(self):
+    def route_chat_with_assistant_command(self):
         self.command = str(input("Your message: "))
         if self.command.lower() == "x":
             return
         elif self.command.lower() == "s":
             self.save_conversation()
-            return self.route_chat_with_aico_command()
+            return self.route_chat_with_assistant_command()
         elif self.command.lower() == "v":
             self.view_conversation()
-            return self.route_chat_with_aico_command()
+            return self.route_chat_with_assistant_command()
         else:
             user = DummyUser(self.command)
             generate_turn_customer_message(user=user, context=self.context)
-            generate_turn_assistant_message(pos=self.pos, context=self.context)
-            return self.route_chat_with_aico_command()
+            generate_turn_assistant_message(assistantHarness=self.assistantHarness, context=self.context)
+            return self.route_chat_with_assistant_command()
 
     def save_conversation(self):
         write_conversation_to_logs(message_history=self.context['message_history'],

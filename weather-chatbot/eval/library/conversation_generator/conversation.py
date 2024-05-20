@@ -4,7 +4,7 @@ to act out a scenario, and the prompt orchestrator."""
 from eval.library.conversation_generator.customer_chat import (
     CustomerChat,
 )
-from eval.library.conversation_generator.pos_harness import (
+from eval.library.conversation_generator.assistantHarness import (
     OrchestratorHarness,
 )
 from eval.library.conversation_generator.conversation_tools import (
@@ -35,11 +35,11 @@ LOCAL_END_TO_END_DATAPATH = "eval/end_to_end/data"
 
 
 class ConversationGenerator:
-    """Object for generate conversations between emulated users and the POS"""
+    """Object for generate conversations between emulated users and the assistantHarness"""
 
     def __init__(self, max_turns=20):
         self.customer_chat = CustomerChat()
-        self.pos = OrchestratorHarness()
+        self.assistantHarness = OrchestratorHarness()
         self.max_turns = max_turns
         self.exit_due_to_error = ""
 
@@ -50,7 +50,7 @@ class ConversationGenerator:
         context["scenario_prompt"] = scenario_prompt
         context["conversation_id"] = uuid4().hex
         context["customer_profile"] = customer_profile
-        context["pos_context"] = {"message_history": []}
+        context["assistantHarness_context"] = {"message_history": []}
 
         print('------------------------------')
         print(f'Conversation_id: {context["conversation_id"]}')
@@ -96,7 +96,7 @@ class ConversationGenerator:
 
             # Detect when to end the conversation
             if self.test_case_interrupter(context, end_of_test_case_key):
-                convo_end_reason = f'End of test case key {end_of_test_case_key} found in pos_context'
+                convo_end_reason = f'End of test case key {end_of_test_case_key} found in assistantHarness_context'
                 break
             elif self.conversation_interrupter(context):
                 convo_end_reason = 'User-ending-conversation keyword found'
@@ -131,7 +131,7 @@ class ConversationGenerator:
         # Carry out the conversation
         print("[ Conversation Started ]")
         for turn in range(self.max_turns - 1):
-            # The POS is currently breaking. Putting this try catch until it's fixed
+            # The assistantHarness is currently breaking. Putting this try catch until it's fixed
             try:
                 context = self.generate_turn(context)
             except Exception:
@@ -167,12 +167,12 @@ class ConversationGenerator:
 
     def generate_turn(self, context: dict) -> dict:
         # Generate turn
-        generate_turn(pos=self.pos, user=self.customer_chat, context=context)
+        generate_turn(assistantHarness=self.assistantHarness, user=self.customer_chat, context=context)
         return context
 
     def test_case_interrupter(self, context, end_of_test_case_key=None):
         """Interrupt test case when key is found in context"""
-        if end_of_test_case_key in context["pos_context"]:
+        if end_of_test_case_key in context["assistantHarness_context"]:
             return True
         return False
 
@@ -187,11 +187,11 @@ class ConversationGenerator:
         for keyword in user_ending_conversation_keyword:
             if (user_content.find(keyword) != -1):
                 return True
-        # We need to interrupt a conversation if aico starts repeating itself
-        last_aico_reply = str(context["message_history"][-2]["content"]).lower()
-        second_to_last_aico_reply = str(context["message_history"][-4]["content"]).lower()
-        if last_aico_reply == second_to_last_aico_reply:
-            self.exit_due_to_error = "Conversation Interrupted: Repeating response (AICO)"
+        # We need to interrupt a conversation if assisatant starts repeating itself
+        last_assistant_reply = str(context["message_history"][-2]["content"]).lower()
+        second_to_last_assistant_reply = str(context["message_history"][-4]["content"]).lower()
+        if last_assistant_reply == second_to_last_assistant_reply:
+            self.exit_due_to_error = "Conversation Interrupted: Repeating response (assistant)"
             return True
         last_user_reply = str(context["message_history"][-1]["content"]).lower()
         second_to_last_user_reply = str(context["message_history"][-3]["content"]).lower()

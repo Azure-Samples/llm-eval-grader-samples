@@ -15,14 +15,14 @@ class TestConversationGenerator(unittest.TestCase):
     def test_initialize_context_with_assistant_message(self):
         module_path = 'eval.library.conversation_generator.conversation'
         with patch(f'{module_path}.CustomerChat') as CustomerChat, patch(
-                f'{module_path}.OrchestratorHarness') as PromptOrchestratorHarness:
+                f'{module_path}.OrchestratorHarness') as OrchestratorHarness:
 
             # Set mock return values
             cc = CustomerChat.return_value
             cc.get_reply.return_value = 'customer reply'
 
-            pos = PromptOrchestratorHarness.return_value
-            pos.get_reply.return_value = 'assistant reply'
+            assistantHarness = OrchestratorHarness.return_value
+            assistantHarness.get_reply.return_value = 'assistant reply'
 
             # Prepare data
             context = {'message_history': [{'role': 'assistant', 'content': 'first assistant message'}]}
@@ -39,23 +39,23 @@ class TestConversationGenerator(unittest.TestCase):
                 {'role': 'assistant', 'content': 'first assistant message'},
                 {'role': 'user', 'content': 'customer reply'}])
             self.assertIn('conversation_id', new_context)
-            self.assertEqual(new_context['pos_context'], {'message_history': []})
+            self.assertEqual(new_context['assistantHarness_context'], {'message_history': []})
 
             # Verify call counts
-            self.assertEqual(pos.get_reply.call_count, 0)
+            self.assertEqual(assistantHarness.get_reply.call_count, 0)
             self.assertEqual(cc.get_reply.call_count, 1)
 
     def test_initialize_context_with_both_messages(self):
         module_path = 'eval.library.conversation_generator.conversation'
         with patch(f'{module_path}.CustomerChat') as CustomerChat, patch(
-                f'{module_path}.OrchestratorHarness') as PromptOrchestratorHarness:
+                f'{module_path}.OrchestratorHarness') as OrchestratorHarness:
 
             # Set mock return values
             cc = CustomerChat.return_value
             cc.get_reply.return_value = 'customer reply'
 
-            pos = PromptOrchestratorHarness.return_value
-            pos.get_reply.return_value = 'assistant reply'
+            assistantHarness = OrchestratorHarness.return_value
+            assistantHarness.get_reply.return_value = 'assistant reply'
 
             # Prepare data
             context = {'message_history': [{'role': 'assistant', 'content': 'first assistant message'},
@@ -73,24 +73,24 @@ class TestConversationGenerator(unittest.TestCase):
                 {'role': 'assistant', 'content': 'first assistant message'},
                 {'role': 'user', 'content': 'the sky is blue'}])
             self.assertIn('conversation_id', new_context)
-            self.assertEqual(new_context['pos_context'], {'message_history': []})
+            self.assertEqual(new_context['assistantHarness_context'], {'message_history': []})
 
             # Verify call counts
-            self.assertEqual(pos.get_reply.call_count, 0)
+            self.assertEqual(assistantHarness.get_reply.call_count, 0)
             self.assertEqual(cc.get_reply.call_count, 0)
 
     def test_generate_turn(self):
         module_path = 'eval.library.conversation_generator.conversation'
         with patch(f'{module_path}.CustomerChat') as CustomerChat, patch(
-                f'{module_path}.OrchestratorHarness') as PromptOrchestratorHarness, patch(
+                f'{module_path}.OrchestratorHarness') as OrchestratorHarness, patch(
                 f'{module_path}.generate_turn') as mock_generate_turn:
 
             # Set mock return values
             cc = CustomerChat.return_value
             cc.get_reply.return_value = 'customer reply'
 
-            pos = PromptOrchestratorHarness.return_value
-            pos.get_reply.return_value = 'assistant reply'
+            assistantHarness = OrchestratorHarness.return_value
+            assistantHarness.get_reply.return_value = 'assistant reply'
 
             mock_generate_turn.return_value = {}
 
@@ -104,7 +104,7 @@ class TestConversationGenerator(unittest.TestCase):
     def test_generate_test_case_single_turn(self):
         module_path = 'eval.library.conversation_generator.conversation'
         with patch(f'{module_path}.CustomerChat') as CustomerChat, patch(
-                f'{module_path}.OrchestratorHarness') as PromptOrchestratorHarness, patch(
+                f'{module_path}.OrchestratorHarness') as OrchestratorHarness, patch(
                 f'{module_path}.ConversationGenerator.initialize_context') as mock_initialize_context, patch(
                 f'{module_path}.ConversationGenerator.generate_turn') as mock_generate_turn, patch(
                 f'{module_path}.ConversationGenerator.test_case_interrupter') as mock_test_case_interrupter, patch(
@@ -113,8 +113,8 @@ class TestConversationGenerator(unittest.TestCase):
             # Set mock responses
             cc = CustomerChat.return_value
             cc.get_reply.return_value = 'customer reply'
-            pos = PromptOrchestratorHarness.return_value
-            pos.get_reply.return_value = 'assistant reply'
+            assistantHarness = OrchestratorHarness.return_value
+            assistantHarness.get_reply.return_value = 'assistant reply'
             mock_initialize_context.return_value = {}
             mock_generate_turn.return_value = {}
             mock_test_case_interrupter.return_value = True
@@ -128,7 +128,7 @@ class TestConversationGenerator(unittest.TestCase):
     def test_generate_test_case_multiple_turns(self):
         module_path = 'eval.library.conversation_generator.conversation'
         with patch(f'{module_path}.CustomerChat') as CustomerChat, patch(
-                f'{module_path}.OrchestratorHarness') as PromptOrchestratorHarness, patch(
+                f'{module_path}.OrchestratorHarness') as OrchestratorHarness, patch(
                 f'{module_path}.ConversationGenerator.initialize_context') as mock_initialize_context, patch(
                 f'{module_path}.ConversationGenerator.generate_turn') as mock_generate_turn, patch(
                 f'{module_path}.ConversationGenerator.test_case_interrupter') as mock_test_case_interrupter, patch(
@@ -137,8 +137,8 @@ class TestConversationGenerator(unittest.TestCase):
             # Set mock responses
             cc = CustomerChat.return_value
             cc.get_reply.return_value = 'customer reply'
-            pos = PromptOrchestratorHarness.return_value
-            pos.get_reply.return_value = 'assistant reply'
+            assistantHarness = OrchestratorHarness.return_value
+            assistantHarness.get_reply.return_value = 'assistant reply'
             mock_initialize_context.return_value = {}
             mock_generate_turn.return_value = {}
             mock_test_case_interrupter.return_value = False
@@ -153,7 +153,7 @@ class TestConversationGenerator(unittest.TestCase):
     def test_generate_conversation(self):
         module_path = 'eval.library.conversation_generator.conversation'
         with patch(f'{module_path}.CustomerChat') as CustomerChat, patch(
-                f'{module_path}.OrchestratorHarness') as PromptOrchestratorHarness, patch(
+                f'{module_path}.OrchestratorHarness') as OrchestratorHarness, patch(
                 f'{module_path}.ConversationGenerator.initialize_context') as mock_initialize_context, patch(
                 f'{module_path}.ConversationGenerator.generate_turn') as mock_generate_turn, patch(
                 f'{module_path}.ConversationGenerator.conversation_interrupter') as mock_interrupter:
@@ -161,8 +161,8 @@ class TestConversationGenerator(unittest.TestCase):
             # Set mock responses
             cc = CustomerChat.return_value
             cc.get_reply.return_value = 'customer reply'
-            pos = PromptOrchestratorHarness.return_value
-            pos.get_reply.return_value = 'assistant reply'
+            assistantHarness = OrchestratorHarness.return_value
+            assistantHarness.get_reply.return_value = 'assistant reply'
             mock_initialize_context.return_value = {}
             mock_generate_turn.return_value = {}
             mock_interrupter.return_value = False
@@ -176,13 +176,13 @@ class TestConversationGenerator(unittest.TestCase):
     def test_print_conversation(self):
         module_path = 'eval.library.conversation_generator.conversation'
         with patch(f'{module_path}.CustomerChat') as CustomerChat, patch(
-                f'{module_path}.OrchestratorHarness') as PromptOrchestratorHarness:
+                f'{module_path}.OrchestratorHarness') as OrchestratorHarness:
 
             cc = CustomerChat.return_value
             cc.get_reply.return_value = 'customer reply'
 
-            pos = PromptOrchestratorHarness.return_value
-            pos.get_reply.return_value = 'assistant reply'
+            assistantHarness = OrchestratorHarness.return_value
+            assistantHarness.get_reply.return_value = 'assistant reply'
 
             cg = ConversationGenerator()
             context = {

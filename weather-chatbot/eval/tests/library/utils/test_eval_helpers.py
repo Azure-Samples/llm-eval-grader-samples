@@ -9,12 +9,12 @@ class TestEvalDataHelpersObject(TestCase):
     def test_get_conversation_as_string(self):
         module_path = 'eval.library.conversation_generator.conversation'
         with patch(f'{module_path}.CustomerChat') as CustomerChat, patch(
-                f'{module_path}.OrchestratorHarness') as PromptOrchestratorHarness:
+                f'{module_path}.OrchestratorHarness') as OrchestratorHarness:
 
             cc = CustomerChat.return_value
             cc.get_reply.return_value = 'customer reply'
-            pos = PromptOrchestratorHarness.return_value
-            pos.get_reply.return_value = 'assistant reply'
+            assistantHarness = OrchestratorHarness.return_value
+            assistantHarness.get_reply.return_value = 'assistant reply'
 
             context = {
                 'conversation_id': 'abc123',
