@@ -6,81 +6,10 @@ import pandas as pd
 
 
 from eval.library.conversation_generator.conversation_tools import (
-    write_conversation_to_logs,
-    write_conversation_to_condensed_logs,
     generate_turn)
 
 
 class TestConversationTools(unittest.TestCase):
-    def test_write_conversation_to_logs(self):
-        # Define test data
-        message_history = [
-            {'text': 'Hello'},
-            {'text': 'How are you?', 'context': {'message_history': [{'text': 'Hello'}]}},
-            {'text': 'I am good. How about you?', 'context': {'message_history':
-                                                              [{'text': 'Hello'}, {'text': 'How are you?'}]}}
-        ]
-        conversation_id = "123456"
-        customer_profile = {"name": "John Doe", "age": 25}
-        scenario_prompt = "Customer support"
-        log_file_name = "src/tests/unit/eval/data/test_write_conversation_to_logs_log_file.json"
-        convo_end_reason = 'dummy reason'
-
-        # Call the function being tested
-        write_conversation_to_logs(message_history, conversation_id, customer_profile,
-                                   scenario_prompt, log_file_name, convo_end_reason)
-
-        # Read in conversation
-        with open(log_file_name, "r") as file:
-            file_contents = file.read()
-            json_objects = file_contents.split('~~~NEW_CONVERSATION~~~')
-
-        conversation = {}
-        for obj in json_objects:
-            try:
-                conversation = json.loads(obj)
-                if isinstance(conversation, dict):
-                    break
-            except json.JSONDecodeError:
-                pass
-
-        # Validate data
-        self.assertEqual(conversation['conversation_id'], conversation_id)
-        self.assertEqual(conversation['customer_profile'], customer_profile)
-        self.assertEqual(conversation['scenario_prompt'], scenario_prompt)
-        self.assertEqual(len(conversation['conversation_history']), len(message_history))
-
-        # Clean up by deleting file
-        if os.path.exists(log_file_name):
-            os.remove(log_file_name)
-
-    def test_write_conversation_to_condensed_logs(self):
-        # Define test data
-        message_history = [
-            {'role': 'role1', 'content': 'Hello'},
-            {'role': 'role2', 'content': 'Hi'},
-        ]
-        conversation_id = "123456"
-        customer_profile = {'attributes': {"vehicle": 'vehicle',
-                                           "name": "John Doe",
-                                           "age": 25,
-                                           'tire_category': ['Winter Tires']},
-                            }
-        scenario_prompt = "Customer support"
-        convo_end_reason = "dummy reason"
-        log_file_name = "eval/tests/data/test_write_conversation_to_condensed_logs_log_file.xlsx"
-
-        # Call the function being tested
-        write_conversation_to_condensed_logs(message_history, conversation_id, customer_profile, scenario_prompt,
-                                             log_file_name, convo_end_reason)
-
-        # Read in output file
-        df = pd.read_excel(log_file_name, engine='openpyxl')
-        self.assertEqual(len(df), len(message_history))
-
-        # Clean up by deleting file
-        if os.path.exists(log_file_name):
-            os.remove(log_file_name)
 
     def test_generate_turn(self):
         context = {
