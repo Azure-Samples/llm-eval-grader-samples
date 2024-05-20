@@ -72,7 +72,7 @@ class ConversationGenerator:
             "message_history": [
                 {
                     "role": "assistant",
-                    "content": "Hello!  How can I help you with your automotive and tire needs?",
+                    "content": "Hello! How can I help you ?",
                 }
             ]
         },
@@ -112,7 +112,7 @@ class ConversationGenerator:
             "message_history": [
                 {
                     "role": "assistant",
-                    "content": "Hello!  How can I help you?",
+                    "content": "Hello! How can I help you with weather stuff?",
                 }
             ]
         },

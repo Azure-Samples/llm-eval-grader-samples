@@ -45,10 +45,10 @@ class CustomerChat:
 
             messages.append(cleaned_message)
 
-        print('-------------------------------------------------------------')
-        print('Emulated User message history')
-        print(messages)
-        print('-------------------------------------------------------------')
+        # print('-------------------------------------------------------------')
+        # print('Emulated User message history')
+        # print(messages)
+        # print('-------------------------------------------------------------')
         
         response = get_completion(
             messages=messages,
