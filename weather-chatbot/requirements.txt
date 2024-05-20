@@ -5,3 +5,4 @@ azureml-dataprep
 azureml-mlflow
 azure-maps-search
 pytest
+pandas
