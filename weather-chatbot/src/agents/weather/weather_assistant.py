@@ -7,4 +7,3 @@ class WeatherAssistant:
         # message_history = context.get_messages()
 
         return "weather assistant done (stub)"
-        # return f"stub for answering weather questions for {context.location_description}"
