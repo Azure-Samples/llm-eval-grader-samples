@@ -12,6 +12,12 @@ import mlflow
 
 
 DATASTORE_NAME = "workspaceblobstore"
+# These environment variables are set by the AML runtime
+# and can be used to determine whether we are executing
+# in AML or on a local machine
+AML_ENV_VAR_SUBSCRIPTION = "AZUREML_ARM_SUBSCRIPTION"
+AML_ENV_VAR_RESOURCE_GROUP = "AZUREML_ARM_RESOURCEGROUP"
+AML_ENV_VAR_WORKSPACE_NAME = "AZUREML_ARM_WORKSPACE_NAME"
 
 load_dotenv()
 
@@ -72,6 +78,12 @@ def get_run(run_name: str, experiment_id: str) -> mlflow.ActiveRun:
         run = mlflow.start_run(run_name=run_name, experiment_id=experiment_id)
 
     return run
+
+def is_running_in_aml() -> bool:
+    """These three environment variables are set when running in an AML job"""
+    return os.getenv(AML_ENV_VAR_SUBSCRIPTION) is not None and \
+        os.getenv(AML_ENV_VAR_RESOURCE_GROUP) is not None and \
+        os.getenv(AML_ENV_VAR_WORKSPACE_NAME) is not None
 
 
 def connect_to_aml() -> str:
