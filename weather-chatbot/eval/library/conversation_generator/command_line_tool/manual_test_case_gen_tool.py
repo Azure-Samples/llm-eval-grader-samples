@@ -214,7 +214,6 @@ class ConversationGenerationTool():
         write_conversation_to_condensed_logs(message_history=self.context['message_history'],
                                              conversation_id=self.context['conversation_id'],
                                              customer_profile=self.context['customer_profile'],
-                                             scenario_prompt=cfg['scenario_prompt'],
                                              log_file_name=self.human_readable_log_file_name,
                                              convo_end_reason='Ended by user of manual convo generation tool')
 
