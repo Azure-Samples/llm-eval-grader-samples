@@ -12,7 +12,7 @@ API_VERSION = "1.0"
 
 
 class WeatherType(Enum):
-    CURRENT = "currentConditions/"
+    CURRENT_CONDITIONS = "currentConditions/"
     DAILY_FORECAST = "forecast/daily/"
     SEVERE_ALERTS = "severe/alerts/"
 
