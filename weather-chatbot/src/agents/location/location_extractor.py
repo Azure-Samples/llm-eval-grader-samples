@@ -3,7 +3,7 @@ from azure.core.credentials import AzureKeyCredential
 from azure.maps.search import MapsSearchClient
 from openai import AzureOpenAI
 
-from src.context import Context
+from context import Context
 
 
 geo_score_threshold = 0.7

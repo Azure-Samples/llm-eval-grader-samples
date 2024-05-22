@@ -1,6 +1,6 @@
-from src.agents.location.location_assistant import LocationAssistant
-from src.agents.location.location_extractor import LocationExtractor
-from src.context import Context
+from agents.location.location_assistant import LocationAssistant
+from agents.location.location_extractor import LocationExtractor
+from context import Context
 
 
 class LocationAgent:

@@ -1,5 +1,5 @@
-from src.context import Context
-from src.clients.weather import Weather, WeatherType
+from clients.weather import Weather, WeatherType
+from context import Context
 
 
 class WeatherAssistant:
