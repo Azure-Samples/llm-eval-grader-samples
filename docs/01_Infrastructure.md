@@ -29,10 +29,10 @@ The infrastructure deployment process involves executing Bicep scripts located i
 2. Create a Service Principal if it's not available.
 
 ### Step 1:Define Parameters
-Define user parameters required for deployment in the parameters.json file. Adjust values as necessary.
+Define user parameters required for deployment in the [parameters.json](../infra/parameters.json) file. Adjust values as necessary.
 
 ### Step 2:Set environment variables
-Sensitive information like `client_id`, `client_secret`, etc., should be set as environment variables. Refer to .env.template and populate the values as required.
+Sensitive information like `client_id`, `client_secret`, etc., should be set as environment variables. Refer to [.env.template](../infra/modules/env.template) and populate the values as required.
 
 ### Step 3:Validate script
 Build the Bicep script and ensure there are no syntax errors:
@@ -41,7 +41,7 @@ Build the Bicep script and ensure there are no syntax errors:
 ### Step 4:Run Bicep Script
 Execute the Bicep script using the following command:
 ``` 
-az deployment group create --name llmops-infra-deployment --resource-group llm-inspect-demo --template-file main.bicep --parameters parameters.json --parameters clientId=CLIENT_ID --parameters clientSecret=CLIENT_SECRET --parameters dbLoginUserName=DB_LOGIN_USERNAME --parameters dbLoginPassword=DB_LOGIN_PASSWORD 
+az deployment group create --name llmops-infra-deployment --resource-group <resource group name> --template-file main.bicep --parameters parameters.json --parameters clientId=CLIENT_ID --parameters clientSecret=CLIENT_SECRET --parameters dbLoginUserName=DB_LOGIN_USERNAME --parameters dbLoginPassword=DB_LOGIN_PASSWORD 
 ```
 Monitor deployment progress in the Azure Portal under the `Deployments` pane in `Settings` of the `Resource groups` section.
 
