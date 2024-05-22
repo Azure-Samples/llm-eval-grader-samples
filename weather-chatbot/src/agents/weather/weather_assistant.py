@@ -1,4 +1,4 @@
-from src.context import Context
+from context import Context
 
 
 class WeatherAssistant:
