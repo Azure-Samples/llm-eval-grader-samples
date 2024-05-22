@@ -26,7 +26,7 @@ class WeatherExtractor:
         system_prompt = inspect.cleandoc(f"""
             Your task is to try and determine what type of question or questions a user is asking about the weather
             based on a following conversation transcript and classify it into one of the following
-            categories: {[enum.name for enum in WeatherType]}. If it's unclear what category to choose simply
+            categories: {[enum.name for enum in WeatherType]}. If it's unclear what category to choose
             or the user hasn't asked any questions about the weather simply return {UNKNOWN_CATEGORY}.
             Conversation transcript:
             ```
