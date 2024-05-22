@@ -1,17 +1,16 @@
-from src.agents.weather.weather_assistant import WeatherAssistant
-from src.agents.weather.weather_query_extractor import WeatherQueryExtractor
-from src.context import Context
+from agents.weather.weather_assistant import WeatherAssistant
+from agents.weather.weather_extractor import WeatherExtractor
+from context import Context
 
 
 class WeatherAgent:
     """Answers weather questions."""
 
     def invoke(self, context: Context) -> str:
-        extractor = WeatherQueryExtractor()
 
-        query = extractor.extract(context)
+        extractor = WeatherExtractor()
 
-        # invoke weather api
+        extractor.extract(context)
 
         assistant = WeatherAssistant()
         reply = assistant.invoke(context)
