@@ -3,11 +3,12 @@
 Here's a brief guide to help you setup and run the LLM evaluation.  
 
 ## Prerequisites
-Note: Version used at the time of development is mentioned in brackets
-- Azure CLI (2.61.0)
-- Python (3.11.5)
-- Conda (23.7.4)
-- Bicep CLI (0.26.170)
+- Azure CLI 
+- Python (3.10 or higher)
+- Conda 
+- Bicep CLI 
+- Visual Studio Code
+- Power BI Desktop (for visualization)
 
 ## Environment Setup
 - For non Mac M1 machines, follow the steps [here](docs/03_Developer_Guide.md#for-non-mac-m1-machines)

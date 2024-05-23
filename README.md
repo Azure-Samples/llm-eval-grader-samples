@@ -51,6 +51,9 @@ The architecture consists of the following components:
 
 ## Getting Started
 
+### QuickStart
+Refer to the [QuickStart](QuickStart.md) guide to get started with the solution.
+
 ### Prerequisites
 
 - Azure Subscription
