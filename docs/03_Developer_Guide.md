@@ -21,7 +21,7 @@ Note: If you get login issues, retry the command after you login to azure portal
 Create a new Python environment with required libraries and activate it:
 
 ``` bash
-cd src\azureml\pipelines
+cd src\azureml\pipeline
 
 conda create --name <ENVIRONMENT_NAME> python=3.10
 conda activate <ENVIRONMENT_NAME>
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 Step 1: Run below commands on your terminal to install HomeBrew, a package manager, and then use it to install Microsoft SQL Server related tools. 
 Note: To know about ODBC installation, follow this link. [ODBC driver for MAC](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16#microsoft-odbc-18). `arch -x86_64` prefix is used to force the execution of the installation script in the x86_64 architecture on Apple Silicon Macs.
 ``` bash
-cd src\azureml\pipelines
+cd src\azureml\pipeline
 
 arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 alias x86brew="arch -x86_64 /usr/local/bin/brew"
