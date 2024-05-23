@@ -3,13 +3,14 @@ import os
 import argparse
 import datetime
 from copy import deepcopy
+from src.main.ca.canadiantire.pos.models.constants import CONTEXT_VISITED_COMPONENTS
 
 log_directories = [
     'logs/',
 ]
 
-default_component_name = 'LocationExtractor'
-default_component_type = 'LocationAgent'
+default_component_name = 'VehicleInfoExtractor'
+default_component_type = 'VehicleIdentification'
 default_test_cases_to_extract = {
     "4d20609952f74240840310cf4650f7c3": 5
 }
@@ -129,6 +130,12 @@ def create_test_cases(conversation: dict, test_cases_to_extract: dict, split_int
                 if "context" in msg:
                     test_case["context"] = deepcopy(msg["context"])
 
+                if split_into_visited_components:
+                    if "context" in msg and CONTEXT_VISITED_COMPONENTS in msg["context"]:
+                        for visited_component in msg["context"][CONTEXT_VISITED_COMPONENTS]:
+                            test_cases.append({visited_component: test_case})
+                else:
+                    test_cases.append({component_name: test_case})
                 break
 
     return test_cases
