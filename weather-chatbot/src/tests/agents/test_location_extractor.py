@@ -4,15 +4,15 @@ from unittest.mock import Mock, patch, ANY
 
 from azure.maps.search.models import LatLon
 
-from agents.location.location_extractor import LocationExtractor
-from context import Context
+from src.agents.location.location_extractor import LocationExtractor
+from src.context import Context
 
 
 class TestLocationExtractor(unittest.TestCase):
     @patch.dict(os.environ, {"OPENAI_DEPLOYMENT_NAME": "openai_deployment_name"})
     @patch.dict(os.environ, {"MAPS_API_KEY": "maps_api_key"})
-    @patch('agents.location.location_extractor.AzureOpenAI')
-    @patch('agents.location.location_extractor.MapsSearchClient.search_address')
+    @patch('src.agents.location.location_extractor.AzureOpenAI')
+    @patch('src.agents.location.location_extractor.MapsSearchClient.search_address')
     def test_extract(self, search_address_mock, openai_mock):
         address = Mock(
             type='Point Address',

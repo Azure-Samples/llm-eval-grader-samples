@@ -3,16 +3,16 @@ import unittest
 from unittest.mock import patch, ANY
 from unittest import mock
 
-from agents.weather.weather_extractor import WeatherExtractor, UNKNOWN_CATEGORY
-from clients.weather import WeatherType
-from context import Context
+from src.agents.weather.weather_extractor import WeatherExtractor, UNKNOWN_CATEGORY
+from src.clients.weather import WeatherType
+from src.context import Context
 
 
 @mock.patch.dict(os.environ, {"OPENAI_DEPLOYMENT_NAME": "openai_deployment_name"})
 @mock.patch.dict(os.environ, {"MAPS_API_KEY": "FAKE_KEY"})
 class TestWeatherExtractor(unittest.TestCase):
 
-    @patch('agents.weather.weather_extractor.AzureOpenAI')
+    @patch('src.agents.weather.weather_extractor.AzureOpenAI')
     def test_extract_valid_weather_type_adds_type_to_context(self, openai_mock):
 
         openai_mock().chat.completions.create.return_value.choices[0]\
@@ -40,7 +40,7 @@ class TestWeatherExtractor(unittest.TestCase):
             ]
         )
 
-    @patch('agents.weather.weather_extractor.AzureOpenAI')
+    @patch('src.agents.weather.weather_extractor.AzureOpenAI')
     def test_extract_no_weather_type_type_not_added_to_context(self, openai_mock):
 
         openai_mock().chat.completions.create.return_value.choices[0]\
