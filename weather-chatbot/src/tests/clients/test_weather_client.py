@@ -6,12 +6,12 @@ from unittest import mock
 from requests.exceptions import HTTPError
 from requests import Response
 
-from clients.weather import Weather, WeatherType
+from src.clients.weather import Weather, WeatherType
 
 
 @mock.patch.dict(os.environ, {"MAPS_API_KEY": "FAKE_KEY"})
 class TestWeatherClient(unittest.TestCase):
-    @patch("clients.weather.requests")
+    @patch("src.clients.weather.requests")
     @patch("requests.Response")
     def test_get_weather_valid_coords_returns_valid_content(self, mock_response: Mock, mock_requests: Mock):
 
@@ -21,7 +21,7 @@ class TestWeatherClient(unittest.TestCase):
 
         mock_requests.get.return_value = mock_response
 
-        current_weather = Weather.get_weather(lat="45.6579106", lon="-122.5834869", weather_type=WeatherType.CURRENT)
+        current_weather = Weather.get_weather(lat=45.6579106, lon=-122.5834869, weather_type=WeatherType.CURRENT_CONDITIONS)
 
         self.assertNotEqual(current_weather, "")
         self.assertNotEqual(current_weather, None)
@@ -30,19 +30,19 @@ class TestWeatherClient(unittest.TestCase):
 
     def test_get_weather_invalid_coords_returns_invalid_message(self):
 
-        current_weather = Weather.get_weather(lat="45.6579106a", lon="+122", weather_type=WeatherType.CURRENT)
+        current_weather = Weather.get_weather(lat="45.6579106a", lon="+122", weather_type=WeatherType.CURRENT_CONDITIONS)
 
         self.assertEqual(current_weather, "Coordinates must be valid floats: received lat: 45.6579106a lon: +122")
 
     def test_get_weather_coords_out_of_range_returns_invalid_message(self):
 
-        current_weather = Weather.get_weather(lat="45.6579106", lon="189", weather_type=WeatherType.CURRENT)
+        current_weather = Weather.get_weather(lat=45.6579106, lon=189, weather_type=WeatherType.CURRENT_CONDITIONS)
 
         self.assertEqual(current_weather, "Coordinates out of range: received lat 45.6579106 lon 189, "
                          "range for lat -90 - 90, range for lon -180 - 180")
 
-    @patch("clients.weather.logger")
-    @patch("clients.weather.requests")
+    @patch("src.clients.weather.logger")
+    @patch("src.clients.weather.requests")
     @patch("requests.Response")
     def test_get_weather_error_response_throws_exception(self, mock_response: Mock,
                                                          mock_requests: Mock, mock_logger: Mock):
@@ -53,6 +53,6 @@ class TestWeatherClient(unittest.TestCase):
         mock_requests.get.return_value = fake_response
 
         # make sure to throw exception before you check to see if logger.exception called
-        self.assertRaises(HTTPError, Weather.get_weather, lat="45.6579106", lon="-122.5834869",
-                          weather_type=WeatherType.CURRENT)
+        self.assertRaises(HTTPError, Weather.get_weather, lat=45.6579106, lon=-122.5834869,
+                          weather_type=WeatherType.CURRENT_CONDITIONS)
         mock_logger.exception.assert_called_once()
