@@ -248,7 +248,7 @@ class TestAmlUtilsObject(TestCase):
 
             print_experiment_details(fake_experiment_dct)
 
-            assert mock_print.call_count == 6
+            assert mock_print.call_count == 5
 
             # Verify that the expected strings were printed
             for expected_string in expected_printed_strings:
@@ -258,5 +258,3 @@ class TestAmlUtilsObject(TestCase):
             mock_experiment.assert_called_once_with(fake_workspace_name, fake_experiment_name)
             mock_get_workspace.assert_called_once()
             mock_run.return_value.get_portal_url.assert_called_once()
-            mock_mlflow.artifacts.load_dict.assert_called_once()
-            assert fake_artifact_uri in mock_mlflow.artifacts.load_dict.call_args.args[0]

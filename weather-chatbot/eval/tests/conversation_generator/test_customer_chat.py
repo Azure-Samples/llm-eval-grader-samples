@@ -21,15 +21,14 @@ class TestCustomerChat(unittest.TestCase):
     def test_get_reply(self):
         mock_response_text = 'customer text response'
         with patch(
-                'eval.library.conversation_generator.customer_chat.ChatCompletion') \
-                as mock_chat_completion, \
+                'eval.library.conversation_generator.customer_chat.get_completion') \
+                as mock_get_completion, \
                 patch('eval.library.conversation_generator.customer_chat.'
                       'CustomerChat.get_system_message', return_value=''):
 
             # Configure the mock behavior
-            mock_get_completion = Mock(return_value=mock_response_text)
-            instance = mock_chat_completion.return_value
-            instance.get_completion = mock_get_completion
+            mock_get_completion.return_value = mock_response_text
+            instance = mock_get_completion.return_value
 
             # Initialize class
             customer_chat = CustomerChat()
@@ -64,6 +63,5 @@ class TestCustomerChat(unittest.TestCase):
 
             mock_get_completion.assert_called_once_with(
                 messages=context['message_history'],
-                temperature=customer_chat.temperature,
-                active_creds=customer_chat.creds,
+                temperature=customer_chat.temperature
             )

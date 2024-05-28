@@ -52,7 +52,7 @@ def run_mlflow_experiment(output_folder: str):
         experiment = mlflow.get_experiment_by_name(exp_name)
         assert experiment is not None
         experiment_id = experiment.experiment_id
-    except MlflowException:
+    except (MlflowException, AssertionError):
         experiment_id = mlflow.create_experiment(exp_name)
 
     print(f'experiment_id: {experiment_id}')

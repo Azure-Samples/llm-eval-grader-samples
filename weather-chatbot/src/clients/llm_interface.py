@@ -13,7 +13,7 @@ def get_completion(messages, temperature, max_tokens: Optional[int] = None):
         max_tokens (Optional[int], optional): temperature parameter for sampling. Defaults to None.
     """
     load_dotenv()
-    
+
     # Set the API key of azure openai
     client = AzureOpenAI(
         api_key=os.environ["AZURE_OPENAI_API_KEY"],

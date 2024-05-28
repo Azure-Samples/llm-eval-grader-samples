@@ -8,84 +8,83 @@ This document provides a guide for developers on how to build the following comp
 
 ## Development Environment Setup
 
-1. Install Visual Studio Code with the following extensions:
+Step 1: Install Visual Studio Code with the following extensions:  
+     - Prompt Flow  
+Step 2:  Create `.env` file from [`.env_template`](../azureml/pipeline/deploy/env.template)and update the values as per your Azure environment.  
+Step 3:  Install the Azure CLI and login to your Azure account:  
+``` bash
+az login
+```
+Note: If you get login issues, retry the command after you login to azure portal(`portal.azure.com`) from browser.
 
-    - Prompt Flow
-2. Create `.env` file from [`.env_template`](../azureml/pipeline/deploy/env.template)and update the values as per your Azure environment.
-3. Install the Azure CLI and login to your Azure account:
+### For Non Mac M1 Machines
+Create a new Python environment with required libraries and activate it:
 
-    ```bash
-    az login
-    ```
+``` bash
+cd src\azureml\pipeline
 
-    Note: If you get login issues, retry the command after you login to azure portal(`portal.azure.com`) from browser.
+conda create --name <ENVIRONMENT_NAME> python=3.10
+conda activate <ENVIRONMENT_NAME>
 
-4. Create a new Python environment with required libraries and activate it:
+pip install -r requirements.txt
+```
 
-    ```bash
-    cd src\azureml\pipelines
+### For Mac M1 machines
 
-    conda create --name <ENVIRONMENT_NAME> python=3.10
-    conda activate <ENVIRONMENT_NAME>
+Step 1: Run below commands on your terminal to install HomeBrew, a package manager, and then use it to install Microsoft SQL Server related tools. 
+Note: To know about ODBC installation, follow this link. [ODBC driver for MAC](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16#microsoft-odbc-18). `arch -x86_64` prefix is used to force the execution of the installation script in the x86_64 architecture on Apple Silicon Macs.
+``` bash
+cd src\azureml\pipeline
 
-    pip install -r requirements.txt
-    ```
+arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+alias x86brew="arch -x86_64 /usr/local/bin/brew"
+x86brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+x86brew update
+HOMEBREW_ACCEPT_EULA=Y  x86brew install msodbcsql17 mssql-tools
+export ODBCSYSINI=/etc 
+```
 
-    For Mac M1 machines,
+Step 2: Remove existing links if created already
 
-    To know about ODBC installation, follow this link. [ODBC driver for MAC](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16#microsoft-odbc-18)  
-    Run below commands on your terminal to install HomeBrew, a package manager, and then use it to install Microsoft SQL Server related tools. `arch -x86_64` prefix is used to force the execution of the installation script in the x86_64 architecture on Apple Silicon Macs.
+``` bash
+sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini
+sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini 
+```
 
-    ``` bash
-    cd src\azureml\pipelines
+Step 3: Create conda environment. `CONDA_SUBDIR=osx-64` part sets the platform-specific directory for package retrieval. In this case, it specifies the directory for macOS 64-bit packages (osx-64).
 
-    arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    alias x86brew="arch -x86_64 /usr/local/bin/brew"
-    x86brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
-    x86brew update
-    HOMEBREW_ACCEPT_EULA=Y  x86brew install msodbcsql17 mssql-tools
-    export ODBCSYSINI=/etc 
-    ```
+``` bash
+CONDA_SUBDIR=osx-64 conda create -n pf-env-86 python=3.10.12
+conda activate pf-env-86
+conda config --env --set subdir osx-64
 
-    Remove existing links if created already
+pip install -r requirements.txt
+```
 
-    ``` bash
-    sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini
-    sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini 
-    ```
+Step 4: Verification of pyodbc driver and connection:
 
-    Create conda environment. `CONDA_SUBDIR=osx-64` part sets the platform-specific directory for package retrieval. In this case, it specifies the directory for macOS 64-bit packages (osx-64).
+ - Run `odbcinst -j` and verify the existence of `DRIVERS` path (Below is the sample output). Read the `/etc/odbcinst.ini` file (`cat /etc/odbcinst.ini`) and ensure the `.dylib` files for the installed mssql version is existing in the mentioned path.
 
-    ``` bash
-    CONDA_SUBDIR=osx-64 conda create -n pf-env-86 python=3.10.12
-    conda activate pf-env-86
-    conda config --env --set subdir osx-64
+``` bash 
+unixODBC 2.3.11
+DRIVERS............: /etc/odbcinst.ini
+SYSTEM DATA SOURCES: /etc/odbc.ini
+FILE DATA SOURCES..: /etc/ODBCDataSources
+USER DATA SOURCES..: /Users/lindamthomas/.odbc.ini
+SQLULEN Size.......: 8
+SQLLEN Size........: 8
+SQLSETPOSIROW Size.: 8 
+```
 
-    pip install -r requirements.txt
-    ```
+Step 5: Go to python terminal and run below code snippet
 
-    Verification of pyodbc driver and connection:
+``` python
+import pyodbc
+pyodbc.drivers()
+pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=<server_name>;DATABASE=<database_name>;UID=<user_id>;PWD=<pwd>")
+```
 
-    - Run `odbcinst -j` and verify the existence of `DRIVERS` path (Below is the sample output). Read the `/etc/odbcinst.ini` file (`cat /etc/odbcinst.ini`) and ensure the `.dylib` files for the installed mssql version is existing in the mentioned path.
-
-    ``` unixODBC 2.3.11
-        DRIVERS............: /etc/odbcinst.ini
-        SYSTEM DATA SOURCES: /etc/odbc.ini
-        FILE DATA SOURCES..: /etc/ODBCDataSources
-        USER DATA SOURCES..: /Users/lindamthomas/.odbc.ini
-        SQLULEN Size.......: 8
-        SQLLEN Size........: 8
-        SQLSETPOSIROW Size.: 8 
-    ```
-
-    - Go to python terminal and run below code snippet
-
-    ``` import pyodbc
-    pyodbc.drivers()
-    pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=<server_name>;DATABASE=<database_name>;UID=<user_id>;PWD=<pwd>")
-    ```
-
-    Replace the <> variables. Connection is success if you are able to connect.
+Replace the <> variables. Connection is success if you are able to connect.
 
 ## Development of Prompt Flow
 
