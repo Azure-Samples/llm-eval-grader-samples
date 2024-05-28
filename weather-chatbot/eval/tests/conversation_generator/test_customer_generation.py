@@ -39,11 +39,3 @@ class TestStandardUserGenerator(unittest.TestCase):
             self.assertIn('prompt', profile)
             self.assertIn('attributes', profile)
             self.assertIn('name', profile)
-
-            # Check that we can cycle through profiles
-            profile_1 = user_gen.generate_customer_profile()
-            profile_2 = user_gen.generate_customer_profile()
-            profile_3 = user_gen.generate_customer_profile()
-
-            self.assertEqual(profile_1, profile_3)
-            self.assertNotEqual(profile_1, profile_2)

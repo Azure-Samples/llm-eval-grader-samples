@@ -1,4 +1,4 @@
-from clients.weather import WeatherType
+from src.clients.weather import WeatherType
 
 
 class Context:

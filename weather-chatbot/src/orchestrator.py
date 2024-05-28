@@ -1,6 +1,6 @@
-from agents.location.location_agent import LocationAgent
-from agents.weather.weather_agent import WeatherAgent
-from context import Context
+from src.agents.location.location_agent import LocationAgent
+from src.agents.weather.weather_agent import WeatherAgent
+from src.context import Context
 
 
 class Orchestrator:

@@ -1,6 +1,6 @@
-from agents.weather.weather_assistant import WeatherAssistant
-from agents.weather.weather_extractor import WeatherExtractor
-from context import Context
+from src.agents.weather.weather_assistant import WeatherAssistant
+from src.agents.weather.weather_extractor import WeatherExtractor
+from src.context import Context
 
 
 class WeatherAgent:
