@@ -35,7 +35,7 @@ pytest
 To run the end to end evaluation from `weather-chatbot` folder:
 1. Create a python environment
 1. Install requirements by running **pip install -r requirements.txt**
-1. Create a .env file at the root of the directory
+1. Copy .env.sample as .env and replace all placeholder values with the correct settings from your Azure resources
 1. In your terminal, run **python -m eval.end_to_end.run_local**
 The run will create synthetic conversations between an emulated user and the assistant endpoint.
 Once the run is complete, a json dataset with the results will be saved in the data folder under end_to_end
@@ -47,7 +47,7 @@ To generate conversation using the command line from `weather-chatbot` folder:
 
 1. Create a python environment
 1. Install requirements by running **pip install -r requirements.txt**
-1. Create a .env file at the root of the directory
+1. Copy .env.sample as .env and replace all placeholder values with the correct settings from your Azure resources
 1. In your terminal, run **python -m eval.library.conversation_generator.command_line_tool.manual_test_case_gen_tool**
 
 ### Run the Test Case Extractor
