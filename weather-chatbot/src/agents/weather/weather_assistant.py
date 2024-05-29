@@ -2,8 +2,8 @@ import inspect
 from openai import AzureOpenAI
 import os
 
-from clients.weather import Weather, WeatherType
-from context import Context
+from src.clients.weather import Weather, WeatherType
+from src.context import Context
 
 
 class WeatherAssistant:

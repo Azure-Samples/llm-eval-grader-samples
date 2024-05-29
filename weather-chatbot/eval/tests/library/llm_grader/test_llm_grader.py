@@ -6,7 +6,6 @@ import os
 import json
 from eval.library.llm_grader.templates import (
     prompt_template_single_criteria_full_conversation,
-    prompt_template_single_criteria
 )
 from eval.library.llm_grader.llm_grader import LLMgrader
 
@@ -65,9 +64,9 @@ class TestRunLocalObject(unittest.TestCase):
             "eval.library.llm_grader.llm_grader.get_completion"
         ) as fake_chat_class:
             evaluator = LLMgrader(
-                prompt_template_single_criteria
+                prompt_template_single_criteria_full_conversation
             )
-            evaluator.evaluate_completion(convo, completion, criteria)
+            evaluator.evaluate_conversation(convo, completion, criteria)
             assert fake_chat_class.get_completion.called_once()
 
     def test_validate_json(self):

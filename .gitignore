@@ -173,3 +173,8 @@ cython_debug/
 
 # Ignore main.json file
 **/main.json
+
+# Generated files in weather-app folder
+weather-chatbot/logs/
+*test-results*
+weather-chatbot/end_to_end/data/

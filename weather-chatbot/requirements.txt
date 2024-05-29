@@ -7,3 +7,4 @@ azure-maps-search
 pytest
 pandas
 xlsxwriter
+mlflow

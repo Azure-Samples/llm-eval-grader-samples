@@ -2,8 +2,8 @@ import os
 import inspect
 from openai import AzureOpenAI
 
-from context import Context
-from clients.weather import WeatherType
+from src.context import Context
+from src.clients.weather import WeatherType
 
 UNKNOWN_CATEGORY = "UNKNOWN"
 
