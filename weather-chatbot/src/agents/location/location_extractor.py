@@ -33,6 +33,7 @@ Conversation transcript:
 ```
 
 You need to know country, city, state or province, street address, and zip code.
+The user can ask multiple questions, make sure you extract the latest geographical location of interest.
 Analyze the conversation transcript carefully and extract country, city, state or province,
 street address, and zip code values without any explanations.
 If it is a well known city add its country to the result.
