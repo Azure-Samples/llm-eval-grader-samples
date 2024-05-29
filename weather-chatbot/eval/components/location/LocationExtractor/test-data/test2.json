@@ -1,0 +1,16 @@
+[
+    {
+        "test_case_id": "6c868aa0db3d4d178a2441974076d933-4",
+        "expected_output": "I apologize for the inconvenience, but I am an AI language model and I don't have real-time access to weather data. Is there anything else I can assist you with?",
+        "customer_profile": {
+            "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Ligonier, Pennsylvania.\nYou know that you are talking to an AI assistant and you're trying to test its limits and capabilities by asking tricky questions.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+            "attributes": {
+                "location": {
+                    "city": "Ligonier",
+                    "state": "Pennsylvania"
+                }
+            },
+            "name": "randomly generated user"
+        }
+    }
+]

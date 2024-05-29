@@ -91,7 +91,8 @@ def run_mlflow_experiment(
                     parameters = {'component_input': test_case}
                     score = component.measure(parameters=parameters)
                 else:
-                    parameters = {'expected_output': expected_output, 'result': result}
+                    parameters = {'expected_output': expected_output, 'result': result,
+                                  'attributes': test_case['customer_profile']['attributes']}
                     score = component.measure(parameters=parameters)
                 test_case['scores'] = score
                 for metric in score.keys():
