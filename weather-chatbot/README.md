@@ -61,6 +61,7 @@ the output files should be written to: eval/components/{component_type}/{compone
 
 #### Decide Which Turns to Extract From The Conversations
 
+Opening up the generated conversations, you will see that each conversation has a conversation_id, which is a guid and each message has a message_id, which is an integer. This tool uses these two values to extract one or more messages from a conversation into a test case that you can use to evaluate your component.
 You can extract a single message from a conversation by using the integer messageId to extract:
 
 ```bash
@@ -81,8 +82,9 @@ or all messages from a conversation:
 
  ...or any combination of the above (including ```--test_cases_to_extract "{'*': 3}"```).
 
+Example: 
 ```bash
-python -m src.tests.evaluation.extract_test_cases.extract_test_cases --test_cases_to_extract "{'*': *}" --component_name foo
+python -m src.tests.evaluation.extract_test_cases.extract_test_cases --test_cases_to_extract "{'6c868aa0db3d4d178a2441974076d933': 3}" --component_name foo
 ```
 
 ### Run the inner-loop-component test
