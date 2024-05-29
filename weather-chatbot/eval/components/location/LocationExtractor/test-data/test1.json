@@ -1,0 +1,27 @@
+[
+    {
+        "test_case_id": "6c868aa0db3d4d178a2441974076d933-3",
+        "expected_output": {
+            "city": "Ligonier",
+            "state": "Pennsylvania"
+        },
+        "customer_profile": {
+            "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Ligonier, Pennsylvania.\nYou know that you are talking to an AI assistant and you're trying to test its limits and capabilities by asking tricky questions.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+            "attributes": {
+                "location": {
+                    "city": "Ligonier",
+                    "state": "Pennsylvania"
+                }
+            },
+            "name": "randomly generated user"
+        },
+        "context": {
+            "message_history": [
+                {
+                    "role": "user",
+                    "content": "Hi there! I'm just here to test your weather knowledge. Can you tell me what the current temperature is in Ligonier, Pennsylvania?"
+                }
+            ]
+        }
+    }
+]
