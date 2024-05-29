@@ -80,7 +80,7 @@ or all messages from a conversation:
 --test_cases_to_extract "{'conversation_id': *}"
 ```
 
- ...or any combination of the above (including ```--test_cases_to_extract "{'*': 3}"```).
+ ...or any combination of the above (including ```--test_cases_to_extract "{'*': 3}"``` which would extract the 3rd message from ALL conversations).
 
 Example: 
 ```bash
