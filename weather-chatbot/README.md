@@ -2,6 +2,9 @@
 
 This project demonstrates API grounded RAG chatbot.
 
+Responses with GPT-3.5 Turbo were more inconsistent, for that reason it is recommended to use GPT-4o.
+GPT-4 may work just as well but it is a bit slower and more costly.
+
 A user supposed to provide a location and the chatbot will be able to answer questions about the weather at that location.
 
 To achieve that there are two agents: Location and Weather. The agents use external APIs to ground the information.
