@@ -1,0 +1,10 @@
+@startuml WeatherAssistantDiagram
+class WeatherAssistant {
+    invoke()
+        __init__()
+}
+WeatherAssistant --> WeatherType
+WeatherAssistant --> Weather
+WeatherAssistant --> Context
+WeatherAssistant --> AzureOpenAI
+@enduml

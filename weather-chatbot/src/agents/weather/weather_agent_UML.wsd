@@ -1,0 +1,9 @@
+@startuml WeatherAgentDiagram
+class WeatherAgent {
+    invoke()
+        __init__()
+}
+WeatherAgent --> WeatherAssistant
+WeatherAgent --> WeatherExtractor
+WeatherAgent --> Context
+@enduml

@@ -1,0 +1,9 @@
+@startuml LocationAgentDiagram
+class LocationAgent {
+    invoke()
+        __init__()
+}
+LocationAgent --> LocationAssistant
+LocationAgent --> LocationExtractor
+LocationAgent --> Context
+@enduml

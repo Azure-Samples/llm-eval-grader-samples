@@ -1,0 +1,9 @@
+@startuml WeatherExtractorDiagram
+class WeatherExtractor {
+    extract()
+        __init__()
+}
+WeatherExtractor --> Context
+WeatherExtractor --> AzureOpenAI
+WeatherExtractor --> WeatherType
+@enduml

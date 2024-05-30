@@ -1,0 +1,7 @@
+@startuml LocationAssistantDiagram
+class LocationAssistant {
+    invoke()
+        __init__()
+}
+LocationAssistant --> AzureOpenAI
+@enduml

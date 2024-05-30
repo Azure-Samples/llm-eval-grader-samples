@@ -1,0 +1,78 @@
+@startuml DemoDiagram
+class WeatherType {
+        __init__()
+}
+class Weather {
+    get_weather()
+    _is_float()
+        __init__()
+}
+class Orchestrator {
+    get_reply()
+        __init__()
+}
+Orchestrator --> Context
+Orchestrator --> LocationAgent
+Orchestrator --> WeatherAgent
+class WeatherExtractor {
+    extract()
+        __init__()
+}
+WeatherExtractor --> Context
+WeatherExtractor --> AzureOpenAI
+WeatherExtractor --> WeatherType
+class Context {
+    add_message()
+    get_messages()
+    location()
+    location()
+    location_description()
+    location_description()
+    weather_category()
+    weather_category()
+        _location : tuple[float, float] 
+    _location_description : str 
+    _weather_category : WeatherType 
+    _location
+    _location_description
+    _weather_category
+    location, description, WeatherType
+}
+Context --> WeatherType
+class WeatherAssistant {
+    invoke()
+        __init__()
+}
+WeatherAssistant --> WeatherType
+WeatherAssistant --> Weather
+WeatherAssistant --> Context
+WeatherAssistant --> AzureOpenAI
+class WeatherAgent {
+    invoke()
+        __init__()
+}
+WeatherAgent --> WeatherAssistant
+WeatherAgent --> WeatherExtractor
+WeatherAgent --> Context
+class LocationExtractor {
+    extract()
+        search_client
+    __init__()
+}
+LocationExtractor --> AzureOpenAI
+LocationExtractor --> Context
+LocationExtractor --> MapsSearchClient
+LocationExtractor --> AzureKeyCredential
+class LocationAssistant {
+    invoke()
+        __init__()
+}
+LocationAssistant --> AzureOpenAI
+class LocationAgent {
+    invoke()
+        __init__()
+}
+LocationAgent --> LocationAssistant
+LocationAgent --> LocationExtractor
+LocationAgent --> Context
+@enduml
