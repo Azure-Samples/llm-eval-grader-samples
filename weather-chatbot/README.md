@@ -6,15 +6,19 @@ This project demonstrates a Retrieval Augmented Generation (RAG) chatbot that ha
 
 A user may provide their geographical location of choice to the chatbot, and it will answer questions about the weather at that location.
 
-## Running demo.py
-To run the demo from the `weather-chatbot` folder:
+## Setting Up the Environment
+
 1. Create a python environment
 2. Install requirements by running: 
 
 ```pip install -r requirements.txt```
 
 3. Copy `.env.sample` as `.env` and replace all placeholder values with the correct settings from Azure Portal resources.
-4. In the terminal, run this command:
+
+
+## Running demo.py
+To run the demo from the `weather-chatbot` folder:
+
 
 ```bash
 python -m src.demo
@@ -22,7 +26,12 @@ python -m src.demo
 
 ## Running Unit Tests
 
-In the `weather-chatbot folder`, run this command:
+In the `weather-chatbot folder`, simply run this command:
+
+```bash
+pytest
+```
+Or, alternatively:
 
 ```bash
 python -m pytest

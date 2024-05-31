@@ -1,9 +1,0 @@
-@startuml OrchestratorDiagram
-class Orchestrator {
-    get_reply()
-        __init__()
-}
-Orchestrator --> Context
-Orchestrator --> LocationAgent
-Orchestrator --> WeatherAgent
-@enduml

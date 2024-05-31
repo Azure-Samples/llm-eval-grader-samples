@@ -1,12 +1,4 @@
-@startuml DemoDiagram
-class WeatherType {
-        __init__()
-}
-class Weather {
-    get_weather()
-    _is_float()
-        __init__()
-}
+@startuml weather_UML
 class Orchestrator {
     get_reply()
         __init__()
@@ -20,7 +12,6 @@ class WeatherExtractor {
 }
 WeatherExtractor --> Context
 WeatherExtractor --> AzureOpenAI
-WeatherExtractor --> WeatherType
 class Context {
     add_message()
     get_messages()
@@ -38,13 +29,10 @@ class Context {
     _weather_category
     location, description, WeatherType
 }
-Context --> WeatherType
 class WeatherAssistant {
     invoke()
         __init__()
 }
-WeatherAssistant --> WeatherType
-WeatherAssistant --> Weather
 WeatherAssistant --> Context
 WeatherAssistant --> AzureOpenAI
 class WeatherAgent {
@@ -62,7 +50,7 @@ class LocationExtractor {
 LocationExtractor --> AzureOpenAI
 LocationExtractor --> Context
 LocationExtractor --> MapsSearchClient
-LocationExtractor --> AzureKeyCredential
+LocationExtractor --> AzureMapsWeather
 class LocationAssistant {
     invoke()
         __init__()

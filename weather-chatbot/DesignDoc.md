@@ -1,56 +1,39 @@
-# How this app works
+# Design purpose
 
-The main purpose of this app is to demonstrate a Retrieval Augmented Generation (RAG) chatbot that has been grounded in a specific API. This code sample uses the Azure maps and weather API.
+The main purpose of this app to highlight three unique aspects: the Orchestration system, the Agent pattern (Extract, Decide, Reply), and the Evaluation Techniques. These three things set it apart from other Retrieval Augmented Generation (RAG)+API bots.
 
-In this Python app's code, there are two agents: **Location** and **Weather**. They communicate with one **Orchestrator**. The agents use external APIs to ground the information.
+- Demonstrate the use of a code-driven **orchestration** of LLMs and APIs for executing a workflow
+- Showcase **"Extract, Decide, Reply,"** (EDR) pattern
+- Copilot LLM **Evaluation** Techniques 
+    - (Synthetic users + End-to-End Eval, and agent-level Eval)
+
+## How this app works
+
+In this Python app's code, there are two agents: **Location** and **Weather**. They communicate with one **Orchestrator**. The agents use external APIs to [ground](https://techcommunity.microsoft.com/t5/fasttrack-for-azure/grounding-llms/ba-p/3843857) the information.
 
 - The **Location** agent talks to the user about their location of interest.
-- The **Weather** agent answers user's questions about the weather at the location.
-- The **Orchestrator** controls the flow of the conversation by invoking an agent according to the conversation state. The Orchestrator integrates with APIs, and dispatches the tasks to AI agents, according to its business rules. It drives the conversation with users and provides personalized recommendations. 
+- The **Weather** agent answers the user's questions regarding the weather at that location.
+- The **Orchestrator** understands the current state of the conversation from the context, and invokes the appropriate agents to handle the conversation.
 
 ![DesignDiagram](../docs/images/weather_UML.png)
 
-On every HTTP request with a message from a user, the Orchestrator receives the message and the context for the given conversation. The context stores the history of the previous messages in this conversation as well as the knowledge accumulated so far. Having that, the Orchestrator can invoke appropriate agents according to the business rules. 
+On every HTTP request with a message from a user, the Orchestrator receives the message from the user (the string, not to be confused with the HTTP message), as well as the context for the conversation. The context stores the history of the previous messages in this conversation, as well as the knowledge accumulated so far. Having that, the Orchestrator can invoke appropriate agents according to the business rules. 
 
-An agent, or, "component," solves one specific task. For example: Talk to the user about their location and extract geographical attributes required by internal APIs. 
+Each agent solves one specific task. For example: Talk to the user about their location and extract geographical attributes required by internal APIs. 
 
-![DesignDiagram](../docs/images/EDR.png)
+![EDR Diagram](../docs/images/EDR.png)
 
-Each agent implements the "Extract, Decide, Reply" pattern, which consists of 3 consecutive steps:
+Each agent can implement the "Extract, Decide, Reply" pattern, which consists of 3 consecutive steps:
 
 - **Extract** step extracts the necessary information from the
 conversation state.
 - **Decide** step decides what to do next.
 - **Reply** step generates a reply for the user, or generates a question if more information is required.
 
-#### Additional information about "EDR":
-
-1. **Extract**: In the Extract step, the LLM is queried with a prompt that contains instructions on what information is needed, and the message history. The extractor is supposed to parse the text returned from the LLM and convert it to a structured object, like a Python dictionary. 
-
-2. **Decide**: Having accumulated knowledge and new knowledge, the agent can Decide what to do next. The agent can invoke internal APIs and update the context according to the business rules. If the task is completed, the agent returns the control back to the Orchestrator. 
-
-3. **Reply**: If more information is needed for the current task, then the Assistant part of the agent queries the LLM with instructions to prepare a Reply to the user. The reply is then returned to the Orchestrator and sent to the user, completing the incoming HTTP request. 
+> In some examples, the above is optional. E.g.: if the location agent is able to discern the user's location, it updates the context, and returns control to the orchestrator. The orchestrator then looks at the state, sees that the location is populated or not null, and understands that it can now invoke the weather agent, so it does.
 
 #### While the user interacts with the chatbot, the following things happen:
 
-1. The user query is sent to the OpenAI GPT-4o model to detect intent of the query. The intent should have something to do with providing a "location" to the chatbot.
-2. Based on the intent, the chatbot will call the respective Prompt and make another call to the OpenAI GPT-4o model to generate the response. Essentially there will be two calls to the OpenAI GPT-4o model for each user query.
+1. The user's message is sent to the OpenAI GPT-4o model.
+2. The chatbot will call the respective Prompt and make another call to the OpenAI GPT-4o model to generate the response. Essentially there will be two calls to the OpenAI GPT-4o model for each user message.
 3. The response generated by the OpenAI GPT-4o model is displayed in the chatbot interface or console.
-4. The chatbot will also display the previous conversation in the chatbot interface for a given conversation.
-
-#### Data logging 
-The following data is logged for each conversation at different stages:
-
-1. **Conversation Data**: For each *query*, the following data is logged:
-    1. `User Query` The query entered by the user.
-    2. `Chatbot Response` The response that user gets from the chatbot.
-    3. `Conversation ID` The ID of the conversation.
-    4. `Turn ID` The ID of the turn in the conversation.
-2. **LLM Data**: For each *OpenAI GPT-4o model call*, the following data is logged:
-    1. `User Query` The query entered by the user.
-    2. `Intent` The intent detected by the OpenAI GPT-4o model.
-    3. `LLM Response` The response generated by the OpenAI GPT-4o model.
-    4. `Conversation ID` The ID of the conversation.
-    5. `Turn ID` The ID of the turn in the conversation.
-    6. `Model` The name of the model used for the call.
-    
