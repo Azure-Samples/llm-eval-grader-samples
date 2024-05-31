@@ -34,10 +34,10 @@ Conversation transcript:
 
 You need to know country, city, state or province, street address, and zip code.
 The user can ask multiple questions, make sure you extract the latest geographical location of interest.
-Analyze the conversation transcript carefully and extract country, city, state or province,
+Analyze the conversation transcript carefully and extract the country, city, state or province,
 street address, and zip code values without any explanations.
-If it is a well known city add its country to the result.
-Only list geographical attributes that are present in the conversation, skip missing geographical attributes.
+If it is a well-known city, add its country to the result.
+Only list geographical attributes that are present in the conversation. Skip missing geographical attributes.
 If there is no geographical information in the history, then print '{location_unknown}'.
 Print the answer on one single line as comma separated values.
 """

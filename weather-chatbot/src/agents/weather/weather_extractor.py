@@ -10,7 +10,7 @@ UNKNOWN_CATEGORY = "UNKNOWN"
 
 class WeatherExtractor:
     """
-    Class for extracting what information about the weather a
+    Class for extracting what information about the weather
     a user wants to know so that an API call can be made.
     """
 

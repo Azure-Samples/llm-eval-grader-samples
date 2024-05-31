@@ -1,25 +1,24 @@
 # Weather chatbot
 
-This project demonstrates API grounded RAG chatbot.
+This project demonstrates a Retrieval Augmented Generation (RAG) chatbot that has been [grounded](https://techcommunity.microsoft.com/t5/fasttrack-for-azure/grounding-llms/ba-p/3843857) in an API. This example uses the Azure maps and weather API.
 
-Responses with GPT-3.5 Turbo were more inconsistent, for that reason it is recommended to use GPT-4o.
-GPT-4 may work just as well but it is a bit slower and more costly.
+> Responses with GPT-3.5 Turbo were more inconsistent, for that reason it is recommended to use GPT-4o. (GPT-4 may work just as well, but it is a bit slower and more costly.)
 
-A user supposed to provide a location and the chatbot will be able to answer questions about the weather at that location.
+A user may provide their geographical location of choice to the chatbot, and it will answer questions about the weather at that location.
 
-To achieve that there are two agents: Location and Weather. The agents use external APIs to ground the information.
-Location agent talks to the user about the location of interest.
-Weather agent answers user's questions about the weather at the location.
-The orchestrator controls the flow of the conversation invoking an agent according to the conversation state.
+## Setting Up the Environment
 
-Each agent implements Extract Decide Reply pattern.
+1. Create a python environment
+2. Install requirements by running: 
 
-- Extract step extracts the necessary information from the
-conversation state.
-- Decide step decides what to do next.
-- Reply step generates an answer for the user or generates a question if more information is required.
+```pip install -r requirements.txt```
 
-To run the demo of the chatbot, execute the following command in the terminal from `weather-chatbot` folder:
+3. Copy `.env.sample` as `.env` and replace all placeholder values with the correct settings from Azure Portal resources.
+
+
+## Running demo.py
+To run the demo from the `weather-chatbot` folder:
+
 
 ```bash
 python -m src.demo
@@ -27,31 +26,34 @@ python -m src.demo
 
 ## Running Unit Tests
 
-Switch to the weather-chatbot folder
+In the `weather-chatbot folder`, simply run this command:
 
 ```bash
 pytest
 ```
+Or, alternatively:
+
+```bash
+python -m pytest
+```
 
 ## Running outer loop evaluation locally
 
-To run the end to end evaluation from `weather-chatbot` folder:
-1. Create a python environment
-1. Install requirements by running **pip install -r requirements.txt**
-1. Copy .env.sample as .env and replace all placeholder values with the correct settings from your Azure resources
-1. In your terminal, run **python -m eval.end_to_end.run_local**
+```cmd
+python -m eval.end_to_end.run_local
+```
+
 The run will create synthetic conversations between an emulated user and the assistant.
-Once the run is complete, a json dataset with the results will be saved in the data folder under end_to_end
+Once the run is complete, a json dataset with the results will be saved in the data folder under end_to_end.
 
 ## Running inner loop evaluation locally
 ### Run manual Conversation Generator
 
 To generate conversation using the command line from `weather-chatbot` folder:
 
-1. Create a python environment
-1. Install requirements by running **pip install -r requirements.txt**
-1. Copy .env.sample as .env and replace all placeholder values with the correct settings from your Azure resources
-1. In your terminal, run **python -m eval.library.conversation_generator.command_line_tool.manual_test_case_gen_tool**
+``` 
+python -m eval.library.conversation_generator.command_line_tool.manual_test_case_gen_tool
+```
 
 ### Run the Test Case Extractor
 
