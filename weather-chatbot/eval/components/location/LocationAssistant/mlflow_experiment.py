@@ -6,7 +6,7 @@ from src.agents.location.location_assistant import LocationAssistant
 from eval.library.utils.inner_loop_helpers import EvaluationUtils
 
 
-class VehicleIdentifierComponent(ComponentWrapper):
+class LocationAssistantComponent(ComponentWrapper):
     """Component wrapper for Vehicle Info Extractor
     """
     def predict(self, context, component_input: dict) -> str | None:
@@ -17,7 +17,7 @@ class VehicleIdentifierComponent(ComponentWrapper):
         """
 
         location_assistant = LocationAssistant()
-        assistant_response = location_assistant.invoke(context=component_input['context'])
+        assistant_response = location_assistant.invoke(message_history=component_input['context']['message_history'])
 
         return assistant_response
 
