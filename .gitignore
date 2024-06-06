@@ -177,4 +177,4 @@ cython_debug/
 # Generated files in weather-app folder
 weather-chatbot/logs/
 *test-results*
-weather-chatbot/end_to_end/data/
+weather-chatbot/eval/end_to_end/data/
