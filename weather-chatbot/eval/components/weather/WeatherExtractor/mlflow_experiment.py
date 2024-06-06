@@ -38,7 +38,6 @@ class WeatherExtractorComponent(ComponentWrapper):
 
         return score
 
-
     def seed_prompt(self) -> dict:
         """
         Returns the seed prompt of component
