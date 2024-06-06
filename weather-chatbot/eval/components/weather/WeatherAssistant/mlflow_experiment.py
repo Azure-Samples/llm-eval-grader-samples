@@ -4,6 +4,7 @@ from eval.library.inner_loop.mlflow_helpers.core.component_base_class import (
 from src.agents.weather.prompts import WEATHER_ASSISTANT_BASE_PROMPT
 from src.agents.weather.weather_assistant import WeatherAssistant
 from eval.library.utils.inner_loop_helpers import EvaluationUtils
+from src.context import Context
 
 
 class WeatherAssistantComponent(ComponentWrapper):
@@ -17,7 +18,9 @@ class WeatherAssistantComponent(ComponentWrapper):
         """
 
         weather_assistant = WeatherAssistant()
-        assistant_response = weather_assistant.invoke(message_history=component_input['context']['message_history'])
+        context = Context()
+        context._messages = component_input['context']['message_history']
+        assistant_response = weather_assistant.invoke(context=context)
 
         return assistant_response
 
