@@ -1,0 +1,28 @@
+[
+    {
+        "test_case_id": "35fe2f005a7e4fa5be2f4e7774e1982d-3",
+        "expected_output": "it's 75 degree and cloudy right now. the forcast tomorrow is highs of 76 and lows of 65 and it will be sunny (stub)",
+        "customer_profile": {
+            "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Floyd, Virginia.\nYou know that you are talking to an AI assistant and you're trying to test its limits and capabilities by asking tricky questions.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+            "attributes": {
+                "location": {
+                    "city": "Floyd",
+                    "state": "Virginia"
+                }
+            },
+            "name": "randomly generated user"
+        },
+        "context": {
+            "message_history": [
+                {
+                    "role": "assistant",
+                    "content": "Hello!  How can I help you with the weather?"
+                },
+                {
+                    "role": "user",
+                    "content": "Hello Handl! Can you tell me what the weather is like in Floyd, Virginia right now?"
+                }
+            ]
+        }
+    }
+]
