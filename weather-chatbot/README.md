@@ -39,12 +39,17 @@ python -m pytest
 
 ## Running outer loop evaluation locally
 
-```cmd
-python -m eval.end_to_end.run_local
-```
+To run the end to end evaluation from `weather-chatbot` folder:
+1. Create a python environment
+1. Install requirements by running **pip install -r requirements.txt**
+1. Copy .env.sample as .env and replace all placeholder values with the correct settings from your Azure resources
+1. In your terminal, run **python -m eval.end_to_end.run_local**
+
 
 The run will create synthetic conversations between an emulated user and the assistant.
 Once the run is complete, a json dataset with the results will be saved in the data folder under end_to_end.
+
+In order to examine the results of the run in a dashboard, run **python -m streamlit run eval/end_to_end/dashboard.py**
 
 ## Running inner loop evaluation locally
 ### Run manual Conversation Generator
@@ -89,7 +94,7 @@ or all messages from a conversation:
 
 Example: 
 ```bash
-python -m src.tests.evaluation.extract_test_cases.extract_test_cases --test_cases_to_extract "{'6c868aa0db3d4d178a2441974076d933': 3}" --component_type bar --component_name foo
+python -m eval.library.inner_loop.extract_test_cases --test_cases_to_extract "{'35fe2f005a7e4fa5be2f4e7774e1982d': 3}" --component_type location --component_name LocationExtractor
 ```
 
 ### Run the inner-loop-component test
