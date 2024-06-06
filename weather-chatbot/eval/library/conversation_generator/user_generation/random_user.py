@@ -6,6 +6,7 @@ TODO: Add attributes once they are figured out"""
 from eval.library.conversation_generator.templates.customer_profile_template import (
     customer_profile_template)
 import secrets
+import json
 
 
 class RandomUserGenerator:
@@ -14,6 +15,7 @@ class RandomUserGenerator:
         base_path = 'eval/library/conversation_generator/customer_profile_data'
         self.places = self._read_data_file(path=f'{base_path}/places.txt')
         self.personalities = self._read_data_file(path=f'{base_path}/personality.txt')
+        self.weather_questions = self._read_data_file(path=f'{base_path}/weather_questions.txt')
 
     def _read_data_file(self, path):
         r = []
@@ -27,12 +29,17 @@ class RandomUserGenerator:
         place = secrets.choice(self.places)
         location_attribute = {"city": place.split(", ")[0], "state": place.split(", ")[1]}
         personality = secrets.choice(self.personalities)
+        weather_question_pair = secrets.choice(self.weather_questions).split('\t')
+        weather_question = weather_question_pair[0]
+        weather_category = json.loads(weather_question_pair[1])['weather_category']
 
 
         profile = {
             'prompt': customer_profile_template.replace("{place}", place).replace(
-                                                       "{personality}", personality),
-            'attributes': {'location': location_attribute},
+                                                       "{personality}", personality).replace(
+                                                           "{weather_question}", weather_question),
+            'attributes': {'location': location_attribute,
+                           'weather_category': weather_category},
             'name': 'randomly generated user'
         }
 
