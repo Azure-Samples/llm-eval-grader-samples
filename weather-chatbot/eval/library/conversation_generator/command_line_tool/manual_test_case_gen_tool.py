@@ -177,8 +177,8 @@ class ConversationGenerationTool():
                                                  "location": {}}},
                         'conversation_id': uuid4().hex,
                         'scenario_prompt': "N/A",
-                        'assistantHarness_context': {'message_history': {'role': "assistant",
-                                             'content': cfg['initial_assistant_message']}}}
+                        'assistantHarness_context': {'message_history': [{'role': "assistant",
+                                             'content': cfg['initial_assistant_message']}]}}
 
         print(f'\nASSISTANT: {cfg["initial_assistant_message"]}\n')
         self.route_chat_with_assistant_command()
