@@ -5,6 +5,8 @@ from eval.library.utils.aml_utils import connect_to_aml
 from eval.library.inner_loop.mlflow_helpers.core.run_mlflow_experiment import (
     run_mlflow_experiment)
 from eval.components.location.LocationExtractor.mlfow_experiment import LocationExtractorComponent
+from eval.components.location.LocationAssistant.mlflow_experiment import LocationAssistantComponent
+
 
 
 class ComponentTest:
@@ -30,6 +32,8 @@ class ComponentTest:
     def get_wrapper(self):
         if self.component_name == 'LocationExtractor':
             return LocationExtractorComponent()
+        elif self.component_name == 'LocationAssistant':
+            return LocationAssistantComponent()
 
     def run_experiment(self):
         run_mlflow_experiment(self.get_wrapper(), self.all_paths,
