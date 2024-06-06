@@ -7,7 +7,7 @@ from eval.library.utils.inner_loop_helpers import EvaluationUtils
 
 
 class LocationAssistantComponent(ComponentWrapper):
-    """Component wrapper for Vehicle Info Extractor
+    """Component wrapper for the Location Assistant
     """
     def predict(self, context, component_input: dict) -> str | None:
         """
