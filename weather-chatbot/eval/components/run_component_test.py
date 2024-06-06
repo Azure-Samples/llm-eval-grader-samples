@@ -7,6 +7,7 @@ from eval.library.inner_loop.mlflow_helpers.core.run_mlflow_experiment import (
 from eval.components.location.LocationExtractor.mlflow_experiment import LocationExtractorComponent
 from eval.components.location.LocationAssistant.mlflow_experiment import LocationAssistantComponent
 from eval.components.weather.WeatherExtractor.mlflow_experiment import WeatherExtractorComponent
+from eval.components.weather.WeatherAssistant.mlflow_experiment import WeatherAssistantComponent
 
 
 
@@ -38,6 +39,8 @@ class ComponentTest:
             return LocationAssistantComponent()
         elif self.component_name == 'WeatherExtractor':
             return WeatherExtractorComponent()
+        elif self.component_name == 'WeatherAssistant':
+            return WeatherAssistantComponent()
 
     def run_experiment(self):
         run_mlflow_experiment(self.get_wrapper(), self.all_paths,
