@@ -3,12 +3,12 @@ from typing import Any, Optional, Union
 import mlflow
 
 
-class ComponentWrapper(mlflow.pyfunc.PythonModel):
+class AgentWrapper(mlflow.pyfunc.PythonModel):
     """
-    Abstract base class for component wrappers
+    Abstract base class for agent wrappers
     """
     @abstractmethod
-    def predict(self, context: Any, component_input: dict) -> Optional[Union[dict, str]]:
+    def predict(self, context: Any, agent_input: dict) -> Optional[Union[dict, str]]:
         pass
 
     @abstractmethod
@@ -17,6 +17,6 @@ class ComponentWrapper(mlflow.pyfunc.PythonModel):
 
     def seed_prompt(self) -> dict:
         """
-        Returns the seed prompt of component
+        Returns the seed prompt of agent
         """
         return {}

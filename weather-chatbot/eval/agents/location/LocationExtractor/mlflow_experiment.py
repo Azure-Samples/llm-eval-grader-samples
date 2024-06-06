@@ -1,5 +1,5 @@
 from src.agents.location.location_extractor import LocationExtractor
-from eval.library.inner_loop.mlflow_helpers.core.component_base_class import ComponentWrapper
+from eval.library.inner_loop.mlflow_helpers.core.agent_base_class import AgentWrapper
 from eval.library.inner_loop.mlflow_helpers.eval.calculate_grade import exact_match_score
 from azure.maps.search import MapsSearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -7,17 +7,17 @@ import os
 from src.context import Context
 
 
-class LocationExtractorComponent(ComponentWrapper):
+class LocationExtractorAgent(AgentWrapper):
     """
-    Component wrapper for location Extractor
+    Agent wrapper for location Extractor
     """
-    def predict(self, context, component_input: dict) -> dict:
+    def predict(self, context, agent_input: dict) -> dict:
         """
-        This method contains the code required to instantiate the component with a variant and get a completion.
+        This method contains the code required to instantiate the agent with a variant and get a completion.
 
-        There will be small differences for each component.
+        There will be small differences for each agent.
         """
-        messages = component_input['context']
+        messages = agent_input['context']
 
         # invoke extractor
         location = LocationExtractor()
@@ -29,7 +29,7 @@ class LocationExtractorComponent(ComponentWrapper):
 
     def measure(self, parameters: dict) -> dict:
         """
-        This method is used to evaluate completions from the component.
+        This method is used to evaluate completions from the agent.
 
         It is called when an experiment runs.
         """
@@ -49,7 +49,7 @@ class LocationExtractorComponent(ComponentWrapper):
 
     def seed_prompt(self) -> dict:
         """
-        Returns the seed prompt of component
+        Returns the seed prompt of agent
         """
         seed_prompt = {'location_extractor_seed_prompt': "dummy"}
 

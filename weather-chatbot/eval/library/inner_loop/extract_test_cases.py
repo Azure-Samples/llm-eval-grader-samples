@@ -3,28 +3,27 @@ import os
 import argparse
 import datetime
 from copy import deepcopy
-# from src.main.ca.canadiantire.pos.models.constants import CONTEXT_VISITED_COMPONENTS
 
 
 log_directories = [
     'logs/',
 ]
 
-default_component_name = 'LocationExtractor'
-default_component_type = 'location'
+default_agent_name = 'LocationExtractor'
+default_agent_type = 'location'
 default_test_cases_to_extract = {
     "4d20609952f74240840310cf4650f7c3": 5
 }
 
-component_name = ''
-component_type = ''
+agent_name = ''
+agent_type = ''
 
-output_base_dir_template = 'logs/extracted_test_cases/{component_type}/{component_name}/test-data/'
+output_base_dir_template = 'logs/extracted_test_cases/{agent_type}/{agent_name}/test-data/'
 
 _MATCH_ALL_WILDCARD = '*'
 
 
-def extract_test_cases(test_cases_to_extract: dict, split_into_visited_components: bool):
+def extract_test_cases(test_cases_to_extract: dict, split_into_visited_agents: bool):
     test_cases = []
 
     # Create output file for this current run
@@ -35,12 +34,12 @@ def extract_test_cases(test_cases_to_extract: dict, split_into_visited_component
             if not filename.endswith('.xlsx'):
                 if os.path.isfile(os.path.join(directory, filename)):
                     test_cases += find_test_cases(f'{directory}/{filename}', test_cases_to_extract,
-                                                  split_into_visited_components)
+                                                  split_into_visited_agents)
 
-    consolidated_test_cases = consolidate_test_cases_by_component(test_cases)
+    consolidated_test_cases = consolidate_test_cases_by_agent(test_cases)
 
-    for component in consolidated_test_cases:
-        output_base_dir = output_base_dir_template.format(component_name=component, component_type=component_type)
+    for agent in consolidated_test_cases:
+        output_base_dir = output_base_dir_template.format(agent_name=agent, agent_type=agent_type)
 
         if not os.path.exists(output_base_dir):
             os.makedirs(output_base_dir)
@@ -49,34 +48,34 @@ def extract_test_cases(test_cases_to_extract: dict, split_into_visited_component
 
         # Print extracted cases
         with open(destination_filename, 'a') as f:
-            json.dump(consolidated_test_cases[component], f, indent=4)
+            json.dump(consolidated_test_cases[agent], f, indent=4)
 
 
-def consolidate_test_cases_by_component(test_cases: list[dict[str, object]]) -> dict[str, list[object]]:
-    """Consolidate lists of component + test cases into dictionary of unique components
+def consolidate_test_cases_by_agent(test_cases: list[dict[str, object]]) -> dict[str, list[object]]:
+    """Consolidate lists of agent + test cases into dictionary of unique agents
     w/ lists of test cases:
-    [ {'component_a': {test case1}}, {'component_b': {test case2}}, {'component_a': {test case3}}] ->
-    {'component_a': [{test case 1}, {test case3}], 'component_b': [{test case2}]}
+    [ {'agent_a': {test case1}}, {'agent_b': {test case2}}, {'agent_a': {test case3}}] ->
+    {'agent_a': [{test case 1}, {test case3}], 'agent_b': [{test case2}]}
 
     Args:
-        test_cases (list[dict[str:object]]): List of dictionaries containing the component names + test cases
+        test_cases (list[dict[str:object]]): List of dictionaries containing the agent names + test cases
 
     Returns:
-        dict[str, list[object]]: The same test cases in a dictionary with the component name as the key
+        dict[str, list[object]]: The same test cases in a dictionary with the agent name as the key
         and a list of the test cases as the value
     """
-    output_cases_by_component = {}
+    output_cases_by_agent = {}
     for test_case in test_cases:
         for _, (k, v) in enumerate(test_case.items()):
-            if k not in output_cases_by_component:
-                output_cases_by_component[k] = [v]
+            if k not in output_cases_by_agent:
+                output_cases_by_agent[k] = [v]
             else:
-                output_cases_by_component[k].append(v)
+                output_cases_by_agent[k].append(v)
 
-    return output_cases_by_component
+    return output_cases_by_agent
 
 
-def find_test_cases(filename: str, test_cases_to_extract: dict, split_into_visited_components: bool) -> list[dict]:
+def find_test_cases(filename: str, test_cases_to_extract: dict, split_into_visited_agents: bool) -> list[dict]:
     test_cases = []
 
     with open(filename, 'r') as file:
@@ -89,14 +88,14 @@ def find_test_cases(filename: str, test_cases_to_extract: dict, split_into_visit
                 if isinstance(conversation, dict):
                     if is_test_case_conversation(test_cases_to_extract, conversation):
                         test_cases += create_test_cases(conversation, test_cases_to_extract,
-                                                        split_into_visited_components)
+                                                        split_into_visited_agents)
             except json.JSONDecodeError:
                 pass
 
     return test_cases
 
 
-def create_test_cases(conversation: dict, test_cases_to_extract: dict, split_into_visited_components: bool) \
+def create_test_cases(conversation: dict, test_cases_to_extract: dict, split_into_visited_agents: bool) \
         -> list[dict]:
     test_cases = []
 
@@ -131,12 +130,7 @@ def create_test_cases(conversation: dict, test_cases_to_extract: dict, split_int
                 if "context" in msg:
                     test_case["context"] = deepcopy(msg["context"])
 
-                # if split_into_visited_components:
-                #     if "context" in msg and CONTEXT_VISITED_COMPONENTS in msg["context"]:
-                #         for visited_component in msg["context"][CONTEXT_VISITED_COMPONENTS]:
-                #             test_cases.append({visited_component: test_case})
-                # else:
-                test_cases.append({component_name: test_case})
+                test_cases.append({agent_name: test_case})
                 break
 
     return test_cases
@@ -177,14 +171,14 @@ def validate_test_cases_to_extract(test_cases_to_extract: dict):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--component_name", type=str, required=False, default=default_component_name)
-    parser.add_argument("--component_type", type=str, required=False, default=default_component_type)
+    parser.add_argument("--agent_name", type=str, required=False, default=default_agent_name)
+    parser.add_argument("--agent_type", type=str, required=False, default=default_agent_type)
     parser.add_argument("--test_cases_to_extract", type=str, required=False, default=str(default_test_cases_to_extract))
-    parser.add_argument("--split_into_visited_components", type=bool, required=False, default=False)
+    parser.add_argument("--split_into_visited_agents", type=bool, required=False, default=False)
     args, _ = parser.parse_known_args()
-    component_name = args.component_name
-    component_type = args.component_type
+    agent_name = args.agent_name
+    agent_type = args.agent_type
     s = args.test_cases_to_extract.replace("\'", "\"")
     test_cases_to_extract = json.loads(s)
     validate_test_cases_to_extract(test_cases_to_extract)
-    extract_test_cases(test_cases_to_extract, args.split_into_visited_components)
+    extract_test_cases(test_cases_to_extract, args.split_into_visited_agents)

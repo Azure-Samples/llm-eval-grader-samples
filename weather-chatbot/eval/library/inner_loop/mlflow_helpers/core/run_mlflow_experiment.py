@@ -6,8 +6,8 @@ import json
 import numpy as np
 import time
 
-from eval.library.inner_loop.mlflow_helpers.core.component_base_class import (
-    ComponentWrapper
+from eval.library.inner_loop.mlflow_helpers.core.agent_base_class import (
+    AgentWrapper
 )
 from eval.library.utils.aml_utils import (
     associate_model_w_data
@@ -25,7 +25,7 @@ from eval.end_to_end.constants import (
 
 
 def run_mlflow_experiment(
-        component: ComponentWrapper,
+        agent: AgentWrapper,
         test_data_path: list[str],
         output_folder: str) -> None:
     """Run experiment with variants in mlflow and evaluate the output"""
@@ -44,7 +44,7 @@ def run_mlflow_experiment(
                 all_test_data.extend([load_json_file(filename, name_data)])
 
     timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    artifact_path = component.__class__.__name__
+    artifact_path = agent.__class__.__name__
     exp_name = f'{artifact_path}'
     run_name = f'{artifact_path}_run_{timestamp}'
 
@@ -59,7 +59,7 @@ def run_mlflow_experiment(
 
     with mlflow.start_run(run_name=run_name, experiment_id=experiment_id) as run:
         # Load mlflow model
-        mlflow_model = mlflow.pyfunc.log_model(artifact_path=artifact_path, python_model=component, signature=False)
+        mlflow_model = mlflow.pyfunc.log_model(artifact_path=artifact_path, python_model=agent, signature=False)
         loaded_model = mlflow.pyfunc.load_model(model_uri=mlflow_model.model_uri)
 
         experiment_dct['parent_run_id'] = run.info.run_id
@@ -78,7 +78,7 @@ def run_mlflow_experiment(
                 result = loaded_model.predict(test_case)
 
                 # Record result
-                test_case['component_output'] = result
+                test_case['agent_output'] = result
 
                 # Score result based on expected_output
                 expected_output = test_case['expected_output']
@@ -88,12 +88,12 @@ def run_mlflow_experiment(
                         'role': 'assistant',
                         'content': result
                     })
-                    parameters = {'component_input': test_case}
-                    score = component.measure(parameters=parameters)
+                    parameters = {'agent_input': test_case}
+                    score = agent.measure(parameters=parameters)
                 else:
                     parameters = {'expected_output': expected_output, 'result': result,
                                   'attributes': test_case['customer_profile']['attributes']}
-                    score = component.measure(parameters=parameters)
+                    score = agent.measure(parameters=parameters)
                 test_case['scores'] = score
                 for metric in score.keys():
                     if metric not in [LLM_GRADER_EXPLANATION, EXACT_MATCH_RAW]:
@@ -117,7 +117,7 @@ def run_mlflow_experiment(
             'test_case_data': all_test_cases,
             'avg_scores': avg_score,
             'overall_score': overall_score,
-            'seed_prompts': component.seed_prompt(),
+            'seed_prompts': agent.seed_prompt(),
             'assistant_version': 'PLACEHOLDER' 
         }
         all_scores = [{'test_case_id': test_case['test_case_id'], 'scores': test_case['scores'],

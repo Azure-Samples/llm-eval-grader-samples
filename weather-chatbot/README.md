@@ -65,13 +65,13 @@ python -m eval.library.conversation_generator.command_line_tool.manual_test_case
 Start by running the conversation generator so that you have some conversations logged.
 
 The tool extract messages from conversations. Supply the
-```--component_name YourComponentName``` parameter to name the output for your component and the
-```--component_type YourComponentType``` parameter to identify the type. This is used to indicate the folder that
-the output files should be written to: eval/components/{component_type}/{component_name}/test-data/
+```--agent_name YourAgentName``` parameter to name the output for your agent and the
+```--agent_type YourAgentType``` parameter to identify the type. This is used to indicate the folder that
+the output files should be written to: eval/agents/{agent_type}/{agent_name}/test-data/
 
 #### Decide Which Turns to Extract From The Conversations
 
-Opening up the generated conversations, you will see that each conversation has a conversation_id, which is a guid and each message has a message_id, which is an integer. This tool uses these two values to extract one or more messages from a conversation into a test case that you can use to evaluate your component.
+Opening up the generated conversations, you will see that each conversation has a conversation_id, which is a guid and each message has a message_id, which is an integer. This tool uses these two values to extract one or more messages from a conversation into a test case that you can use to evaluate your agent.
 You can extract a single message from a conversation by using the integer messageId to extract:
 
 ```bash
@@ -94,40 +94,40 @@ or all messages from a conversation:
 
 Example: 
 ```bash
-python -m eval.library.inner_loop.extract_test_cases --test_cases_to_extract "{'35fe2f005a7e4fa5be2f4e7774e1982d': 3}" --component_type location --component_name LocationExtractor
+python -m eval.library.inner_loop.extract_test_cases --test_cases_to_extract "{'35fe2f005a7e4fa5be2f4e7774e1982d': 3}" --agent_type location --agent_name LocationExtractor
 ```
 
-### Run the inner-loop-component test
-#### Below are examples to run the test for LocationExtractorComponent
-#### You should switch to your component_type and component_name
-#### Make sure you have "test-data" folder like this: eval\components\location\LocationExtractor\test-data
+### Run the inner-loop-agent test
+#### Below are examples to run the test for LocationExtractorAgent
+#### You should switch to your agent_type and agent_name
+#### Make sure you have "test-data" folder like this: eval\agents\location\LocationExtractor\test-data
 -------------------------------------------------------------------------------------
 If you want to run the test for everything
 ```bash
-python -W "ignore" -m eval.components.run_component_test --component_type location --component_name LocationExtractor --test_data \*
+python -W "ignore" -m eval.agents.run_agent_test --agent_type location --agent_name LocationExtractor --test_data \*
 ```
 -------------------------------------------------------------------------------------
 If you want to run the test for one file under test-data
 ```bash
-python -W "ignore" -m eval.components.run_component_test --component_type location --component_name LocationExtractor --test_data file_name.json
+python -W "ignore" -m eval.agents.run_agent_test --agent_type location --agent_name LocationExtractor --test_data file_name.json
 ```
 -------------------------------------------------------------------------------------
 If you want to run the test for multiple files under test-data
 ```bash
-python -W "ignore" -m eval.components.run_component_test --component_type location --component_name LocationExtractor --test_data file_name1.json file_name2.json etc.,
+python -W "ignore" -m eval.agents.run_agent_test --agent_type location --agent_name LocationExtractor --test_data file_name1.json file_name2.json etc.,
 ```
 -------------------------------------------------------------------------------------
 If you want to run the test for all files in one sub-folder under test-data
 ```bash
-python -W "ignore" -m eval.components.run_component_test --component_type location --component_name LocationExtractor --test_data folder_name
+python -W "ignore" -m eval.agents.run_agent_test --agent_type location --agent_name LocationExtractor --test_data folder_name
 ```
 -------------------------------------------------------------------------------------
 If you want to run the test for all files in multiple sub-folders under test-data
 ```bash
-python -W "ignore" -m eval.components.run_component_test --component_type location --component_name LocationExtractor --test_data folder_name1 folder_name2
+python -W "ignore" -m eval.agents.run_agent_test --agent_type location --agent_name LocationExtractor --test_data folder_name1 folder_name2
 ```
 -------------------------------------------------------------------------------------
 If you want to run the test for one file under a sub-folder or multiple files under multiple sub-folders within test-data
 ```bash
-python -W "ignore" -m eval.components.run_component_test --component_type location --component_name LocationExtractor --test_data folder_name1/file1.json folder_name2/file2.json
+python -W "ignore" -m eval.agents.run_agent_test --agent_type location --agent_name LocationExtractor --test_data folder_name1/file1.json folder_name2/file2.json
 ```
