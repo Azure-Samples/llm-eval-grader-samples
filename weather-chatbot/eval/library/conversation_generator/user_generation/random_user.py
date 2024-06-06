@@ -29,7 +29,7 @@ class RandomUserGenerator:
         place = secrets.choice(self.places)
         location_attribute = {"city": place.split(", ")[0], "state": place.split(", ")[1]}
         personality = secrets.choice(self.personalities)
-        weather_question_pair = secrets.choice(self.weather_questions).split('\t')
+        weather_question_pair = secrets.choice(self.weather_questions).split(', ')
         weather_question = weather_question_pair[0]
         weather_category = json.loads(weather_question_pair[1])['weather_category']
 
