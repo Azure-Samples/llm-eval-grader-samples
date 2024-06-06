@@ -171,6 +171,7 @@ def generate_turn_assistant_message(assistantHarness, context: dict) -> bool:
     # Log this reconstructed context as the assistantHarness_context for this turn
     context['message_history'].append(
         {'role': 'assistant', 'content': assistant_message, 'context': new_assistantHarness_context})
+    context['assistantHarness_context'] = new_assistantHarness_context
 
     if assistant_message is None:
         return False

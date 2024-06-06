@@ -11,7 +11,7 @@ log_directories = [
 ]
 
 default_component_name = 'LocationExtractor'
-default_component_type = 'LocationAgent'
+default_component_type = 'location'
 default_test_cases_to_extract = {
     "4d20609952f74240840310cf4650f7c3": 5
 }
@@ -184,6 +184,7 @@ if __name__ == "__main__":
     args, _ = parser.parse_known_args()
     component_name = args.component_name
     component_type = args.component_type
-    test_cases_to_extract = json.loads(args.test_cases_to_extract)
+    s = args.test_cases_to_extract.replace("\'", "\"")
+    test_cases_to_extract = json.loads(s)
     validate_test_cases_to_extract(test_cases_to_extract)
     extract_test_cases(test_cases_to_extract, args.split_into_visited_components)

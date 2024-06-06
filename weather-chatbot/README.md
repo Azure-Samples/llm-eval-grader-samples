@@ -84,7 +84,7 @@ or all messages from a conversation:
 
 Example: 
 ```bash
-python -m src.tests.evaluation.extract_test_cases.extract_test_cases --test_cases_to_extract "{'6c868aa0db3d4d178a2441974076d933': 3}" --component_type bar --component_name foo
+python -m eval.library.inner_loop.extract_test_cases --test_cases_to_extract "{'35fe2f005a7e4fa5be2f4e7774e1982d': 3}" --component_type location --component_name LocationExtractor
 ```
 
 ### Run the inner-loop-component test

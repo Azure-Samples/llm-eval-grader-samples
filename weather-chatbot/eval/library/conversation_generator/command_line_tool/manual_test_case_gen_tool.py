@@ -149,7 +149,8 @@ class ConversationGenerationTool():
                         'scenario_prompt': scenario_prompt,
                         'conversation_id': uuid4().hex,
                         'customer_profile': customer_profile,
-                        'assistantHarness_context': {'message_history': []}}
+                        'assistantHarness_context': {'message_history': [{'role': "assistant",
+                                             'content': cfg['initial_assistant_message']}]}}
 
         # Get the first customer message
         customer_message = self.customer_chat.get_reply(self.context)
@@ -166,12 +167,6 @@ class ConversationGenerationTool():
             # within generate_turn
             succeeded = None
 
-        if succeeded:
-            # Print generated turn
-            temp_context = deepcopy(self.context)
-            temp_context['message_history'] = temp_context['message_history'][-2:]
-            self.cg.print_conversation(temp_context, print_conversation_id=False)
-
         return succeeded
 
     def chat_with_assistant(self):
@@ -182,7 +177,8 @@ class ConversationGenerationTool():
                                                  "location": {}}},
                         'conversation_id': uuid4().hex,
                         'scenario_prompt': "N/A",
-                        'assistantHarness_context': {'message_history': []}}
+                        'assistantHarness_context': {'message_history': {'role': "assistant",
+                                             'content': cfg['initial_assistant_message']}}}
 
         print(f'\nASSISTANT: {cfg["initial_assistant_message"]}\n')
         self.route_chat_with_assistant_command()
