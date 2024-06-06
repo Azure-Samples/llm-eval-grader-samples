@@ -7,7 +7,7 @@ from src.context import Context
 
 class WeatherExtractorComponent(ComponentWrapper):
     """
-    Component wrapper for location Extractor
+    Component wrapper for Weather Extractor
     """
     def predict(self, context, component_input: dict) -> dict:
         """
