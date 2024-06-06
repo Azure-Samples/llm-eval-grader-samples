@@ -10,7 +10,7 @@ UNKNOWN_CATEGORY = "UNKNOWN"
 
 class WeatherExtractor:
     """
-    Class for extracting what information about the weather a
+    Class for extracting what information about the weather
     a user wants to know so that an API call can be made.
     """
 
@@ -18,10 +18,14 @@ class WeatherExtractor:
 
         message_history = context.get_messages()
 
+        # Grabbing the most recent two messages so that we can update
+        # the category as needed, without managing change detection
+        recent_history = message_history[-2:]
+
         if len(message_history) == 0:
             return
 
-        flattened_history = "\n".join([f"{m['role']}: {m['content']}" for m in message_history])
+        flattened_history = "\n".join([f"{m['role']}: {m['content']}" for m in recent_history])
 
         system_prompt = inspect.cleandoc(f"""
             Your task is to try and determine what type of question or questions a user is asking about the weather
