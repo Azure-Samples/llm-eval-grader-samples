@@ -1,0 +1,29 @@
+[
+    {
+        "test_case_id": "0d351b3d902d4f26a3530cde2fc7ee59-3",
+        "expected_output": "The user wants to know the weather forecast for the next five days in La Conner, Washington. \n\nUnfortunately, the provided weather data only includes the forecast for one day, which is June 6, 2024. On this day, the weather in La Conner, Washington is expected to be partly sunny and nice with a maximum temperature of 19.9\u00b0C and a minimum of 7.8\u00b0C. The air quality is good and there is no precipitation expected. \n\nI'm sorry, but I don't have the weather data for the next five days. Would you like to know more about the weather on June 6, 2024, or is there anything else you would like to know?",
+        "customer_profile": {
+            "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in La Conner, Washington.\nYou often fail to understand instructions and usually misinterpret what the assistant is saying..\nYou want to know the daily forecast of the weather in the next 5 days.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+            "attributes": {
+                "location": {
+                    "city": "La Conner",
+                    "state": "Washington"
+                },
+                "weather_category": "DAILY_FORECAST"
+            },
+            "name": "randomly generated user"
+        },
+        "context": {
+            "message_history": [
+                {
+                    "role": "assistant",
+                    "content": "Hello!  How can I help you with the weather?"
+                },
+                {
+                    "role": "user",
+                    "content": "Hey there! I'd like to know what the weather's gonna be like in La Conner, Washington for the next five days. Could ya help with that?"
+                }
+            ]
+        }
+    }
+]

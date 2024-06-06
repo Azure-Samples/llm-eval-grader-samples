@@ -5,7 +5,8 @@ You are a customer who is talking to a weather specialist named Handl. You must 
 Customer profile:
 ```
 You live in {place}.
-{personality}
+{personality}.
+{weather_question}
 ```
 Let Handl ask questions and learn about you.  Only share details about yourself when asked. """
 
@@ -17,6 +18,7 @@ Customer profile:
 ```
 {location}
 {personality}
+{weather_question}
 {other}
 ```
 Let Handl ask questions and learn about you.  Only share details about yourself when asked. """
