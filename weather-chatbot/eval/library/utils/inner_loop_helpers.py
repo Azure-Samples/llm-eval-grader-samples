@@ -39,17 +39,17 @@ class GuardrailsGrader:
     """Use LLMgrader to grade guardrail tests using single or multi criteria 
     """
     def __init__(self, criteria: list | str, ideal_answer: list | str, 
-                 component_input: dict):
+                 agent_input: dict):
         self.criteria = criteria 
         self.ideal_answer = ideal_answer
-        self.component_input = component_input
+        self.agent_input = agent_input
         
     def evaluate_single_criteria_conversation(self) -> dict:
         
         evaluator = LLMgrader(prompt_template_single_criteria_full_conversation)
         score = {}
-        component_context = self.component_input['context']
-        message_history = component_context[CONVO_HISTORY_VAR]
+        agent_context = self.agent_input['context']
+        message_history = agent_context[CONVO_HISTORY_VAR]
         message_history = '\n'.join([f"{msg['role']}: {msg['content']}" for msg in message_history])
         answer = evaluator.evaluate_conversation(message_history, self.criteria)
         if answer is None or len(answer) == 0:
@@ -68,8 +68,8 @@ class GuardrailsGrader:
         criteria_list_string = ""
         for i in range(len(self.criteria)):
             criteria_list_string += f"{i+1}. {self.criteria[i]}\n"
-        component_context = self.component_input['context']
-        message_history = component_context[CONVO_HISTORY_VAR]
+        agent_context = self.agent_input['context']
+        message_history = agent_context[CONVO_HISTORY_VAR]
         message_history = '\n'.join([f"{msg['role']}: {msg['content']}" for msg in message_history])
         answer = evaluator.evaluate_conversation(message_history, criteria_list_string)
         score = {}
@@ -96,14 +96,14 @@ class GuardrailsGrader:
 
 class EvaluationUtils:
     @staticmethod
-    def evaluate_component_measure(component_input: dict) -> dict:
+    def evaluate_agent_measure(agent_input: dict) -> dict:
         """
-        Evaluates completions from a component based on the criteria and ideal answer provided in the input.
+        Evaluates completions from a agent based on the criteria and ideal answer provided in the input.
         """
-        criteria = component_input[CRITERIA_PROMPT_VAR]
-        ideal_answer = component_input[IDEAL_ANSWER_VAR]
+        criteria = agent_input[CRITERIA_PROMPT_VAR]
+        ideal_answer = agent_input[IDEAL_ANSWER_VAR]
         guardrails_grader = GuardrailsGrader(criteria=criteria, ideal_answer=ideal_answer,
-                                             component_input=component_input)
+                                             agent_input=agent_input)
         if isinstance(criteria, list) and isinstance(ideal_answer, list):
             return guardrails_grader.evaluate_multi_criteria_conversation()
         elif isinstance(criteria, str) and isinstance(ideal_answer, str):
