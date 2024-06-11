@@ -1,76 +1,87 @@
-# Contributing to [project-title]
+# Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+This project welcomes contributions and suggestions.  Most contributions require
+you to agree to a Contributor License Agreement (CLA) declaring that you have
+the right to, and actually do, grant us the rights to use your contribution. For
+details, visit <https://cla.microsoft.com>.
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+When you submit a pull request, a CLA-bot will automatically determine whether
+you need to provide a CLA and decorate the PR appropriately (e.g., label,
+comment). Simply follow the instructions provided by the bot. You will only need
+to do this once across all repos using our CLA.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project has adopted the [Microsoft Open Source Code of
+Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct
+FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any
+additional questions or comments.
 
- - [Code of Conduct](#coc)
- - [Issues and Bugs](#issue)
- - [Feature Requests](#feature)
- - [Submission Guidelines](#submit)
+## Permissions & Contributions
 
-## <a name="coc"></a> Code of Conduct
-Help us keep this project open and inclusive. Please read and follow our [Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+There are two ways in which you can help update the content:
 
-## <a name="issue"></a> Found an Issue?
-If you find a bug in the source code or a mistake in the documentation, you can help us by
-[submitting an issue](#submit-issue) to the GitHub Repository. Even better, you can
-[submit a Pull Request](#submit-pr) with a fix.
+* **One-off:** \
+If you are not a regular contributor to the project, but you would like to
+contribute some changes, the best way to do it is:
 
-## <a name="feature"></a> Want a Feature?
-You can *request* a new feature by [submitting an issue](#submit-issue) to the GitHub
-Repository. If you would like to *implement* a new feature, please submit an issue with
-a proposal for your work first, to be sure that we can use it.
+  1. Fork the repo
+  2. Write in your contributions
+  3. Create a PR into this repo
 
-* **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
+* **Periodic and regular contributions:** \
+If you plan to update the content semi-regularly or regularly, you can be added
+to the project's Contributors group. Please contact one of the project's
+administrators to be added to the group.
+You will still need a PR against master in order to merge your changes.
 
-## <a name="submit"></a> Submission Guidelines
+## Git guidance
 
-### <a name="submit-issue"></a> Submitting an Issue
-Before you submit an issue, search the archive, maybe your question was already answered.
+Consistent with the practices suggested in this playbook, please follow the
+specifics regarding git as described in this section.
 
-If your issue appears to be a bug, and hasn't been reported, open a new issue.
-Help us to maximize the effort we can spend fixing issues and adding new
-features, by not reporting duplicate issues.  Providing the following information will increase the
-chances of your issue being dealt with quickly:
+### Branch naming convention
 
-* **Overview of the Issue** - if an error is being thrown a non-minified stack trace helps
-* **Version** - what version is affected (e.g. 0.1.2)
-* **Motivation for or Use Case** - explain what are you trying to do and why the current behavior is a bug for you
-* **Browsers and Operating System** - is this a problem with all browsers?
-* **Reproduce the Error** - provide a live example or a unambiguous set of steps
-* **Related Issues** - has a similar issue been reported before?
-* **Suggest a Fix** - if you can't fix the bug yourself, perhaps you can point to what might be
-  causing the problem (line of code or commit)
+In this repo, we use the following branch naming conventions:
 
-You can file new issues by providing the above information at the corresponding repository's issues link: https://github.com/[organization-name]/[repository-name]/issues/new].
+| Branch Type | Pattern | Example |
+| - | - | - |
+| Feature | feature/\<issue#>-\<short description> | feature/498-reorganize-scm-section |
+| Bug Fix | fix/\<bug#>-\<short description> | bug/978-correct-grammar-myfile.md |
 
-### <a name="submit-pr"></a> Submitting a Pull Request (PR)
-Before you submit your Pull Request (PR) consider the following guidelines:
+> **Note:**
+>
+> * Please, do not use personal branches. Work should refer back to a
+feature/bug fix in the backlog.
+> * Mind the capitalization of the branch prefix (feature, fix). Tools that
+diplay branches as a hierarchy are typically case sensitive, and will display
+different hierarchies for the same words with different capitalization.
 
-* Search the repository (https://github.com/[organization-name]/[repository-name]/pulls) for an open or closed PR
-  that relates to your submission. You don't want to duplicate effort.
+### Linting
 
-* Make your changes in a new git fork:
+If you use VSCode as your preferred editor, please install the [markdownlint
+extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+and ensure that all rules are followed. This will help ensure consistency in the
+look and feel of the documentation in this repo.
 
-* Commit your changes using a descriptive commit message
-* Push your fork to GitHub:
-* In GitHub, create a pull request
-* If we suggest changes then:
-  * Make the required updates.
-  * Rebase your fork and force push to your GitHub repository (this will update your Pull Request):
+## Legal Notices
 
-    ```shell
-    git rebase master -i
-    git push -f
-    ```
+Microsoft and any contributors grant you a license to the Microsoft
+documentation and other content in this repository under the
+[Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/legalcode),
+see the [LICENSE](LICENSE) file, and grant you a license to any code in the
+repository under the [MIT License](https://opensource.org/licenses/MIT), see the
+[LICENSE-CODE](LICENSE-CODE) file.
 
-That's it! Thank you for your contribution!
+Microsoft, Windows, Microsoft Azure and/or other Microsoft products and services
+referenced in the documentation may be either trademarks or registered
+trademarks of Microsoft in the United States and/or other countries.
+The licenses for this project do not grant you rights to use any Microsoft
+names, logos, or trademarks. Microsoft's general trademark guidelines can be
+found at <http://go.microsoft.com/fwlink/?LinkID=254653>.
+
+Privacy information can be found at <https://privacy.microsoft.com/en-us/>
+
+Microsoft and any contributors reserve all others rights, whether under their
+respective copyrights, patents, or trademarks, whether by implication, estoppel
+or otherwise.
