@@ -40,7 +40,7 @@ param blobStorageName string
 @description('The VM size for compute instance')
 param vmSize string = 'Standard_DS3_v2'
 @description('Specifies the name of the compute cluster')
-param clusterName string = 'llm-inspect-cluster'
+param clusterName string = 'llm-eval-grader-cluster'
 @description('Specifies the name of the log analytics workspace secret')
 param logAnalyticsWorkspaceSecretName string = 'sample-chatbot-az-monitor-workspace-id'
 @description('Specifies the name of the sql database secret')

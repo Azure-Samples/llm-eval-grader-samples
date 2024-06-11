@@ -85,7 +85,7 @@ The framework is designed to be modular and extensible. The framework consists o
 1. [Data Model](./docs/images/data_model.png) - The data model for the evaluation, containing the chat logs and the evaluation metrics.
 1. [Azure SQL](./azuresql) - The Azure SQL scripts for creating the database and tables for storing the evaluation metrics as per the data model.
 1. [Sample Chatbot](./sample-chatbot) - A sample chatbot application that generates the chat logs for demonstration purposes.
-1. [Framework Source](./src/llminspect) - The source code for the framework, containing python modules for the data transformation pipeline and evaluation pipeline.
+1. [Framework Source](./src/llmevalgrader) - The source code for the framework, containing python modules for the data transformation pipeline and evaluation pipeline.
 1. [Framework Deployment](./azureml) - The deployment and execution scripts for the framework, containing the Azure ML pipelines for the data transformation and evaluation pipelines.
 1. [Dashboards](./dashboards) - The PowerBI dashboard for visualizing the evaluation metrics.
 

@@ -6,7 +6,7 @@ from azure.core.exceptions import HttpResponseError
 from azure.identity import DefaultAzureCredential
 from azure.monitor.query import LogsQueryClient, LogsQueryStatus
 
-from llminspect.common.logger import get_logger
+from llmevalgrader.common.logger import get_logger
 
 class AzureMonitorHandler:
     def __init__(self, workspace_id: str, logger: Logger = get_logger("azure_monitor_handler")):

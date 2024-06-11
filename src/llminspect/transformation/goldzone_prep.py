@@ -1,7 +1,7 @@
 from uuid import uuid4
 import pandas as pd
 
-from llminspect.common.logger import get_logger
+from llmevalgrader.common.logger import get_logger
 
 logger = get_logger("goldzone_prep")
 

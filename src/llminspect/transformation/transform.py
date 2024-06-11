@@ -6,10 +6,10 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
-from llminspect.common.logger import get_logger
-from llminspect.common.azure_monitor_handler import AzureMonitorHandler
-from llminspect.common.get_secret import get_key_vault_secret
-from llminspect.common.entities import AzureMonitorDataSource, MappingList, TransformationDTO
+from llmevalgrader.common.logger import get_logger
+from llmevalgrader.common.azure_monitor_handler import AzureMonitorHandler
+from llmevalgrader.common.get_secret import get_key_vault_secret
+from llmevalgrader.common.entities import AzureMonitorDataSource, MappingList, TransformationDTO
 
 
 class DataTransformer:

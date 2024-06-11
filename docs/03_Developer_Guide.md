@@ -142,16 +142,16 @@ Data transformation pipelines are used to transform the raw data into a format t
     - Define transformation specific AML pipeline configurations such as endpoint, schedule, schedule start time etc.
 
 2. The transformation pipeline source code is at two places, one in the azureml folder, other in the src folder.
-    - [transform_data.py](../azureml/pipeline/code/transform_data.py) This acts like the onboarding script for transformation.It imports the code in the src/llminspect folder, calling the common and transformation folder. This script orchestrates the transformation process. It calls the respective code which reads the data from azure monitor, transforms the data, as per mappings specified in the transfromation_config file , samples it and updates the dim and fact tables in the ADLS Gen2 (GOLD ZONE) in parquet format. It will create the dim_conversation, dim_metadata, fact_evaluation output files if not present , or update them if already present. Finally clean data is stored in the GOLD ZONE, ready for evaluation pipeleines
+    - [transform_data.py](../azureml/pipeline/code/transform_data.py) This acts like the onboarding script for transformation.It imports the code in the src/llmevalgrader folder, calling the common and transformation folder. This script orchestrates the transformation process. It calls the respective code which reads the data from azure monitor, transforms the data, as per mappings specified in the transfromation_config file , samples it and updates the dim and fact tables in the ADLS Gen2 (GOLD ZONE) in parquet format. It will create the dim_conversation, dim_metadata, fact_evaluation output files if not present , or update them if already present. Finally clean data is stored in the GOLD ZONE, ready for evaluation pipeleines
     - [transformation.yml](../azureml/pipeline/components/definition/transformation.yml) This file has the definition for the transformation component. It has the input and outputs defined and the conda environment to be created.
     - [deploy_transformation_pipeline.py](../azureml/pipeline/deploy/deploy_transformation_pipeline.py)
         This file is the actual deploy script which invokes the transform_data.py
-    - The common reusable code is located in the  [src/llminspect/common/](../src/llminspect/)  and [src/llminspect/transformation/](../src/llminspect/transformation/)which is packaged and imported in the [../src/azureml/pipeline/code/](../azureml/pipeline/code) python scripts
-        - [transform.py](../src/llminspect/transformation/transform.py)
+    - The common reusable code is located in the  [src/llmevalgrader/common/](../src/llmevalgrader/)  and [src/llmevalgrader/transformation/](../src/llmevalgrader/transformation/)which is packaged and imported in the [../src/azureml/pipeline/code/](../azureml/pipeline/code) python scripts
+        - [transform.py](../src/llmevalgrader/transformation/transform.py)
         This file does all the main transformations in the data at the bot and the component level. If there is a change in the data format, data schema or transformation logic, one needs to make the changes here in the corresponding functions. Currently this file is specific to sample chatbot application. This file takes care of reading the data from azure monitor and mapping the columns and do the preprocessing on the data.
-        - [goldzone_prep.py](../src/llminspect/transformation/goldzonne_prep.py)
+        - [goldzone_prep.py](../src/llmevalgrader/transformation/goldzonne_prep.py)
         This file reads and updates the goldzone table, namely the dim_metadata,dim_conversation and fact_evaluation_dataset
-        - [sampling.py](..src/llminspect/transformation/sampling.py)This python script takes care of checking unique sessions and taking a fraction of these to be sampled and used for transformation pipeline, which gets written to the gold zone and finally is used by the eval pipeline
+        - [sampling.py](..src/llmevalgrader/transformation/sampling.py)This python script takes care of checking unique sessions and taking a fraction of these to be sampled and used for transformation pipeline, which gets written to the gold zone and finally is used by the eval pipeline
 
 ### LLM Evaluation Pipelines
 

@@ -1,7 +1,7 @@
 import yaml
 
-from llminspect.common.entities import (App, Evaluator, Metric, Transformer, MappingColumn, AzureMonitorDataSource,MappingList)
-from llminspect.common.logger import get_logger
+from llmevalgrader.common.entities import (App, Evaluator, Metric, Transformer, MappingColumn, AzureMonitorDataSource,MappingList)
+from llmevalgrader.common.logger import get_logger
 
 logger = get_logger("config_handler")
 

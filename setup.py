@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 
-package_name = "llminspect"
+package_name = "llmevalgrader"
 version = "0.1.0"
 
 setup(

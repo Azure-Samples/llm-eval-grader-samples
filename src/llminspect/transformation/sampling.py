@@ -2,7 +2,7 @@
 from logging import Logger
 import pandas as pd
 
-from llminspect.common.logger import get_logger
+from llmevalgrader.common.logger import get_logger
 
 
 def simple_sample(df: pd.DataFrame, sample_conversation_fraction: float = 0.8, logger: Logger = get_logger("simple_sample")):

@@ -4,10 +4,10 @@ import pandas as pd
 
 from datetime import datetime
 
-from llminspect.common.adls_handler import ADLSHandler
-from llminspect.common.db_handler import DBHandler
-from llminspect.common.logger import get_logger
-from llminspect.common.utils import start_date_for_pipeline_run, end_date_for_pipeline_run
+from llmevalgrader.common.adls_handler import ADLSHandler
+from llmevalgrader.common.db_handler import DBHandler
+from llmevalgrader.common.logger import get_logger
+from llmevalgrader.common.utils import start_date_for_pipeline_run, end_date_for_pipeline_run
 
 logger = get_logger("prep_data")
 adls_handler = ADLSHandler()

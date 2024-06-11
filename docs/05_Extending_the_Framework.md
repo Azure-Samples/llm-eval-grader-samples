@@ -64,9 +64,9 @@ This framework is designed to be modular and extensible, so you can extend the f
 
 For example you can modify the transformation pipeline in the following ways:
 
-1. Modify the [sampling](../src/llminspect/transformation/sampling.py) logic to sample the data in a different way.
-1. Modify the [transformation](../src/llminspect/transformation/transform.py) logic to transform the data in a different way.
-1. Modify the [goldzone_prep](../src/llminspect/transformation/goldzone_prep.py) to prepare the data for the evaluation according to updated data model. For example adding new metadata to the data model, or adding a new dimension to the data model, etc.
+1. Modify the [sampling](../src/llmevalgrader/transformation/sampling.py) logic to sample the data in a different way.
+1. Modify the [transformation](../src/llmevalgrader/transformation/transform.py) logic to transform the data in a different way.
+1. Modify the [goldzone_prep](../src/llmevalgrader/transformation/goldzone_prep.py) to prepare the data for the evaluation according to updated data model. For example adding new metadata to the data model, or adding a new dimension to the data model, etc.
 1. Modify the [transform_data.py](../azureml/pipeline/components/code/transform_data.py) pipeline entry script to include the new transformation code block into the orchestration. Also if there are any new parameters that are required for the transformation, you can add them to the `transformation_config.yml` and pass them to the transformation pipeline.
 
 Also you can modify the evaluation pipeline in the following ways:

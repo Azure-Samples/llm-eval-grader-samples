@@ -4,8 +4,8 @@ from typing import List
 import pyodbc
 from tenacity import retry, stop_after_attempt, wait_fixed
 
-from llminspect.common.get_secret import get_key_vault_secret
-from llminspect.common.logger import get_logger
+from llmevalgrader.common.get_secret import get_key_vault_secret
+from llmevalgrader.common.logger import get_logger
 
 logger = get_logger("db_handler")
 

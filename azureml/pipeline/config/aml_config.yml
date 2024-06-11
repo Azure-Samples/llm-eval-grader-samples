@@ -1,5 +1,5 @@
 compute:
-  name: llm-inspect-cluster
+  name: llm-eval-grader-cluster
 environment:
   name: llm-eval-cpu-ubuntu-base-plus-conda-py310
   description: "Environment created from AML CPU Ubuntu base Docker image plus Conda environment."

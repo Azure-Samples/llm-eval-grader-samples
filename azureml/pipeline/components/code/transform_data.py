@@ -5,12 +5,12 @@ from datetime import datetime, timezone, timedelta
 import pandas as pd
 
 
-from llminspect.common.entities import AzureMonitorDataSource, MappingList
-from llminspect.transformation.transform import DataTransformer
-from llminspect.transformation.goldzone_prep import create_goldzone_tables
-from llminspect.transformation.sampling import simple_sample
-from llminspect.common.adls_handler import ADLSHandler
-from llminspect.common.logger import get_logger
+from llmevalgrader.common.entities import AzureMonitorDataSource, MappingList
+from llmevalgrader.transformation.transform import DataTransformer
+from llmevalgrader.transformation.goldzone_prep import create_goldzone_tables
+from llmevalgrader.transformation.sampling import simple_sample
+from llmevalgrader.common.adls_handler import ADLSHandler
+from llmevalgrader.common.logger import get_logger
 
 
 def parse_args():

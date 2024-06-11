@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceGroupName": {
-            "value": "llm-inspect-demo" 
+            "value": "llm-eval-grader-demo"
         },
         "applicationName": {
             "value": "llmops" 

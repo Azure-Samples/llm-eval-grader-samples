@@ -4,10 +4,10 @@ import pandas as pd
 from pathlib import Path
 import datetime
 
-from llminspect.common.entities import FactEvaluationMetric, DimMetrics
-from llminspect.common.db_handler import DBHandler
-from llminspect.common.logger import get_logger
-from llminspect.common.mlflow_logger import mlflow_log_metric
+from llmevalgrader.common.entities import FactEvaluationMetric, DimMetrics
+from llmevalgrader.common.db_handler import DBHandler
+from llmevalgrader.common.logger import get_logger
+from llmevalgrader.common.mlflow_logger import mlflow_log_metric
 
 logger = get_logger("write_metrics")
 

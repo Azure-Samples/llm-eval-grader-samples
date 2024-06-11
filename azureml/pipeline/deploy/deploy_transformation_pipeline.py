@@ -7,11 +7,11 @@ from azure.ai.ml import Output, Input, load_component
 from azure.ai.ml.constants import AssetTypes
 from azure.ai.ml.dsl import pipeline
 
-from llminspect.common.azure_ml_handler import AzureMLHandler
-from llminspect.common.config_handler import get_transformer_info
-from llminspect.common.entities import Transformer
-from llminspect.transformation.transform  import DataTransformer
-from llminspect.common.logger import get_logger
+from llmevalgrader.common.azure_ml_handler import AzureMLHandler
+from llmevalgrader.common.config_handler import get_transformer_info
+from llmevalgrader.common.entities import Transformer
+from llmevalgrader.transformation.transform  import DataTransformer
+from llmevalgrader.common.logger import get_logger
 
 
 logger = get_logger("deploy_transformation_pipeline")
