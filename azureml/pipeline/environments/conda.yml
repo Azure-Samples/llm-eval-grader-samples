@@ -13,6 +13,6 @@ dependencies:
     - numpy==1.26.2
     - pandas
     - pyodbc==5.0.1
-    - azureml-mlflow==1.54.0
+    - azureml-mlflow==2.13.2
     - tenacity==8.2.3
     - azure-monitor-query==1.3.0
