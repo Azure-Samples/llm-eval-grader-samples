@@ -58,7 +58,7 @@ def write_conversation_to_condensed_logs(message_history: List,
 
     # Other context keys to look for
     possible_context_keys = [
-        'visited_components',
+        'visited_agents',
         'city',
         'state',
         'zip_code',
@@ -98,7 +98,7 @@ def write_conversation_to_condensed_logs(message_history: List,
 
     # Add expected location details column beside location details where appropriate
     expected_location_details = customer_profile['attributes']['location']
-    # filt_visited_location_id = (df_log['visited_components'].astype(str).str.contains('LocationAgent'))
+    # filt_visited_location_id = (df_log['visited_agents'].astype(str).str.contains('LocationAgent'))
     filt_location_identified = (df_log['location_details'].notnull())
     # filt_add_expected_location_details = filt_visited_location_id & filt_location_identified
     filt_add_expected_location_details = filt_location_identified
@@ -217,7 +217,7 @@ def _write_df_to_excel(df, excel_filename):
         'messageId': 0.45,
         'role': 0.4,
         'message': 3.5,
-        # 'visited_components': 0.9,
+        # 'visited_agents': 0.9,
         'location_details': 1.05,
         'expected_location_details': 1.05,
     }
