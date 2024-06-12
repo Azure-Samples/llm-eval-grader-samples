@@ -6,7 +6,7 @@
             "value": "llm-eval-grader-demo"
         },
         "applicationName": {
-            "value": "llmops" 
+            "value": "llmevg" 
         },
         "environment": {
             "value": "dev" 
@@ -30,7 +30,7 @@
             "value": "<user-principal-id>"
         },
         "servicePrincipalId":{ 
-            "value": "<service-principal-id>"
+            "value": "< service-principal-id >"
         }
     }
 }

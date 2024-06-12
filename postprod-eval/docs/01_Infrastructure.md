@@ -28,6 +28,8 @@ The infrastructure deployment process involves executing Bicep scripts located i
 1. Check and create the resource group if it doesn't exist.
 2. Create a Service Principal if it's not available.
 
+
+
 ### Step 1:Define Parameters
 Define user parameters required for deployment in the [parameters.json](../infra/parameters.json) file. Adjust values as necessary.
 
