@@ -38,6 +38,13 @@ python run_transformation_pipeline.py  --transformation_start_date "2024/05/10" 
 ```
 The pipeline reads chatbot logs from the AML Log Analytics workspace and performs necessary transformation and sampling. It then writes the fact dataset and related dim tables to the gold zone of the ADLS Gen2 container.
 
+### Add OpenAI connection in promptflow
+![Promptflow Connection](../docs/images/promptflow_connection.png)
+1. Goto AML workspace in Azure portal and select your workspace.
+2. Click on `Promptflow` and select the `Connections` tab.
+3. Click on `Create` button and select the `OpenAI` connection option.
+4. Fill in the required details and click on `Create`.
+
 ### Run Evaluation Pipeline
 The pipeline can be executed either from the AML Jobs Schedule or by triggering the scripts in the [run](../azureml/pipeline/run/) folder
 ```

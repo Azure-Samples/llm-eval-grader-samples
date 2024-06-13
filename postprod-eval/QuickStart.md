@@ -17,8 +17,10 @@ Here's a brief guide to help you setup and run the LLM evaluation.
 ## Infra Setup
 Follow the steps [here](docs/01_Infrastructure.md#deployment-details)
 
+
 ## Deploy and Run Pipelines
 Follow the steps [here](docs/02_Deployment.md)
+
 
 ## PowerBI Visualisation
 Follow the steps [here](docs/05_Extending_the_Framework.md#adding-new-visualization) to add new cards to visualisation

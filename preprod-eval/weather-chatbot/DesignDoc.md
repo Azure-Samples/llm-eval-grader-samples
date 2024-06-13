@@ -15,7 +15,7 @@ In this Python app's code, there are two agents: **Location** and **Weather**. T
 - The **Weather** agent answers the user's questions regarding the weather at that location.
 - The **Orchestrator** understands the current state of the conversation from the context, and invokes the appropriate agents to handle the conversation.
 
-![DesignDiagram](../docs/images/weather_UML.png)
+![DesignDiagram](images/weather_UML.png)
 
 On every HTTP request with a message from a user, the Orchestrator receives the message from the user (the string, not to be confused with the HTTP message), as well as the context for the conversation. The context stores the history of the previous messages in this conversation, as well as the knowledge accumulated so far. Having that, the Orchestrator can invoke appropriate agents according to the business rules. 
 

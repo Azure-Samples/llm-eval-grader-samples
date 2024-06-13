@@ -54,8 +54,10 @@ Ensure the connection name is `azure_open_ai_connection` as referenced in the so
 
 ### Step 6:Run DDL SQL Scripts
 1. Access the SQL Database and open Query Editor.
-2. Execute the content from SQL files located under the `azuresql` folder in the source code.
-3. Verify successful creation of `DIM_METRIC` and `FACT_EVALUATION_METRIC` tables.
+
+2. Create below sql tables by logging into azure portal and navigating to the query editor in the SQL database.
+- [DIM_METRIC](azuresql/DIM_METRIC.sql)
+- [FACT_EVALUATION_METRIC](azuresql/FACT_EVALUATION_METRIC.sql)
 
 ## Troubleshooting
 
