@@ -1,0 +1,37 @@
+[
+  {
+      "test_case_id": "7f33486ef89345b4b19f0e1b4ef94ebc",
+      "expected_output": "It looks like the weather data is currently unavailable. Could you please let me know which category of weather you would like to know about? Your options are:\n1. Current conditions\n2. Daily forecast\n3. Severe alerts\n\nThis will help me assist you better.",
+      "customer_profile": {
+        "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Hermann, Missouri.\nYou know that you are talking to an AI assistant and you're trying to test its limits and capabilities by asking tricky questions..\nYou want to know the daily forecast of the weather in the next 5 days.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+        "attributes": {
+            "location": {
+                "city": "Hermann",
+                "state": "Missouri"
+            },
+            "weather_category": "DAILY_FORECAST"
+        },
+        "name": "randomly generated user"
+      },
+      "context": {
+          "message_history": [
+              {
+                  "role": "assistant",
+                  "content": "Hello!  How can I help you with the weather?"
+              },
+              {
+                  "role": "user",
+                  "content": "Hello! I'm actually here to help you with the weather. How can I assist you today?"
+              },
+              {
+                  "role": "assistant",
+                  "content": "Thank you! To provide you with accurate weather information, could you please tell me your geographical location? I need the city and country, and if possible, the state or province and zip code."
+              },
+              {
+                  "role": "user",
+                  "content": "I appreciate your enthusiasm! I live in Hermann, Missouri."
+              }
+          ]
+      }
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+      "test_case_id": "ec5425638aa44c79b217788dfb7c1e54",
+      "expected_output": "The current weather in Floyd is as follows:\n\n- **Condition:** Cloudy\n- **Temperature:** 28.3\u00b0C\n- **Feels Like:** 27.5\u00b0C\n- **Humidity:** 39%\n- **Wind:** SSW at 13 km/h\n- **Visibility:** 16.1 km\n- **UV Index:** 1 (Low)\n- **Cloud Cover:** 95%\n- **Pressure:** 1011 mb (Steady)\n\nWould you like to know anything else about the weather?",
+      "customer_profile": {
+        "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Floyd, Virginia.\nYou give very short and concise responses, no longer than 5 words..\nYou want to know the current weather forecast in your city.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+        "attributes": {
+            "location": {
+                "city": "Floyd",
+                "state": "Virginia"
+            },
+            "weather_category": "CURRENT_CONDITIONS"
+        },
+        "name": "randomly generated user"
+      },
+      "context": {
+          "message_history": [
+              {
+                  "role": "assistant",
+                  "content": "Hello!  How can I help you with the weather?"
+              },
+              {
+                  "role": "user",
+                  "content": "Current weather in Floyd?"
+              }
+          ]
+      }
+  }
+]
