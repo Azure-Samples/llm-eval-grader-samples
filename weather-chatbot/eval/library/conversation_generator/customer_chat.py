@@ -4,7 +4,7 @@ from eval.library.conversation_generator.templates.emulated_customer_templates i
     emulated_customer_general_template)
 
 from copy import deepcopy
-from src.clients.llm_interface import get_completion
+from eval.library.utils.llm_interface import get_completion
 
 
 class CustomerChat:
