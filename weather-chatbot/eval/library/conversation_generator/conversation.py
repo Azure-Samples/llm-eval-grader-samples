@@ -10,10 +10,10 @@ from eval.library.conversation_generator.assistantHarness import (
 from eval.library.conversation_generator.conversation_tools import (
     generate_turn,
 )
-from eval.library.utils.aml_utils import (
-    get_workspace,
-    create_dataset,
-)
+from conversation_tools import (
+    write_conversation_to_logs,
+    write_conversation_to_condensed_logs)
+
 from eval.library.utils.eval_helpers import (
     get_conversation_as_string,
 )
@@ -72,7 +72,7 @@ class ConversationGenerator:
             "message_history": [
                 {
                     "role": "assistant",
-                    "content": "Hello! How can I help you ?",
+                    "content": "Hello! How can I help you?",
                 }
             ]
         },
@@ -112,7 +112,7 @@ class ConversationGenerator:
             "message_history": [
                 {
                     "role": "assistant",
-                    "content": "Hello! How can I help you with weather stuff?",
+                    "content": "Hello! How can I help you?",
                 }
             ]
         },
@@ -200,21 +200,6 @@ class ConversationGenerator:
             return True
         return False
 
-    def save_conversation_as_amldataset(self, data) -> None:
-        """Placeholder:  Will eventually format and save conversation to disk
-        Should probably save the entire context."""
-        today = datetime.now().strftime("%Y-%m-%d")
-
-        filename = os.path.join(LOCAL_END_TO_END_DATAPATH, CONVO_DATA_FILE_NAME)
-
-        # Open a file in write mode
-        with open(filename, "w") as file:
-            json.dump(data, file)
-
-        ws = get_workspace()
-        aml_scenario_datapath_with_date = CONVO_DATA_FILE_NAME + "/" + today
-        create_dataset(ws, LOCAL_END_TO_END_DATAPATH, aml_scenario_datapath_with_date)
-
     def assess_conversation(self, context, scenario) -> dict | None:
         """Detect whether or not the scenario played out as expected"""
         evaluator = LLMgrader(prompt_template_single_scenario_grading)
@@ -228,4 +213,22 @@ class ConversationGenerator:
             print(f"Conversation Id: {context['conversation_id']}")
         for turn_dct in context["message_history"]:
             print(f"{turn_dct['role'].upper()}: {turn_dct['content']}")
+            
+    def save_conversation(self, context, log_location, scenario_prompt):
+        timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+        machine_readable_log_file_name = os.path.join(log_location, f'log_{timestamp}.txt')
+        human_readable_log_file_name = os.path.join(log_location, f'log_{timestamp}_condensed.xlsx')
+        write_conversation_to_logs(message_history=context['message_history'],
+                                conversation_id=context['conversation_id'],
+                                customer_profile=context['customer_profile'],
+                                scenario_prompt=scenario_prompt,
+                                log_file_name=machine_readable_log_file_name,
+                                convo_end_reason='Ended by user of manual convo generation tool')
+        print(f'Complete log saved to {machine_readable_log_file_name}.')
+        write_conversation_to_condensed_logs(message_history=context['message_history'],
+                                            conversation_id=context['conversation_id'],
+                                            customer_profile=context['customer_profile'],
+                                            log_file_name=human_readable_log_file_name,
+                                            convo_end_reason='Ended by user of manual convo generation tool')
 
+        print(f'Condensed log saved to {human_readable_log_file_name}.')
