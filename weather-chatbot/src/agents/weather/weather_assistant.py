@@ -30,7 +30,7 @@ class WeatherAssistant:
             weather_data_suffix = ', ' + context.weather_category.name.replace('_', ' ').lower()
 
         system_prompt = inspect.cleandoc(f"""
-            Your task is to try and determine what a user wants to know about the weather and
+            You are a helpful assistant talking to a user. Your task is to try and determine what a user wants to know about the weather and
             try to answer their questions. Use the following JSON formatted weather data and conversation transcript
             to figure out what their questions are and answer them. You do not need to ask for their location.
 
