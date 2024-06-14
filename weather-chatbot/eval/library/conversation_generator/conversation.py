@@ -83,6 +83,10 @@ class ConversationGenerator:
 
         # Carry out the conversation
         convo_end_reason = 'max_turns'
+        first_assistant_message = context["message_history"][0]["content"]
+        first_user_message = context["message_history"][1]["content"]
+        print(f'\nASSISTANT: {first_assistant_message}\n')
+        print(f'\nUSER: {first_user_message}\n')
         for _ in range(self.max_turns - 1):
             try:
                 context = self.generate_turn(context)
@@ -128,6 +132,10 @@ class ConversationGenerator:
 
         # Carry out the conversation
         print("[ Conversation Started ]")
+        first_assistant_message = context["message_history"][0]["content"]
+        first_user_message = context["message_history"][1]["content"]
+        print(f'\nASSISTANT: {first_assistant_message}\n')
+        print(f'\nUSER: {first_user_message}\n')
         for turn in range(self.max_turns - 1):
             # The assistantHarness is currently breaking. Putting this try catch until it's fixed
             try:
