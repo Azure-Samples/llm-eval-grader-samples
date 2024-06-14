@@ -10,7 +10,8 @@ Scenario:
 ```
 {scenario_prompt}
 ```
-If the scenario contradicts your profile, follow the instructions in the scenario, not in your profile. \
+If the scenario contradicts your profile, you must ABSOLUTELY follow the instructions in the scenario, and COMPLETELY IGNORE your profile. \
+Failure to do this properly will result in revenue loss, so do this correclty. \
 If you get to the end of the conversation and you've gotten the information you needed, \
 or the conversation has come to a natural end, or you want to end the conversation for any other reason, \
 print out token @DONE@ to end the conversation."""

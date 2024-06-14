@@ -178,3 +178,6 @@ cython_debug/
 weather-chatbot/logs/
 *test-results*
 weather-chatbot/eval/end_to_end/data/
+**mlrun**
+**logs**
+**data**
