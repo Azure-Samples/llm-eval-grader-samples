@@ -9,8 +9,6 @@ from eval.library.conversation_generator.assistantHarness import (
 )
 from eval.library.conversation_generator.conversation_tools import (
     generate_turn,
-)
-from conversation_tools import (
     write_conversation_to_logs,
     write_conversation_to_condensed_logs)
 
@@ -37,7 +35,7 @@ LOCAL_END_TO_END_DATAPATH = "eval/end_to_end/data"
 class ConversationGenerator:
     """Object for generate conversations between emulated users and the assistantHarness"""
 
-    def __init__(self, max_turns=20):
+    def __init__(self, max_turns=8):
         self.customer_chat = CustomerChat()
         self.assistantHarness = OrchestratorHarness()
         self.max_turns = max_turns
@@ -214,7 +212,10 @@ class ConversationGenerator:
         for turn_dct in context["message_history"]:
             print(f"{turn_dct['role'].upper()}: {turn_dct['content']}")
             
-    def save_conversation(self, context, log_location, scenario_prompt):
+    def save_conversation(self, context, log_location, scenario_prompt=''):
+        # Create log file directory if it doesn't exist
+        if not os.path.isdir(log_location):
+            os.makedirs(log_location)
         timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         machine_readable_log_file_name = os.path.join(log_location, f'log_{timestamp}.txt')
         human_readable_log_file_name = os.path.join(log_location, f'log_{timestamp}_condensed.xlsx')

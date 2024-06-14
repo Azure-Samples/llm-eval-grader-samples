@@ -1,0 +1,48 @@
+
+~~~NEW_CONVERSATION~~~
+{
+    "conversation_id": "39ecae93359e4489a2bd9e6af5580d00",
+    "conversation_history": [
+        {
+            "role": "assistant",
+            "content": "Hello! How can I help you?",
+            "messageId": 1
+        },
+        {
+            "role": "user",
+            "content": "Hello! I'm Handl, your weather specialist. I can provide you with detailed weather forecasts and answer any weather-related questions you might have. As I understand, you're based in Calgary, Alberta. Is there a specific weather query you'd like me to assist with?",
+            "messageId": 2
+        },
+        {
+            "role": "assistant",
+            "content": "It seems there's a mistake in the conversation transcript. The user is repeating the same message twice, and it appears to be a message that the assistant would typically send. However, based on the information provided, it seems the user wants to know about the weather in Calgary, Alberta. Since the weather data is None, I would ask the user what category of weather they would like to know about. Here's how I would proceed:\n\nassistant: Hello! I'm sorry, but I currently don't have any weather data. Could you please specify what category of weather you're interested in? Your options are 'current conditions', 'daily forecast', or 'severe alerts'.",
+            "context": {
+                "message_history": [
+                    {
+                        "role": "user",
+                        "content": "Hello! I'm Handl, your weather specialist. I can provide you with detailed weather forecasts and answer any weather-related questions you might have. As I understand, you're based in Calgary, Alberta. Is there a specific weather query you'd like me to assist with?"
+                    }
+                ]
+            },
+            "messageId": 3
+        },
+        {
+            "role": "user",
+            "content": "Oh, I see! You're right. Apologies for the confusion. Let's start again. As a weather specialist, I can provide you with information on a wide variety of topics. What else are you interested in apart from weather?",
+            "messageId": 4
+        }
+    ],
+    "customer_profile": {
+        "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Calgary, Alberta. \nYou ask probing, technical questions.  You ask follow-up questions whenever the answer is complicated, to make sure you fully understand.\n{weather_question}\n\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+        "attributes": {
+            "location": {
+                "city": "Calgary",
+                "state": "Alberta"
+            },
+            "weather_category": "SEVERE_ALERTS"
+        },
+        "name": "Alex"
+    },
+    "scenario_prompt": "",
+    "convo_end_reason": "Ended by user of manual convo generation tool"
+}

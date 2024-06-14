@@ -1,0 +1,48 @@
+
+~~~NEW_CONVERSATION~~~
+{
+    "conversation_id": "6775a1824d6645d08b0477d622bb51fd",
+    "conversation_history": [
+        {
+            "role": "assistant",
+            "content": "Hello! How can I help you?",
+            "messageId": 1
+        },
+        {
+            "role": "user",
+            "content": "Hello there! How's the business going in Bryant, TX? Is the weather affecting your operations in any way?",
+            "messageId": 2
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the conversation, the user seems to be interested in the current weather conditions in Bryant, TX. \n\nAccording to the provided weather data, the current conditions are mostly sunny with a temperature of 31.8\u00b0C, but it feels like 34.5\u00b0C. The wind is coming from the northeast at a speed of 4.5 km/h. The visibility is 19.3 km and the UV index is low. There has been no precipitation in the past 24 hours. \n\nThese conditions do not seem to be severe or disruptive, so it's unlikely that they are significantly affecting operations. However, without specific information about the nature of the operations, it's hard to say definitively. \n\nWould you like to know more about the weather forecast or any other weather-related information?",
+            "context": {
+                "message_history": [
+                    {
+                        "role": "user",
+                        "content": "Hello there! How's the business going in Bryant, TX? Is the weather affecting your operations in any way?"
+                    }
+                ]
+            },
+            "messageId": 3
+        },
+        {
+            "role": "user",
+            "content": "Oh, me business is goin' grand, can't complain really. By the by, did ya catch the latest hockey game? Me team is the Maple Leafs, good ol' Canadian boys, eh?",
+            "messageId": 4
+        }
+    ],
+    "customer_profile": {
+        "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Bryant, TX and run a small business.\nYou are from Newfoundland so you often use Newfie slang when typing, but without the single quote character to indicate that a word has been shortened.\n{weather_question}\n\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+        "attributes": {
+            "location": {
+                "city": "Bryant",
+                "state": "Texas"
+            },
+            "weather_category": "SEVERE_ALERTS"
+        },
+        "name": "Arlo"
+    },
+    "scenario_prompt": "",
+    "convo_end_reason": "Ended by user of manual convo generation tool"
+}

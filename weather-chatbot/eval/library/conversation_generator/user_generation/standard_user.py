@@ -1,6 +1,7 @@
 import json
 import os
 from copy import deepcopy
+from pathlib import Path
 from eval.library.conversation_generator.templates.customer_profile_template import (
     standard_user_template)
 
@@ -19,9 +20,15 @@ class StandardUserGenerator:
 
     def _load_user_profiles(self) -> None:
         """Load user profiles from file"""
-        directory = "eval/library/conversation_generator/user_generation/data/"
-        with open(os.path.join(directory, "user_profiles.json"), "r") as f:
-            self.user_profiles = json.load(f)
+        
+        try:
+            path = Path(__file__).parent / "data/user_profiles.json"
+            with path.open() as f:
+                self.user_profiles = json.load(f)
+        except Exception:
+            directory = "eval/library/conversation_generator/user_generation/data/"
+            with open(os.path.join(directory, "user_profiles.json"), "r") as f:
+                self.user_profiles = json.load(f)
 
     def all_valid_profiles(self, profile_overrides: dict = {},
                            attribute_dict_overrides: dict = {}) -> list[dict]:
