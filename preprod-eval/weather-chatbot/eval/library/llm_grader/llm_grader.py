@@ -1,4 +1,4 @@
-from src.clients.llm_interface import (
+from eval.library.utils.llm_interface import (
     get_completion,
 )
 import json

@@ -26,7 +26,9 @@ class OrchestrateConversation:
         self.default_num_convo = default_num_convo
         self.scenario_and_retry_dict = {}
         self.convo_gen = convo_gen
-        self.copilot_principles = pd.read_csv(LOCAL_COPILOT_PRINCIPLES_DATAPATH)
+        my_path = os.path.abspath(os.path.dirname(__file__))
+        base_path = os.path.join(my_path, LOCAL_COPILOT_PRINCIPLES_DATAPATH)
+        self.copilot_principles = pd.read_csv(base_path)
         self.runtime_dict = {}
         self.scenario_count = 0
 
@@ -35,7 +37,9 @@ class OrchestrateConversation:
         Returns:
             pd.DataFrame: Dataframe of scenarios and criteria
         '''
-        scenario_df = pd.read_csv(LOCAL_SCENARIO_DATAPATH)
+        my_path = os.path.abspath(os.path.dirname(__file__))
+        base_path = os.path.join(my_path, LOCAL_SCENARIO_DATAPATH)
+        scenario_df = pd.read_csv(base_path)
         if scenario_df is None:
             raise RuntimeError('Found 0 scenarios in path: {LOCAL_SCENARIO_DATAPATH}')
         scenario_df[NUM_CONVO_VAR] = scenario_df[

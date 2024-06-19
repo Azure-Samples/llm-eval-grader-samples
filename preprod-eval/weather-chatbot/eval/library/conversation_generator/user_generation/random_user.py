@@ -7,15 +7,17 @@ from eval.library.conversation_generator.templates.customer_profile_template imp
     customer_profile_template)
 import secrets
 import json
+import os
 
 
 class RandomUserGenerator:
     """Generate unique customer profiles"""
     def __init__(self):
-        base_path = 'eval/library/conversation_generator/customer_profile_data'
-        self.places = self._read_data_file(path=f'{base_path}/places.txt')
-        self.personalities = self._read_data_file(path=f'{base_path}/personality.txt')
-        self.weather_questions = self._read_data_file(path=f'{base_path}/weather_questions.txt')
+        my_path = os.path.abspath(os.path.dirname(__file__))
+        base_path = os.path.join(my_path, "../customer_profile_data")
+        self.places = self._read_data_file(path=os.path.join(base_path, 'places.txt'))
+        self.personalities = self._read_data_file(path=os.path.join(base_path, 'personality.txt'))
+        self.weather_questions = self._read_data_file(path=os.path.join(base_path, 'weather_questions.txt'))
 
     def _read_data_file(self, path):
         r = []

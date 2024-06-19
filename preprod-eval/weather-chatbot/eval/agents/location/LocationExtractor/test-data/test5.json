@@ -1,0 +1,37 @@
+[
+  {
+      "test_case_id": "a8e622aa04664b87be71ccdee82ff0cf",
+      "expected_output": "It looks like the weather data is currently unavailable. Could you please let me know which category of weather you would like to know about? Your options are:\n1. Current conditions\n2. Daily forecast\n3. Severe alerts\n\nThis will help me assist you better.",
+      "customer_profile": {
+        "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Eureka Springs, Arkansas.\nYou keep your responses very short and never offer any information unless the assistant asks you directly..\nYou want to know if there are any severe weather alerts in your area.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+        "attributes": {
+            "location": {
+                "city": "Eureka Springs",
+                "state": "Arkansas"
+            },
+            "weather_category": "SEVERE_ALERTS"
+        },
+        "name": "randomly generated user"
+      },
+      "context": {
+          "message_history": [
+              {
+                  "role": "assistant",
+                  "content": "Hello!  How can I help you with the weather?"
+              },
+              {
+                  "role": "user",
+                  "content": "Hi. Are there any severe weather alerts in my area?"
+              },
+              {
+                  "role": "assistant",
+                  "content": "I'd be happy to help with that. Could you please provide your geographical location, including your city and country? If you have a zip code, that would be helpful too."
+              },
+              {
+                  "role": "user",
+                  "content": "Eureka Springs, Arkansas."
+              }
+          ]
+      }
+  }
+]

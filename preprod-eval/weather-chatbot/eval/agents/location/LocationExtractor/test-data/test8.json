@@ -1,0 +1,37 @@
+[
+  {
+      "test_case_id": "a14b73d4b79d4e1994c8dedcef2b6032",
+      "expected_output": "It looks like the weather data is currently unavailable. Could you please let me know which category of weather you would like to know about? Your options are:\n1. Current conditions\n2. Daily forecast\n3. Severe alerts\n\nThis will help me assist you better.",
+      "customer_profile": {
+        "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Oxford, Mississippi.\nYou give brief responses and always use incorrect grammar or spelling..\nYou want to know the daily forecast of the weather in the next 5 days.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+        "attributes": {
+            "location": {
+                "city": "Oxford",
+                "state": "Mississippi"
+            },
+            "weather_category": "DAILY_FORECAST"
+        },
+        "name": "randomly generated user"
+      },
+      "context": {
+          "message_history": [
+              {
+                  "role": "assistant",
+                  "content": "Hello!  How can I help you with the weather?"
+              },
+              {
+                  "role": "user",
+                  "content": "hi there. 5 day wether pls"
+              },
+              {
+                  "role": "assistant",
+                  "content": "Sure, I'd be happy to help with that. Could you please provide me with your geographical location, including the city and country? If you have a zip code, that would be helpful too."
+              },
+              {
+                  "role": "user",
+                  "content": "oxford ms"
+              }
+          ]
+      }
+  }
+]
