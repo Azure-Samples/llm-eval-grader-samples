@@ -48,6 +48,7 @@ az deployment group create --name llmops-infra-deployment --resource-group <reso
 Monitor deployment progress in the Azure Portal under the `Deployments` pane in `Settings` of the `Resource groups` section.
 
 ### Step 5:Create Open AI Promptflow connection
+![Promptflow Connection](../docs/images/promptflow_connection.png)
 1. Navigate to the AML Workspace and click on `promptflow` -> `connections`.
 2. Create an Open AI connection, filling in the necessary details from OpenAI.
 Ensure the connection name is `azure_open_ai_connection` as referenced in the source code.
