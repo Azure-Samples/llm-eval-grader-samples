@@ -33,6 +33,10 @@ The infrastructure deployment process involves executing Bicep scripts located i
 ### Step 1:Define Parameters
 Define user parameters required for deployment in the [parameters.json](../infra/parameters.json) file. Adjust values as necessary.
 
+Note: To get the ServicePrincipalObjectId parameter value, follow the below steps:
+1. Go to `Microsoft Entra Id` -> `Enterprise Applications` -> Search in the `All Applications` with the name of your principal.
+2. Click on the App registration and copy the `Object ID` from the Overview section.
+
 ### Step 2:Set environment variables
 Sensitive information like `client_id`, `client_secret`, etc., should be set as environment variables. Refer to [.env.template](../infra/modules/env.template) and populate the values as required.
 

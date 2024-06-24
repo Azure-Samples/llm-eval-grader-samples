@@ -29,7 +29,7 @@
         "userPrincipalId":{
             "value": "<user-principal-id>"
         },
-        "servicePrincipalId":{ 
+        "servicePrincipalObjectId":{
             "value": "< service-principal-id >"
         }
     }
