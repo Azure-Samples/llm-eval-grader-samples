@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceGroupName": {
+            "value": "llm-eval-grader-demo"
+        },
+        "applicationName": {
+            "value": "llmevg" 
+        },
+        "environment": {
+            "value": "dev" 
+        },
+        "location": {
+            "value": "eastus" 
+        },
+        "storageContainerOne": {
+            "value": "evaluation" 
+        },
+        "storageContainerTwo": {
+            "value": "gold-zone" 
+        },  
+        "authorityUrl":{
+            "value": "https://login.microsoftonline.com" 
+        },
+        "resourceUrl": {
+            "value": "https://storage.azure.com" 
+        },
+        "userPrincipalId":{
+            "value": "<user-principal-id>"
+        },
+        "servicePrincipalId":{ 
+            "value": "< service-principal-id >"
+        }
+    }
+}
