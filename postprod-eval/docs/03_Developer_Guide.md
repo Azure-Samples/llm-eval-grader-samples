@@ -17,7 +17,7 @@ az login
 ```
 Note: If you get login issues, retry the command after you login to azure portal(`portal.azure.com`) from browser.
 
-### For Non Mac M1 Machines
+### Conda Environment Setup
 Create a new Python environment with required libraries and activate it:
 
 ``` bash
@@ -29,63 +29,6 @@ conda activate <ENVIRONMENT_NAME>
 pip install -r requirements.txt
 ```
 
-### For Mac M1 machines
-
-Step 1: Run below commands on your terminal to install HomeBrew, a package manager, and then use it to install Microsoft SQL Server related tools. 
-Note: To know about ODBC installation, follow this link. [ODBC driver for MAC](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16#microsoft-odbc-18). `arch -x86_64` prefix is used to force the execution of the installation script in the x86_64 architecture on Apple Silicon Macs.
-``` bash
-cd src\azureml\pipeline
-
-arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-alias x86brew="arch -x86_64 /usr/local/bin/brew"
-x86brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
-x86brew update
-HOMEBREW_ACCEPT_EULA=Y  x86brew install msodbcsql17 mssql-tools
-export ODBCSYSINI=/etc 
-```
-
-Step 2: Remove existing links if created already
-
-``` bash
-sudo ln -s /usr/local/etc/odbcinst.ini /etc/odbcinst.ini
-sudo ln -s /usr/local/etc/odbc.ini /etc/odbc.ini 
-```
-
-Step 3: Create conda environment. `CONDA_SUBDIR=osx-64` part sets the platform-specific directory for package retrieval. In this case, it specifies the directory for macOS 64-bit packages (osx-64).
-
-``` bash
-CONDA_SUBDIR=osx-64 conda create -n pf-env-86 python=3.10.12
-conda activate pf-env-86
-conda config --env --set subdir osx-64
-
-pip install -r requirements.txt
-```
-
-Step 4: Verification of pyodbc driver and connection:
-
- - Run `odbcinst -j` and verify the existence of `DRIVERS` path (Below is the sample output). Read the `/etc/odbcinst.ini` file (`cat /etc/odbcinst.ini`) and ensure the `.dylib` files for the installed mssql version is existing in the mentioned path.
-
-``` bash 
-unixODBC 2.3.11
-DRIVERS............: /etc/odbcinst.ini
-SYSTEM DATA SOURCES: /etc/odbc.ini
-FILE DATA SOURCES..: /etc/ODBCDataSources
-USER DATA SOURCES..: /Users/lindamthomas/.odbc.ini
-SQLULEN Size.......: 8
-SQLLEN Size........: 8
-SQLSETPOSIROW Size.: 8 
-```
-
-Step 5: Go to python terminal and run below code snippet
-
-``` python
-import pyodbc
-pyodbc.drivers()
-pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=<server_name>;DATABASE=<database_name>;UID=<user_id>;PWD=<pwd>")
-```
-
-Replace the <> variables. Connection is success if you are able to connect.
-
 ## Development of Prompt Flow
 
 Prompt flow is used to evaluate the performance of the chat bot. When a new evaluation metric is added to the evaluation framework, a new prompt flow must be developed to generate the metric.
@@ -93,7 +36,7 @@ Prompt flow is used to evaluate the performance of the chat bot. When a new eval
 ### Steps
 
 1. Define the new metric in the [evaluation_config.yml](../azureml/pipeline/config/evaluation_config.yml) file.
-2. Develop the prompt flow in a new folder under[`azureml/promptflow/`](../azureml/promptflow/). The name of the folder represents the name of metric that will be generated.
+2. Develop the prompt flow in a new folder under [`azureml/promptflow/`](../azureml/promptflow/). The name of the folder represents the name of metric that will be generated.
 3. Use one of the existing prompt flows as a template to develop the new prompt flow. You can refer to [turn_relevance prompt flow](../azureml/promptflow/turn_relevance/) to develop a basic prompt flow that generates a single metric.
 4. Update the jinja templates in the prompt flow to define the evaluation criteria. Ensure that the metric names defined in the jinja templates match the metric names defined in the evaluation_config.yml.
 5. Update the `samples.jsonl` file with the sample data required to evaluate the metric.
@@ -142,16 +85,16 @@ Data transformation pipelines are used to transform the raw data into a format t
     - Define transformation specific AML pipeline configurations such as endpoint, schedule, schedule start time etc.
 
 2. The transformation pipeline source code is at two places, one in the azureml folder, other in the src folder.
-    - [transform_data.py](../azureml/pipeline/code/transform_data.py) This acts like the onboarding script for transformation.It imports the code in the src/llmevalgrader folder, calling the common and transformation folder. This script orchestrates the transformation process. It calls the respective code which reads the data from azure monitor, transforms the data, as per mappings specified in the transfromation_config file , samples it and updates the dim and fact tables in the ADLS Gen2 (GOLD ZONE) in parquet format. It will create the dim_conversation, dim_metadata, fact_evaluation output files if not present , or update them if already present. Finally clean data is stored in the GOLD ZONE, ready for evaluation pipeleines
+    - [transform_data.py](../azureml/pipeline/components/code/transform_data.py) This acts like the onboarding script for transformation.It imports the code in the src/llmevalgrader folder, calling the common and transformation folder. This script orchestrates the transformation process. It calls the respective code which reads the data from azure monitor, transforms the data, as per mappings specified in the transfromation_config file , samples it and updates the dim and fact tables in the ADLS Gen2 (GOLD ZONE) in parquet format. It will create the dim_conversation, dim_metadata, fact_evaluation output files if not present , or update them if already present. Finally clean data is stored in the GOLD ZONE, ready for evaluation pipeleines
     - [transformation.yml](../azureml/pipeline/components/definition/transformation.yml) This file has the definition for the transformation component. It has the input and outputs defined and the conda environment to be created.
     - [deploy_transformation_pipeline.py](../azureml/pipeline/deploy/deploy_transformation_pipeline.py)
         This file is the actual deploy script which invokes the transform_data.py
-    - The common reusable code is located in the  [src/llmevalgrader/common/](../src/llmevalgrader/)  and [src/llmevalgrader/transformation/](../src/llmevalgrader/transformation/)which is packaged and imported in the [../src/azureml/pipeline/code/](../azureml/pipeline/code) python scripts
+    - The common reusable code is located in the  [src/llmevalgrader/common/](../src/llmevalgrader/common/)  and [src/llmevalgrader/transformation/](../src/llmevalgrader/transformation/) which is packaged and imported in the [src/azureml/pipeline/components/code/](../azureml/pipeline/components/code) python scripts
         - [transform.py](../src/llmevalgrader/transformation/transform.py)
         This file does all the main transformations in the data at the bot and the component level. If there is a change in the data format, data schema or transformation logic, one needs to make the changes here in the corresponding functions. Currently this file is specific to sample chatbot application. This file takes care of reading the data from azure monitor and mapping the columns and do the preprocessing on the data.
-        - [goldzone_prep.py](../src/llmevalgrader/transformation/goldzonne_prep.py)
+        - [goldzone_prep.py](../src/llmevalgrader/transformation/goldzone_prep.py)
         This file reads and updates the goldzone table, namely the dim_metadata,dim_conversation and fact_evaluation_dataset
-        - [sampling.py](..src/llmevalgrader/transformation/sampling.py)This python script takes care of checking unique sessions and taking a fraction of these to be sampled and used for transformation pipeline, which gets written to the gold zone and finally is used by the eval pipeline
+        - [sampling.py](../src/llmevalgrader/transformation/sampling.py) This python script takes care of checking unique sessions and taking a fraction of these to be sampled and used for transformation pipeline, which gets written to the gold zone and finally is used by the eval pipeline
 
 ### LLM Evaluation Pipelines
 
@@ -164,7 +107,7 @@ Evaluation pipelines are used to orchestrate the evaluation process. The evaluat
     - Define the new bot in the "app" section.
     - List the evaluators to be run for the bot or component. This must match the evaluators defined in the "evaluators" section.
     - Define evaluator specific AML pipeline configurations such as endpoint, schedule, schedule start time etc.
-2. The evaluation pipeline source code is generic and can be used for any bot or component. The source code is located in the [azureml/pipeline/src/](../azureml/pipeline/components/code) folder. The source code is comprised of two main scripts:
+2. The evaluation pipeline source code is generic and can be used for any bot or component. The source code is located in the [azureml/pipeline/components/code/](../azureml/pipeline/components/code) folder. The source code is comprised of two main scripts:
 
     1. [prep_data.py](../azureml/pipeline/components/code/prep_data.py) - Prep Data Component
         - This script filters source data in ADLS Gen 2 gold zone based on the supplied start and end date parameters. For scheduled pipelines, the start and end date parameters are set as default to the previous day's date. If required, the default logic can be updated to filter data based on a different date range in the `main` method. For pipeline invokation via batch endpoint, the start and end date parameters are supplied as input to the pipeline and it overrides the default logic.
@@ -192,17 +135,12 @@ Evaluation pipelines are used to orchestrate the evaluation process. The evaluat
 
 ### Debugging Azure Machine Learning (AML) Pipelines
 
-1. Each component of a pipeline run has it's own logs. To view the logs, double click on the pipeline component > click on "Outputs + logs" tab.
+Each component of a pipeline run has it's own logs. To view the logs, go to the aml workspace and specific pipeline, double click on the pipeline component > click on "Outputs + logs" tab.
 1. Logs from pipeline source code can be found under `user_logs` > `std_log.txt`
-    ![User Logs](./images/aml_pipeline_user_logs.png)
 1. Data outputs from a pipeline run can be found under `Data Outputs` > `Show data outputs` > click `Preview data` to view the data
-    ![Data Outputs](./images/aml_pipeline_data_output.png)
 1. For evaluation pipelines, errors with prompt flow execution can be found under `logs` > `job_error.<CURRENT_DATE>.txt`.
-    ![Prompt Flow Execution](./images/aml_pipeline_promptflow_execution.png)
 1. For evaluation pipelines, details of prompt flow mini-batch executions can be found under `logs` > `sys` > `job_report` folder
-    ![Prompt Flow Mini Batches](./images/aml_pipeline_promptflow_minibatches.png)
-1. For evaluation pipelines, refer to the below diagram for retry scenarios:
-    ![Retry Scenarios](./images/evaluation_pipeline_retry_flow.png)
+
 
 ### Debugging issues related to SQL Server
 
