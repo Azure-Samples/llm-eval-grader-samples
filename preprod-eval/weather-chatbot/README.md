@@ -131,3 +131,23 @@ If you want to run the test for one file under a sub-folder or multiple files un
 ```bash
 python -W "ignore" -m eval.agents.run_agent_test --agent_type location --agent_name LocationExtractor --test_data folder_name1/file1.json folder_name2/file2.json
 ```
+
+## Adapting the conversation generator to your own orchestrator
+If you have your own orchestrator and you want to plug it in and be able to generate and evaluate conversations, here are suggested changes that need to happen:
+### Modify assistantHarness.py
+This file is located in weather-chatbot/eval/library/conversation_generator/assistantHarness.py
+1. Import your own orchestrator and initialize it how it needs to be initialize under __init__() method. For example, some orchestrators initialize a conversation id or a session id in order to keep track of history message. You will do that in the __init__ if needed. 
+1. In the get_reply() method, you need to call your orchestrator the way it needs to be called. In the case of the weather-chatbot, we are passing both the user message and the message history. Perharps for your orchestrator you may need only the user message.
+
+### Adapting the emulated users to your orchestrator
+The emulated users are built to act like users looking for weather information. You may need to update this depending on what your orchestrator does. 
+1. Modify weather-chatbot/eval/library/conversation_generator/templates/customer_profile_template.py and weather-chatbot/eval/library/conversation_generator/templates/emulated_customer_templates.py to instruct it what kind of users they are and what kind of assistant they are talking to. You could get away by doing just this step and rely on supplying a scenario to the conversation generator so that it ignores the weather related attributes of the emulated user
+2. Change customer profile attributes. This is a more involved update ranging over multiple files. If yoou want to create different emulated users, you have to modify their complete customer profiles for both the standard user and random user. You need to modify:
+   1. weather-chatbot/eval/library/conversation_generator/customer_profile_data and update with the profile data of the user you want to emulate
+   2. weather-chatbot/eval/library/conversation_generator/templates/customer_profile_template.py and update the section under Customer Profile with the new customer profile fields
+   3. weather-chatbot/eval/library/conversation_generator/user_generation/data/user_profiles.json and update standard user profiles attributes to match the new user profile
+   4. weather-chatbot/eval/library/conversation_generator/user_generation/random_user.py and modify to grab the new customer profile data the right way
+   5. weather-chatbot/eval/library/conversation_generator/user_generation/standard_user.py and modify how the prompt is built by grabbing the new user profile attributes
+
+After these modifications, you can head to the notebooks to try out conversation generation and conversation grading under /weather-chatbot/eval/notebooks
+  
