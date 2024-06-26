@@ -137,7 +137,7 @@ If you have your own orchestrator and you want to plug it in and be able to gene
 ### Modify assistantHarness.py
 This file is located in weather-chatbot/eval/library/conversation_generator/assistantHarness.py
 1. Import your own orchestrator and initialize it how it needs to be initialize under __init__() method. For example, some orchestrators initialize a conversation id or a session id in order to keep track of history message. You will do that in the __init__ if needed. 
-1. In the get_reply() method, you need to call your orchestrator the way it needs to be called. In the case of the weather-chatbot, we are passing both the user message and the message history. Perharps for your orchestrator you may need only the user message.
+1. In the get_reply() method, you need to call your orchestrator the way it needs to be called. In the case of the weather-chatbot, we are passing both the user message and the message history. Perhaps for your orchestrator you may need only the user message.
 
 ### Adapting the emulated users to your orchestrator
 The emulated users are built to act like users looking for weather information. You may need to update this depending on what your orchestrator does. 
