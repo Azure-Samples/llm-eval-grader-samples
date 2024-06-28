@@ -14,7 +14,7 @@ param dbServerName string
 @description('The name of the Database')
 param databaseName string
 @description('The service principal id')
-param servicePrincipalId string
+param servicePrincipalObjectId string
 @description('The storage account name')
 param blobStorageName string
 
@@ -89,7 +89,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(resourceGroup().id, 'contributor')
   scope: resourceStorageAccount
   properties: {
-    principalId: servicePrincipalId
+    principalId: servicePrincipalObjectId
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
   }
 }

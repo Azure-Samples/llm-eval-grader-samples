@@ -1,6 +1,6 @@
 # Demo
 
-**Pre-requisites:** Before demo you need to complete till the step - [Framework Deployment](../README.md#framework-deployment)
+**Pre-requisites:** Before demo you need to complete till the step - [Framework Deployment](../../README.md#framework-deployment)
 
 This section provides a quick demo of the solution. The demo consists of the following steps:
 

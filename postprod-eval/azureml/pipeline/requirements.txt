@@ -7,7 +7,6 @@ promptflow-tools==1.4.0
 pyodbc --no-binary=pyodbc==5.0.1
 python-dotenv==1.0.0
 PyYAML==6.0.1
-azureml-fsspec==1.3.0
 tenacity==8.2.3
 azureml-mlflow==1.56.0
 azure-monitor-query==1.3.0

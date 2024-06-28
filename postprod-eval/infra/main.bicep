@@ -15,7 +15,7 @@ param dbLoginUserName string
 @description('The password for the SQL Server admin')
 param dbLoginPassword string
 @description('Service Principal Object Id')
-param servicePrincipalId string
+param servicePrincipalObjectId string
 @description('Specifies the name of the ADLS Gen2 container 1')
 param storageContainerOne string
 @description('Specifies the name of the ADLS Gen2 container 1')
@@ -48,7 +48,7 @@ module storage 'modules/storage.bicep' = {
     dbLoginPassword: dbLoginPassword
     dbServerName: dbServerName
     databaseName: databaseName
-    servicePrincipalId: servicePrincipalId
+    servicePrincipalObjectId: servicePrincipalObjectId
     blobStorageName: blobStorageName
   }
 }
