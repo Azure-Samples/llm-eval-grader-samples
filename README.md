@@ -1,4 +1,4 @@
-# LLM Inspect: Evaluation of LLM based ChatBots
+# Evaluation of LLM based ChatBots
 
 ## Overview
 
@@ -78,8 +78,6 @@ The framework can be deployed using the provided deployment scripts. For more de
 
 A quick demo of the solution can be found in the [Demo](./postprod-eval/docs/04_Demo.md) guide.
 
-TODO: Video link
-
 ### Understanding the Framework
 
 The framework is designed to be modular and extensible. The framework consists of the following components:
@@ -90,8 +88,6 @@ The framework is designed to be modular and extensible. The framework consists o
 1. [Framework Source](./postprod-eval/src/llmevalgrader) - The source code for the framework, containing python modules for the data transformation pipeline and evaluation pipeline.
 1. [Framework Deployment](./postprod-eval/azureml) - The deployment and execution scripts for the framework, containing the Azure ML pipelines for the data transformation and evaluation pipelines.
 1. [Dashboards](./postprod-eval/dashboards) - The PowerBI dashboard for visualizing the evaluation metrics.
-
-TODO: Video link
 
 **NOTE:** The more detailed information about the framework can be found in the [Developer Guide](./postprod-eval/docs/03_Developer_Guide.md).
 
@@ -111,4 +107,18 @@ The framework can be extended in several ways to support different use cases. Fo
 
 
 ## PreProd Evaluation
+
 Go to [PreProd Evaluation](./preprod-eval/weather-chatbot/README.md) for more details.
+
+## Contributors
+
+- [Ivan Shaporov](https://github.com/ivan-shaporov)
+- [Jeff Ding](https://github.com/jding05)
+- [Linda M Thomas](https://github.com/lindamthomas)
+- [Prabal Deb](https://github.com/prabdeb)
+- [Priya Bhimjyani](https://github.com/priya-27)
+- [Sarah Sexton](https://github.com/SarahSexton)
+- [Scott Grosenick](https://github.com/ScoGroMSFT)
+- [Sean Miller](https://github.com/seanmiller168)
+- [Sugandh Mishra](https://github.com/meghdivya)
+- [Zikra Toure](https://github.com/zitoure)
