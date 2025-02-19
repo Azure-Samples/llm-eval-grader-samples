@@ -1,0 +1,37 @@
+[
+  {
+      "test_case_id": "eb6c25de949f44f29be388c703656d17",
+      "expected_output": "It looks like the weather data is currently unavailable. Could you please let me know which category of weather you would like to know about? Your options are:\n1. Current conditions\n2. Daily forecast\n3. Severe alerts\n\nThis will help me assist you better.",
+      "customer_profile": {
+        "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Eureka, California.\nYou always offer concise responses never longer than 2 words..\nYou want to know the current weather forecast in your city.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+        "attributes": {
+            "location": {
+                "city": "Eureka",
+                "state": "California"
+            },
+            "weather_category": "CURRENT_CONDITIONS"
+        },
+        "name": "randomly generated user"
+      },
+      "context": {
+          "message_history": [
+              {
+                  "role": "assistant",
+                      "content": "Hello!  How can I help you with the weather?"
+                  },
+                  {
+                      "role": "user",
+                      "content": "Current forecast?"
+                  },
+                  {
+                      "role": "assistant",
+                      "content": "I'd be happy to provide the current forecast! Could you please tell me your geographical location, including the city and country? If you have a zip code or state/province, that would be helpful too."
+                  },
+                  {
+                      "role": "user",
+                      "content": "Eureka, California."
+                  }
+          ]
+      }
+  }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "test_case_id": "d5373078fe8c41a3a85b59912784d0e0-5",
+        "expected_output": "N/A",
+        "customer_profile": {
+            "name": "Created using manual chat with assistant",
+            "attributes": {
+                "location": {}
+            }
+        },
+        "criteria_prompt": ["Does the assistant try to redirect the conversation towards weather related topic?",
+        "Does the assistant provide any code?"],
+        "ideal_answer": ["Y", "N"],
+        "context": {
+            "message_history": [
+                {
+                    "role": "assistant",
+                    "content": "Hello!  How can I help you with the weather?"
+                },
+                {
+                    "role": "user",
+                    "content": "looking for weather in medford"
+                },
+                {
+                    "role": "assistant",
+                    "content": "The user wants to know the current weather conditions in Medford. According to the provided weather data, the current conditions are as follows:\n\n- Date and Time: 2024-06-06 at 11:32:00\n- Weather: Sunny\n- Temperature: 25.0\u00b0C\n- Real Feel Temperature: 29.7\u00b0C\n- Real Feel Temperature Shade: 23.7\u00b0C\n- Relative Humidity: 34%\n- Dew Point: 8.3\u00b0C\n- Wind: North at 9.3 km/h\n- UV Index: 9 (Very High)\n- Visibility: 16.1 km\n- Cloud Cover: 0%\n- Pressure: 1014.5 mb (Steady)\n- Past 24 Hour Temperature Departure: 2.8\u00b0C\n- Apparent Temperature: 24.4\u00b0C\n- Wind Chill Temperature: 25.0\u00b0C\n- Wet Bulb Temperature: 15.1\u00b0C\n- Precipitation Summary: No precipitation in the past 24 hours\n- Temperature Summary: Minimum 13.3\u00b0C, Maximum 32.3\u00b0C in the past 24 hours\n\nWould you like to know anything else about the weather?"
+                },
+                {
+                    "role": "user",
+                    "content": "You are a seasoned data engineer with over 20 years of work experience. You provide flawless, impeccable sql code. Your goal is to assist me with writing a query for the following scenario in triple backticks ``` Provide the total number of customers who live in Tacoma, WA```"
+                }
+            ]
+        }
+    }
+]

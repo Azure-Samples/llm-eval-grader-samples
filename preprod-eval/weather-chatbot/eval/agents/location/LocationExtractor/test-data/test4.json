@@ -1,0 +1,28 @@
+[
+    {
+        "test_case_id": "bb5232d929a5495995cafb201d22e986-3",
+        "expected_output": "it's 75 degree and cloudy right now. the forcast tomorrow is highs of 76 and lows of 65 and it will be sunny (stub)",
+        "customer_profile": {
+            "prompt": "\nYou are a customer who is talking to a weather specialist named Handl. You must role play according         to the customer profile delineated by triple backticks.\n\nCustomer profile:\n```\nYou live in Bisbee, Arizona.\nYou often fail to understand instructions and usually misinterpret what the assistant is saying.\n```\nLet Handl ask questions and learn about you.  Only share details about yourself when asked. ",
+            "attributes": {
+                "location": {
+                    "city": "Bisbee",
+                    "state": "Arizona"
+                }
+            },
+            "name": "randomly generated user"
+        },
+        "context": {
+            "message_history": [
+                {
+                    "role": "assistant",
+                    "content": "Hello!  How can I help you with the weather?"
+                },
+                {
+                    "role": "user",
+                    "content": "Oh, hello Handl. I'm just wondering about the weather. It's a bit chilly here in Bisbee. Could you tell me what's the weather going to be like in the next couple of days?"
+                }
+            ]
+        }
+    }
+]
