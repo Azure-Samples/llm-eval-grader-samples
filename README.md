@@ -8,10 +8,6 @@ LLMs can produce sophisticated, coherent and persuasive language on any topic us
 
 Customers who develop and use applications such as ChatBots for answering product or service-related questions would need to evaluate the performance of these applications from both Business and Data science perspectives to enhance them further.
 
-Some of the potential measurements for a e-commerce chatbot are
-
-TODO: Add the list of potential measurements
-
 The area of LLM assessing LLM based applications is new but evolving quickly, however there are no common framework or platform to conduct evaluations at a large scale for retail/commerce ChatBots.
 
 ### Business Value
