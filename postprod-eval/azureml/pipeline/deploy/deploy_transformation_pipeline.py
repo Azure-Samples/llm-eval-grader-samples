@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """This script is used to deploy the pipeline for data transformation for evaluation dataset."""
 import argparse
 import os

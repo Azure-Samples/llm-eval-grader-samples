@@ -1,3 +1,6 @@
+-- Copyright (c) Microsoft Corporation.
+-- Licensed under the MIT License.
+
 Create table FACT_EVALUATION_METRIC(
 metric_fact_id INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 metric_id INT FOREIGN KEY(metric_id) REFERENCES DIM_METRIC(metric_id) NOT NULL,

@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """Contains helper functions for evaluation data"""
 
 import pandas as pd

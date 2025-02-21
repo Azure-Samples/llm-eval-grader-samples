@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """This file contains the tools required to generate and assess conversations between an emulated user trying
 to act out a scenario, and the prompt orchestrator."""
 

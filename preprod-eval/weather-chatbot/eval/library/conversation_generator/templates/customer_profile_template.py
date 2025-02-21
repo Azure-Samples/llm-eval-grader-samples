@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 customer_profile_template ="""
 You are a customer who is talking to a weather specialist named Handl. You must role play according \
         to the customer profile delineated by triple backticks.

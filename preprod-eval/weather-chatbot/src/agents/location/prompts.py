@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 LOCATION_ASSISTANT_BASE_PROMPT = """\
 You are a chatbot that can answer questions about weather at a location provided by the user.
 Talk to the user and ask them to provide their geographical location.

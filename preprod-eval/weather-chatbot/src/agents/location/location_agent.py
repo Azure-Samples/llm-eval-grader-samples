@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from src.agents.location.location_assistant import LocationAssistant
 from src.agents.location.location_extractor import LocationExtractor
 from src.context import Context

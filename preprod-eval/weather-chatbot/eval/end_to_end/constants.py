@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 CONVO_ID_VAR = 'conversation_id'
 CRITERIA_NAME_VAR = 'criteria_name'
 CRITERIA_ID_VAR = 'criteria_id'

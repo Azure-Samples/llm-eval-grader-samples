@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from openai import AzureOpenAI
 from dotenv import load_dotenv
 from typing import Optional

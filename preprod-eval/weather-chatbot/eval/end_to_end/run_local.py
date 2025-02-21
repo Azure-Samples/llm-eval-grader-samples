@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 import mlflow
 from mlflow.exceptions import MlflowException
 from datetime import datetime

@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """Generate prompts that specify the traits of unique customers.  This will create diverse emulated users.
 
 You can run this file to see some generated customers.

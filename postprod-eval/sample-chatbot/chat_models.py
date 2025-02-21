@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """
 Description:
 This file contains the code to interact with the Azure OpenAI API to generate responses for the chatbot.

@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 transformation_config:
   - name: transformation
     chatbot_name: sample-chatbot

@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """This file contains the CustomerChat object.  It is used to generate the emulated user side of the conversation"""
 from eval.library.conversation_generator.templates.emulated_customer_templates import (
     emulated_customer_scenario_template,

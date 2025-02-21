@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 import yaml
 
 from llmevalgrader.common.entities import (App, Evaluator, Metric, Transformer, MappingColumn, AzureMonitorDataSource,MappingList)

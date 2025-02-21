@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from eval.library.inner_loop.mlflow_helpers.core.agent_base_class import (
     AgentWrapper
 )

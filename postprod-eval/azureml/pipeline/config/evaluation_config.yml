@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 # This section contains the list of apps to be evaluated. An app can be a bot, a component or a function.
 # For each app, the evaluators to be run are specified.
 apps:

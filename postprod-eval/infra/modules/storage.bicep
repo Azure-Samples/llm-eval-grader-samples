@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 @description('Specifies the location of the Azure Machine Learning workspace and dependent resources.')
 param location string
 @description('Specifies the name of the ADLS Gen2 container 1')

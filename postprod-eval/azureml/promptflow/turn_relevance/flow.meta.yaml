@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 $schema: https://azuremlschemas.azureedge.net/latest/flow.schema.json
 name: turn_relevance_eval
 display_name: Turn Relevance Evaluation

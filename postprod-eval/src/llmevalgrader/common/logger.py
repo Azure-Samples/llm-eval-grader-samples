@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """Reusable logger for evaluation pipeline."""
 import logging
 import sys

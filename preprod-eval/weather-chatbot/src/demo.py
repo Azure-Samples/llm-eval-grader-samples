@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from src.context import Context
 from src.orchestrator import Orchestrator
 from dotenv import load_dotenv

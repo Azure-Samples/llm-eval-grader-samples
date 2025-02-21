@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from eval.library.conversation_generator.user_generation.standard_user import (
     StandardUserGenerator,
 )

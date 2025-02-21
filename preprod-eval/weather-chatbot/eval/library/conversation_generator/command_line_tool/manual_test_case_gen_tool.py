@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """Contains code for command line tool, which can be used to generate conversation using emulated users"""
 from copy import deepcopy
 import urllib3

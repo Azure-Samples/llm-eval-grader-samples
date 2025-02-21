@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 

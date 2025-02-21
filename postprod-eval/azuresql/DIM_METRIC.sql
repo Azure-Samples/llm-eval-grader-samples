@@ -1,3 +1,6 @@
+-- Copyright (c) Microsoft Corporation.
+-- Licensed under the MIT License.
+
 Create table DIM_METRIC(
 metric_id INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, 
 metric_name Varchar(255) NOT NULL,

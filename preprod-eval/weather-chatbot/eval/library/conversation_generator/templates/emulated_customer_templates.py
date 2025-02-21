@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 
 emulated_customer_scenario_template = """{customer_profile}
 

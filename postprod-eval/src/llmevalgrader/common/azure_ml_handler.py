@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from datetime import datetime, timedelta
 from azure.identity import DefaultAzureCredential
 from azure.ai.ml import MLClient
