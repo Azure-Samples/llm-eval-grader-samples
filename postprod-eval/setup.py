@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 # Create a package that will build and install the python codes from src directory.
 
 from setuptools import setup, find_packages

@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 WEATHER_ASSISTANT_BASE_PROMPT= """
 Your task is to try and determine what a user wants to know about the weather and
 try to answer their questions. Use the following JSON formatted weather data and conversation transcript

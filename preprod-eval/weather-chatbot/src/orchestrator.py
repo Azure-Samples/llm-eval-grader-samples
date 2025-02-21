@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from src.agents.location.location_agent import LocationAgent
 from src.agents.weather.weather_agent import WeatherAgent
 from src.context import Context

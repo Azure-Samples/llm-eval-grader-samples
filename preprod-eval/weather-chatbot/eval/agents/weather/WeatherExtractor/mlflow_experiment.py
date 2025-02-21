@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from src.agents.weather.weather_extractor import WeatherExtractor
 from eval.library.inner_loop.mlflow_helpers.core.agent_base_class import AgentWrapper
 from eval.library.inner_loop.mlflow_helpers.eval.calculate_grade import exact_match_score

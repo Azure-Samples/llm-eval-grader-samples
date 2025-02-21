@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 import os
 from azure.core.credentials import AzureKeyCredential
 from azure.maps.search import MapsSearchClient

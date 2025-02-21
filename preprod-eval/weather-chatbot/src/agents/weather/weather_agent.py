@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from src.agents.weather.weather_assistant import WeatherAssistant
 from src.agents.weather.weather_extractor import WeatherExtractor
 from src.context import Context

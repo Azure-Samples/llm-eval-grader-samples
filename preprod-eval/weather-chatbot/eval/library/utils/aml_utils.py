@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from typing import Dict
 from azureml.core.model import Model
 from azureml.core import Workspace, Datastore, Dataset, Experiment

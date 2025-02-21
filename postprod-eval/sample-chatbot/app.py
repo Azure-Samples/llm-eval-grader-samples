@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 """
 Description:
 This file contains the Streamlit app that allows users to interact with the OpenAI chatbot.

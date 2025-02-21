@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 
 prompt_template_single_criteria_full_conversation = """ \
 You are tasked with grading a conversation based on a set of criteria. \

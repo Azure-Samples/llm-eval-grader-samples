@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from unittest import TestCase
 from unittest.mock import patch
 import pytest
