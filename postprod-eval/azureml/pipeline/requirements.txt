@@ -5,7 +5,7 @@ ipykernel==6.27.1
 promptflow==1.8.0
 promptflow-tools==1.4.0
 pyodbc --no-binary=pyodbc==5.0.1
-python-dotenv==1.0.0
+python-dotenv==1.2.2
 PyYAML==6.0.1
 tenacity==8.2.3
 azureml-mlflow==1.56.0
